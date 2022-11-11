@@ -7,6 +7,8 @@
 
 2.  The coprocessor is implemented using simplfied 16-bit IEEE format as an additional module.
 
+![Block Diagram](image/16-bit%20RISC%20Pipelined%20Processor%20with%20FP%20unit.png)
+
 ## 5-stage RISC pipelined Processor
 
 ```mermaid
@@ -51,7 +53,7 @@
 
 ### Datapath
 1. Main Datapath
-![Datapath](datapath_pipeline.png)
+![Datapath](image/datapath_pipeline.png)
 
 2. Hazard Unit
 
