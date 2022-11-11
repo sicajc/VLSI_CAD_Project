@@ -3,7 +3,7 @@ parameter  DEPTH = 4,
 parameter  ADDR = 2,
 parameter  WIDTH = 8)
 
-( 
+(
 input     rst,
 input     clk,
 
@@ -30,7 +30,7 @@ always@(posedge clk or posedge rst)
 begin: rf_block
   integer i;
   if(rst)
-     for(i=0; i<DEPTH; i=i+1)        
+     for(i=0; i<DEPTH; i=i+1)
            rf[i] <= {(WIDTH){1'b0}};
   else if(w_en)
            rf[w_addr] <= w_data;

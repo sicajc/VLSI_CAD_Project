@@ -34,11 +34,9 @@
     SPS_CTR --> ST[Stall control]
 
 
-    PS_CTR --> OP[OPcode] --> ASM[ASM Chart]
+    PS_CTR --> OP[OPcode]
 
 ```
-
-
 
 ### Instruction set architecture
 
@@ -52,9 +50,13 @@
 ### Specification
 
 ### Datapath
+1. Main Datapath
+![Datapath](datapath_pipeline.png)
+
+2. Hazard Unit
 
 ### Controlpath
 
 
 ## Testbench
-# VLSI_CAD_Project
+# References
