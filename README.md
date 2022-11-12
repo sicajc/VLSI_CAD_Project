@@ -1,6 +1,11 @@
 # NCHU VLSI CAD Final project
 
 ## Index
+1. [Introduction](#introduction)
+2. [Datapath](#datapath)
+3. [Controlpath](#controlpath)
+4. [TestBench](#testbench)
+
 
 ## Introduction
 1. A 16-bit 5-stage pipelined RISC Processor with floating point coprocessor is implemented, using a small set of Custom RISC ISA. In order to enhance performace, forwarding unit and hazard detection unit are also implemented to resolve the data hazard and control hazard.
@@ -10,6 +15,8 @@
 ![Block Diagram](image/16-bit%20RISC%20Pipelined%20Processor%20with%20FP%20unit.png)
 
 ## 5-stage RISC pipelined Processor
+1. ISA
+![ISA](image/ISA_Instruction_Description.png)
 
 ```mermaid
 
@@ -108,7 +115,30 @@ MemSrc:
         do nothing
 ```
 
-
-
 # Testbench
+```
+loop: add $3,$4,$5
+      add $5,$3,$2
+      add $2,$5,$3
+      lw $2,4
+      add $3,$2,$4
+      mov $4,7
+      add $5,$4,$3
+      sw  $5,3
+      lw  $7,4
+      sw  $7,2
+      add $3,$3,$5
+      jmpz $3, loop
+      add $4,$5,$6
+      lw  $4,7
+      sw  $7,2
+      stop
+```
+
+# Synthesis Result
+
+
+# APR
+
+
 # References
