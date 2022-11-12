@@ -39,26 +39,76 @@
     PS_CTR --> OP[OPcode]
 
 ```
-
-### Instruction set architecture
-
-### Datapath
-
-### Controlpath
-
-
-## 16-bit floating point Coprocessor
-
-### Specification
-
-### Datapath
+# Datapath
 1. Main Datapath
 ![Datapath](image/datapath_pipeline.png)
 
-2. Hazard Unit
+# Controlpath
+## CTR
+![ControlPath](image/OP_CTR_code.png)
 
-### Controlpath
+## Hazard Unit
+
+![HazardUnit](image/HazardUnits.png)
+
+# Forwarding Condition
+>To solve Data hazard including R-R sw-lw
+
+ALU_src1:
+```verilog
+    if((rsE!=0)and(rsE == WriteRegM) and (RegWriteM))
+        ALU_src1 = 01
+    else if ((rsE!=0) and (rsE == WriteRegW) and RegWriteW)
+        ALU_src1 = 10
+    else
+        ALU_src1 = 00
+```
+
+ALU_src2:
+```verilog
+    if((rsE!=0)and(rsE == WriteRegM) and (RegWriteM == 1))
+        ALU_src2 = 01
+    else if ((rsE!=0) and (rsE == WriteRegW) and RegWriteW == 1)
+        ALU_src2 = 10
+    else
+        ALU_src2 = 0
+```
+
+MemSrc:
+> To solve sw-lw data hazard
+```verilog
+    if((rsM!=0) and (rsM == WriteRegW) and (MemRead == 1))
+        MemSrc = 1
+    else
+        MemSrc = 0
+```
 
 
-## Testbench
+## Stall Condition
+> To solve lw-r data hazard and stop signal
+
+```verilog
+    if(stop)
+        stall Every Pipeline and PC
+    else if( ((rsI == rsE) and (rsI!=0)) or ((rsI == rsE) and (rtI != 0 )) and (MemRead == 1))
+        stall PC and flush ID/EX
+    else
+        do nothing
+```
+
+## Control Hazard Control
+> To solve j and branch hazard
+
+```verilog
+    if(jump == 1)
+        flush IF/ID
+    else if (PCSrc == 1)
+        flush EX/MEM for 3 cycles
+    else
+        do nothing
+```
+
+
+
+# Testbench
 # References
