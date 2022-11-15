@@ -51,7 +51,7 @@
 ![Datapath](image/datapath_pipeline.png)
 
 # Controlpath
-## CTR
+## CTR Signal and corresponding Control vector
 ![ControlPath](image/OP_CTR_code.png)
 
 ## Hazard Unit
