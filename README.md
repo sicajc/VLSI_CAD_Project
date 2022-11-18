@@ -15,9 +15,10 @@
 ![Block Diagram](image/16-bit%20RISC%20Pipelined%20Processor%20with%20FP%20unit.png)
 
 ## 5-stage RISC pipelined Processor
-1. ISA
+### ISA
 ![ISA](image/ISA_Instruction_Description.png)
 
+### System tree diagram
 ```mermaid
 
    graph TD
@@ -46,6 +47,9 @@
     PS_CTR --> OP[OPcode]
 
 ```
+### Processor block diagram
+<br />![Processor](image/Processor.png)
+
 # Datapath
 1. Main Datapath
 ![Datapath](image/datapath_pipeline.png)
@@ -65,7 +69,7 @@ ALU_src1:
 ```verilog
     if((rsE!=0)and(rsE == WriteRegM) and (RegWriteM))
         ALU_src1 = 01
-    else if ((rsE!=0) and (rsE == WriteRegW) and RegWriteW)
+    else if ((rsE!=0) and (rsE == WriteRegW) and (RegWriteW ==1 ))
         ALU_src1 = 10
     else
         ALU_src1 = 00
@@ -73,12 +77,12 @@ ALU_src1:
 
 ALU_src2:
 ```verilog
-    if((rsE!=0)and(rsE == WriteRegM) and (RegWriteM == 1))
+    if((rtE!=0)and(rtE == WriteRegM) and (RegWriteM == 1))
         ALU_src2 = 01
-    else if ((rsE!=0) and (rsE == WriteRegW) and RegWriteW == 1)
+    else if ((rtE!=0) and (rtE == WriteRegW) and (RegWriteW == 1))
         ALU_src2 = 10
     else
-        ALU_src2 = 0
+        ALU_src2 = 00
 ```
 
 MemSrc:
@@ -116,6 +120,88 @@ MemSrc:
 ```
 
 # Testbench
+## Test1
+Testing basic instructions without forwarding and stalling.
+```
+    mov $10,10
+    mov $11,20
+    mov $12,30
+    lw $2,0
+    lw $3,1
+    lw $4,2
+    nop
+    nop
+    add $5,$2,$3
+    add $6,$2,$4
+    sub $11,$2,$4
+    sw $5,0
+    sw $6,1
+    sw $11,2
+    stop
+    nop
+```
+## Test2
+Testing R-R forwarding.
+```
+    lw $2,0
+    lw $3,1
+    lw $4,2
+    nop
+    nop
+    add $5,$2,$3
+    add $5,$5,$5
+    add $3,$5,$2
+    stop
+    nop
+```
+
+## Test3
+Testing R-lw hazard
+```
+    lw $2,0
+    lw $3,1
+    lw $4,2
+    nop
+    nop
+    add $5,$2,$3
+    lw  $1,$3
+    add $6,$1,$2
+    add $7,$1,$2
+    stop
+    nop
+```
+## Test4
+Testing sw-lw forwarding
+```
+    lw $2,0
+    lw $3,1
+    lw $4,2
+    add $5,$3,$4
+    lw $1,3
+    sw $1,6
+    nop
+    nop
+    stop
+    nop
+```
+## Test5
+Branch control
+```
+
+loop:
+
+
+
+
+
+        j loop
+exit:
+
+
+```
+
+
+## Full testing
 ```
 loop: add $3,$4,$5
       add $5,$3,$2
