@@ -30,8 +30,8 @@ module ID#(parameter DATA_WIDTH = 16,
         output[REG_WIDTH-1:0]  rdE,
         output reg[ADDR_WIDTH-1:0] PCE,
 
-        output reg Jump,
-        output reg Stop,
+        output Jump,
+        output Stop,
 
         output reg RegWriteE,
         output reg ALUopE,
@@ -41,7 +41,7 @@ module ID#(parameter DATA_WIDTH = 16,
         output reg MemWriteE,
         output reg MemToRegE,
         output reg MovE,
-        output reg FloatingE,
+        output reg FloatingE
        );
 
 //Instruction bit slices from IM
@@ -58,13 +58,14 @@ wire Branch;
 wire MemRead;
 wire RegDst;
 wire MemWrite;
-wire Jump;
 wire MemToReg;
 wire Mov;
 wire Floating;
-wire Stop;
+
 
 CTR ctr(.opcode_i(opcode),
+
+        //Outputs
         .RegWrite(RegWrite),
         .ALUop(ALUop),
         .Branch(Branch),
@@ -93,11 +94,9 @@ begin
         MemReadE <= 'd0;
         RegDstE <= 'd0;
         MemWriteE <= 'd0;
-        JumpE <= 'd0;
         MemToRegE <= 'd0;
         MovE <= 'd0;
         FloatingE <= 'd0;
-        StopE <= 'd0;
     end
     else if(stall_ID_EX_i)
     begin
@@ -108,11 +107,9 @@ begin
         MemReadE <= MemReadE;
         RegDstE <= RegDstE;
         MemWriteE <= MemWriteE;
-        JumpE <= JumpE;
         MemToRegE <= MemToRegE;
         MovE <= MovE;
         FloatingE <= FloatingE;
-        StopE <= StopE;
     end
     else if(flush_ID_EX_i)
     begin
@@ -123,11 +120,9 @@ begin
         MemReadE <= 'd0;
         RegDstE <= 'd0;
         MemWriteE <= 'd0;
-        JumpE <= 'd0;
         MemToRegE <= 'd0;
         MovE <= 'd0;
         FloatingE <= 'd0;
-        StopE <= 'd0;
     end
     else
     begin
@@ -138,11 +133,9 @@ begin
         MemReadE <= MemRead;
         RegDstE <= RegDst;
         MemWriteE <= MemWrite;
-        JumpE <= Jump;
         MemToRegE <= MemToReg;
         MovE <= Mov;
         FloatingE <= Floating;
-        StopE <= Stop;
     end
 end
 
