@@ -29,17 +29,19 @@ module ID#(parameter DATA_WIDTH = 16,
         output[REG_WIDTH-1:0]  rsE,
         output[REG_WIDTH-1:0]  rdE,
         output reg[ADDR_WIDTH-1:0] PCE,
+
+        output reg Jump,
+        output reg Stop,
+
         output reg RegWriteE,
         output reg ALUopE,
         output reg BranchE,
         output reg MemReadE,
         output reg RegDstE,
         output reg MemWriteE,
-        output reg JumpE,
         output reg MemToRegE,
         output reg MovE,
         output reg FloatingE,
-        output reg StopE
        );
 
 //Instruction bit slices from IM

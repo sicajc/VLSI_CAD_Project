@@ -1,0 +1,54 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_00000243a4fb6650 .scope module, "WB" "WB" 2 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "clk";
+    .port_info 1 /INPUT 1 "rst";
+    .port_info 2 /INPUT 16 "WBResultW_i";
+    .port_info 3 /INPUT 16 "WriteRegW_i";
+    .port_info 4 /INPUT 1 "RegWriteW_i";
+    .port_info 5 /INPUT 1 "MemToRegW_i";
+    .port_info 6 /OUTPUT 1 "RegWriteW_o";
+    .port_info 7 /INPUT 16 "memData_r_i";
+    .port_info 8 /OUTPUT 8 "ResultW_o";
+    .port_info 9 /OUTPUT 16 "WriteRegW_o";
+P_00000243a4fb67e0 .param/l "ADDR_WIDTH" 0 2 2, +C4<00000000000000000000000000001000>;
+P_00000243a4fb6818 .param/l "CV_WIDTH" 0 2 5, +C4<00000000000000000000000000001011>;
+P_00000243a4fb6850 .param/l "DATA_WIDTH" 0 2 1, +C4<00000000000000000000000000010000>;
+P_00000243a4fb6888 .param/l "IMM8_WIDTH" 0 2 3, +C4<00000000000000000000000000001000>;
+P_00000243a4fb68c0 .param/l "OP_WIDTH" 0 2 6, +C4<00000000000000000000000000000100>;
+P_00000243a4fb68f8 .param/l "REG_WIDTH" 0 2 4, +C4<00000000000000000000000000000100>;
+o00000243a4ef70c8 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+L_00000243a4fb6940 .functor BUFZ 16, o00000243a4ef70c8, C4<0000000000000000>, C4<0000000000000000>, C4<0000000000000000>;
+o00000243a4ef6fd8 .functor BUFZ 1, C4<z>; HiZ drive
+v00000243a4fb6d90_0 .net "MemToRegW_i", 0 0, o00000243a4ef6fd8;  0 drivers
+o00000243a4ef7008 .functor BUFZ 1, C4<z>; HiZ drive
+v00000243a4ef3130_0 .net "RegWriteW_i", 0 0, o00000243a4ef7008;  0 drivers
+o00000243a4ef7038 .functor BUFZ 1, C4<z>; HiZ drive
+v00000243a4ef2eb0_0 .net "RegWriteW_o", 0 0, o00000243a4ef7038;  0 drivers
+v00000243a4ef3810_0 .net "ResultW_o", 7 0, L_00000243a4ef3090;  1 drivers
+o00000243a4ef7098 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v00000243a4ef3950_0 .net "WBResultW_i", 15 0, o00000243a4ef7098;  0 drivers
+v00000243a4ef3590_0 .net "WriteRegW_i", 15 0, o00000243a4ef70c8;  0 drivers
+v00000243a4ef34f0_0 .net "WriteRegW_o", 15 0, L_00000243a4fb6940;  1 drivers
+v00000243a4ef2f50_0 .net *"_ivl_0", 15 0, L_00000243a4ef3c70;  1 drivers
+o00000243a4ef7158 .functor BUFZ 1, C4<z>; HiZ drive
+v00000243a4ef3a90_0 .net "clk", 0 0, o00000243a4ef7158;  0 drivers
+o00000243a4ef7188 .functor BUFZ 16, C4<zzzzzzzzzzzzzzzz>; HiZ drive
+v00000243a4ef36d0_0 .net "memData_r_i", 15 0, o00000243a4ef7188;  0 drivers
+o00000243a4ef71b8 .functor BUFZ 1, C4<z>; HiZ drive
+v00000243a4ef31d0_0 .net "rst", 0 0, o00000243a4ef71b8;  0 drivers
+L_00000243a4ef3c70 .functor MUXZ 16, o00000243a4ef7098, o00000243a4ef7188, o00000243a4ef6fd8, C4<>;
+L_00000243a4ef3090 .part L_00000243a4ef3c70, 0, 8;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "WB.v";

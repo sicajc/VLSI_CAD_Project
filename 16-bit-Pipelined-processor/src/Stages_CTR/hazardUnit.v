@@ -6,8 +6,6 @@ module hazardUnit(
            //Forwarding
            input rsE        ,
            input rtE        ,
-           input WriteRegM  ,
-           input WriteRegW  ,
            input RegWriteM  ,
            input RegWriteW  ,
            input rsM        ,
@@ -40,11 +38,11 @@ module hazardUnit(
 //Fowarding
 always @(*)
 begin
-    if((rsE != 0 ) && (rsE == WriteRegM) && (RegWriteM == 1))
+    if((rsE != 0 ) && (rsE == RegWriteM) && (RegWriteM == 1))
     begin
         alu_src1 = 2'b01;
     end
-    else if ((rsE !=0 ) && (rsE == WriteRegW) && (RegWriteW == 1))
+    else if ((rsE !=0 ) && (rsE == RegWriteW) && (RegWriteW == 1))
     begin
         alu_src1 = 2'b10;
     end
@@ -57,11 +55,11 @@ end
 
 always @(*)
 begin
-    if((rtE != 0 ) && (rtE == WriteRegM) && (RegWriteM == 1))
+    if((rtE != 0 ) && (rtE == RegWriteM) && (RegWriteM == 1))
     begin
         alu_src2 = 2'b01;
     end
-    else if ((rtE !=0 ) && (rtE == WriteRegW) && (RegWriteW == 1))
+    else if ((rtE !=0 ) && (rtE == RegWriteW) && (RegWriteW == 1))
     begin
         alu_src2 = 2'b10;
     end
@@ -73,7 +71,7 @@ end
 
 always @(*)
 begin
-    if((rsM!= 0 ) && (rsM == WriteRegW) && (MemReadE == 1))
+    if((rsM!= 0 ) && (rsM == RegWriteW) && (MemReadE == 1))
     begin
         mem_src = 1'b1;
     end
