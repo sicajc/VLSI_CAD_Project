@@ -121,24 +121,38 @@ MemSrc:
 
 # Testbench
 ## Test1
+```C
+    int a = 3;
+    int b = 4;
+    int c = 0;
+    int addr = &12;
+
+    c = a + b;
+    dm[addr] = c;
+```
 Testing basic instructions without forwarding and stalling.
 ```
-    mov $10,10
-    mov $11,20
-    mov $12,30
-    lw $2,0
-    lw $3,1
-    lw $4,2
+    mov $1,3
+    mov $2,4
+    mov $3,0
+    mov $4,12
+    add $3,$2,$1
+    sw  $3,12
     nop
     nop
-    add $5,$2,$3
-    add $6,$2,$4
-    sub $11,$2,$4
-    sw $5,0
-    sw $6,1
-    sw $11,2
     stop
-    nop
+```
+Machine Code:
+```
+0:  0011_0001_0000_0011 //mov $1,3
+1:  0011_0010_0000_0100 //mov $2,4
+2:  0011_0011_0000_0000 //mov $3,0
+3:  0011_0100_0000_1100
+4:  0010_0010_0001_0011
+5:  0001_0011_0000_1100
+6:  0000_0000_0000_0000
+7:  0000_0000_0000_0000
+8:  0111_0000_0000_0000
 ```
 ## Test2
 Testing R-R forwarding.
