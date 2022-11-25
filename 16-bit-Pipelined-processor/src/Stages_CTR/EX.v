@@ -28,11 +28,10 @@ module EX#(parameter DATA_WIDTH = 16,
         input MemReadE_i ,
         input RegDstE_i ,
         input MemWriteE_i ,
-        input JumpE_i ,
         input MemToRegE_i ,
         input MovE_i ,
         input FloatingE_i ,
-        input StopE_i ,
+
 
         //EX/ME
         //Data

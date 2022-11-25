@@ -3,7 +3,10 @@ module pipelinedPS#(parameter OP_WIDTH  = 4,
                     parameter HZ_CV_WIDTH  = 10,
                     parameter STATES_WIDTH  = 15,
                     parameter ADDR_WIDTH  = 8,
-                    parameter DATA_WIDTH  = 16)
+                    parameter DATA_WIDTH  = 16,
+                    parameter REG_WIDTH   = 4,
+                    parameter IMM8_WIDTH  = 8,
+                    parameter REG_NUM     = 16)
        (
            input  clk,
            input  rst,
@@ -38,13 +41,41 @@ wire RegWriteW,MemToRegW;//WB
 wire alu_src1,alu_src2,mem_src,flushEX_MEM,flushIF_ID,pcstall,flushID_EX ,IF_IDstall ,ID_EXstall ,EX_MEMstall,MEM_WBstall ;
 
 //IF
-wire PCD,rsD,rtD,rdD;
+wire[ADDR_WIDTH-1:0] PCD;
+wire[REG_WIDTH-1:0] rsD,rtD,rdD;
+
+wire[ADDR_WIDTH-1:0] rf_r1_addr,rf_r2_addr;
+wire[DATA_WIDTH-1:0] rf_r1_data,rf_r2_data;
 
 //EX
-wire rtE,rsE,rdE,PCE;
+wire[ADDR_WIDTH-1:0]PCE;
+wire[REG_WIDTH-1:0] rtE,rsE,rdE;
+wire[IMM8_WIDTH-1:0] imm8E;
+
+
+//MEM
+wire[ADDR_WIDTH-1:0] PCM;
+wire[DATA_WIDTH-1:0] WriteDataM;
+wire[DATA_WIDTH-1:0] imm8M;
+wire[DATA_WIDTH-1:0] rsM;
+wire[REG_WIDTH-1:0] WriteRegM;
+wire[DATA_WIDTH-1:0] alu_outM;
+
+
+
+wire PC_src;
+
+wire[ADDR_WIDTH-1:0] branchAddr;
+wire[ADDR_WIDTH-1:0] jumpAddr;
+
+//WB
+wire[DATA_WIDTH-1:0] ResultW;
+wire[ADDR_WIDTH-1:0] WriteRegW;
+wire[DATA_WIDTH-1:0] WBResultW;
+
 
 CTR#(
-       .OP_WIDTH  ( 4 )
+       .OP_WIDTH  ( OP_WIDTH )
    )u_CTR(
        .opcode_i  ( opcode    ),
        .RegWrite  ( RegWrite  ),
@@ -60,40 +91,53 @@ CTR#(
        .Stop      ( Stop      )
    );
 
-hazardUnit u_hazardUnit(
-               .clk         ( clk         ),
-               .rst         ( rst         ),
+hazardUnit#(
+    .REG_WIDTH   ( REG_WIDTH )
+)u_hazardUnit(
+    .clk         ( clk         ),
+    .rst         ( rst         ),
 
-               //Inputs
-               .rsE         ( rsE         ),
-               .rtE         ( rtE         ),
-               .RegWriteM   ( RegWriteM   ),
-               .RegWriteW   ( RegWriteW   ),
-               .rsM         ( rsM         ),
-               .rsI         ( rsI         ),
-               .rtI         ( rtI         ),
-               .MemReadE    ( MemReadE    ),
-               .stop        ( stop        ),
-               .PCSrc       ( PCSrc       ),
-               .jump        ( jump        ),
+    //Fowarding and stall
+    .rsE         ( rsE         ),
+    .rtE         ( rtE         ),
+    .RegWriteM   ( RegWriteM   ),
+    .RegWriteW   ( RegWriteW   ),
+    .WriteRegM   ( WriteRegM   ),
+    .WriteRegW   ( WriteRegW   ),
+    .rsM         ( rsM         ),
 
-               //Hazard units outputs
-               .alu_src1    ( alu_src1    ),
-               .alu_src2    ( alu_src2    ),
-               .mem_src     ( mem_src     ),
-               .flushEX_MEM ( flushEX_MEM ),
-               .flushIF_ID  ( flushIF_ID  ),
-               .pcstall     ( pcstall     ),
-               .flushID_EX  ( flushID_EX  ),
-               .IF_IDstall  ( IF_IDstall  ),
-               .ID_EXstall  ( ID_EXstall  ),
-               .EX_MEMstall ( EX_MEMstall ),
-               .MEM_WBstall ( MEM_WBstall )
-           );
+    //Stall
+    .rsI         ( rsI         ),
+    .rtI         ( rtI         ),
+    .MemReadE    ( MemReadE    ),
+
+    //Control hazard
+    .stop        ( stop        ),
+    .PCSrc       ( PCSrc       ),
+    .jump        ( jump        ),
+
+    //Forwarding
+    .alu_src1    ( alu_src1    ),
+    .alu_src2    ( alu_src2    ),
+    .mem_src     ( mem_src     ),
+
+    //Stall
+    .flushEX_MEM ( flushEX_MEM ),
+    .flushIF_ID  ( flushIF_ID  ),
+    .pcstall     ( pcstall     ),
+
+    //Control hazard
+    .flushID_EX  ( flushID_EX  ),
+    .IF_IDstall  ( IF_IDstall  ),
+    .ID_EXstall  ( ID_EXstall  ),
+    .EX_MEMstall ( EX_MEMstall ),
+    .MEM_WBstall ( MEM_WBstall )
+);
+
 
 IF#(
-      .DATA_WIDTH   ( 16 ),
-      .ADDR_WIDTH   ( 8 )
+      .DATA_WIDTH   ( DATA_WIDTH ),
+      .ADDR_WIDTH   ( ADDR_WIDTH )
   )u_IF(
       .rst          ( rst          ),
       .clk          ( clk          ),
@@ -117,26 +161,26 @@ IF#(
   );
 
 ID#(
-      .DATA_WIDTH           ( 16 ),
-      .ADDR_WIDTH           ( 8 ),
-      .IMM8_WIDTH           ( 8 ),
-      .REG_WIDTH            ( 4 ),
-      .CV_WIDTH             ( 11 ),
-      .OP_WIDTH             ( 4 )
+      .DATA_WIDTH           ( DATA_WIDTH ),
+      .ADDR_WIDTH           ( ADDR_WIDTH ),
+      .IMM8_WIDTH           ( IMM8_WIDTH ),
+      .REG_WIDTH            ( REG_WIDTH ),
+      .CV_WIDTH             ( CV_WIDTH ),
+      .OP_WIDTH             ( OP_WIDTH )
   )u_ID(
       .rst                  ( rst                  ),
       .clk                  ( clk                  ),
 
       //IF/ID
-      .PCD_i                ( PCD_i                ),
-      .instruction_mem_rD_i ( instruction_mem_rD_i ),
-      .flush_ID_EX_i        ( flush_ID_EX_i        ),
-      .stall_ID_EX_i        ( stall_ID_EX_i        ),
-      .RegWriteW_i          ( RegWriteW_i          ),
+      .PCD_i                ( PCD                ),
+      .instruction_mem_rD_i ( im_r_data ),
+      .flush_ID_EX_i        ( flushID_EX        ),
+      .stall_ID_EX_i        ( ID_EXstall        ),
+      .RegWriteW_i          ( RegWriteW          ),
 
-      //RF
-      .reg_file_r1          ( reg_file_r1          ),
-      .reg_file_r2          ( reg_file_r2          ),
+      //RF read Addr
+      .reg_file_r1          ( rf_r1_addr          ),
+      .reg_file_r2          ( rf_r2_addr          ),
       //Forwarding
       .jumpAddr             ( jumpAddr             ),
 
@@ -146,6 +190,7 @@ ID#(
 
       .Jump                ( Jump                ),
       .Stop                ( Stop                ),
+
       //ID/EX
       .rtE                  ( rtE                  ),
       .rsE                  ( rsE                  ),
@@ -165,9 +210,9 @@ ID#(
   );
 
 reg_file#(
-            .DEPTH   ( 4 ),
-            .ADDR    ( 2 ),
-            .WIDTH   ( 8 )
+            .DEPTH   ( REG_NUM ),
+            .ADDR    ( ADDR_WIDTH ),
+            .WIDTH   ( DATA_WIDTH )
         )u_reg_file(
             .rst     ( rst     ),
             .clk     ( clk     ),
@@ -176,128 +221,149 @@ reg_file#(
             .r1_en   ( 1'b1   ),
             .r2_en   ( 1'b1   ),
 
-            .r1_addr ( reg_file_r1),
-            .r2_addr ( reg_file_r2 ),
+            .r1_addr ( r1_addr),
+            .r2_addr ( r2_addr ),
 
             .w_data  ( ResultW    ),
             .w_addr  ( WriteRegW  ),
             .w_en    ( RegWriteW  ),
 
-            .r1_data ( r1_data_r ),
-            .r2_data ( r2_data_r )
+            .r1_data ( rf_r1_data ),
+            .r2_data ( rf_r2_data )
         );
 
 EX#(
-      .DATA_WIDTH     ( 16 ),
-      .ADDR_WIDTH     ( 8 ),
-      .IMM8_WIDTH     ( 8 ),
-      .REG_WIDTH      ( 4 ),
-      .CV_WIDTH       ( 11 ),
-      .OP_WIDTH       ( 4 )
+      .DATA_WIDTH     ( DATA_WIDTH ),
+      .ADDR_WIDTH     ( ADDR_WIDTH ),
+      .IMM8_WIDTH     ( IMM8_WIDTH ),
+      .REG_WIDTH      ( REG_WIDTH ),
+      .CV_WIDTH       ( CV_WIDTH ),
+      .OP_WIDTH       ( OP_WIDTH )
   )u_EX(
       .clk            ( clk            ),
       .rst            ( rst            ),
 
-      .PCE_i          ( PCE_i          ),
+      .PCE_i          ( PCE          ),
 
-      .r1_data_r_i    ( r1_data_r_i    ),
-      .r2_data_r_i    ( r2_data_r_i    ),
+      .r1_data_r_i    ( rf_r1_data    ),
+      .r2_data_r_i    ( rf_r2_data    ),
 
-      .imm8E_i        ( imm8E_i        ),
-      .rtE_i          ( rtE_i          ),
-      .rsE_i          ( rsE_i          ),
-      .rdE_i          ( rdE_i          ),
+      .imm8E_i        ( imm8E        ),
+      .rtE_i          ( rtE          ),
+      .rsE_i          ( rsE          ),
+      .rdE_i          ( rdE          ),
 
       //Control
-      .flush_EX_MEM_i ( flush_EX_MEM_i ),
-      .stall_EX_MEM_i ( stall_EX_MEM_i ),
-      .RegWriteE_i    ( RegWriteE_i    ),
-      .ALUopE_i       ( ALUopE_i       ),
-      .BranchE_i      ( BranchE_i      ),
-      .MemReadE_i     ( MemReadE_i     ),
-      .RegDstE_i      ( RegDstE_i      ),
-      .MemWriteE_i    ( MemWriteE_i    ),
-      .JumpE_i        ( JumpE_i        ),
-      .MemToRegE_i    ( MemToRegE_i    ),
-      .MovE_i         ( MovE_i         ),
-      .FloatingE_i    ( FloatingE_i    ),
-      .StopE_i        ( StopE_i        ),
+      .flush_EX_MEM_i ( flushEX_MEM ),
+      .stall_EX_MEM_i ( EX_MEMstall ),
 
-      .PCM_o          ( PCM_o          ),
-      .WriteDataM_o   ( WriteDataM_o   ),
-      .imm8M_o        ( imm8M_o        ),
-      .rsM_o          ( rsM_o          ),
-      .WriteRegM_o    ( WriteRegM_o    ),
-      .alu_outM_o     ( alu_outM_o     ),
-      .RegWriteM_o    ( RegWriteM_o    ),
-      .BranchM_o      ( BranchM_o      ),
-      .MemReadM_o     ( MemReadM_o     ),
-      .MemWriteM_o    ( MemWriteM_o    ),
-      .MemToRegM_o    ( MemToRegM_o    ),
-      .MovM_o         ( MovM_o         ),
+      .RegWriteE_i    ( RegWriteE    ),
+      .ALUopE_i       ( ALUopE       ),
+      .BranchE_i      ( BranchE      ),
+      .MemReadE_i     ( MemReadE     ),
+      .RegDstE_i      ( RegDstE      ),
+      .MemWriteE_i    ( MemWriteE    ),
+      .MemToRegE_i    ( MemToRegE    ),
+      .MovE_i         ( MovE         ),
+      .FloatingE_i    ( FloatingE    ),
 
-      .WBResultM_i    ( WBResultM_i    ),
-      .ResultW_i      ( ResultW_i      ),
-      .alu_src1_i     ( alu_src1_i     ),
-      .alu_src2_i     ( alu_src2_i     )
+      .PCM_o          ( PCM          ),
+      .WriteDataM_o   ( WriteDataM   ),
+      .imm8M_o        ( imm8M        ),
+      .rsM_o          ( rsM          ),
+
+      .WriteRegM_o    ( WriteRegM    ),
+      .RegWriteM_o    ( RegWriteM    ),
+
+      .alu_outM_o     ( alu_outM     ),
+      .BranchM_o      ( BranchM      ),
+
+      .MemReadM_o     ( MemReadM     ),
+      .MemWriteM_o    ( MemWriteM    ),
+      .MemToRegM_o    ( MemToRegM    ),
+      .MovM_o         ( MovM         ),
+
+      .WBResultM      ( WBResultM    ),
+      .ResultW_i      ( ResultW      ),
+      .alu_src1_i     ( alu_src1     ),
+      .alu_src2_i     ( alu_src2     )
   );
 
 MEM#(
-       .DATA_WIDTH     ( 16 ),
-       .ADDR_WIDTH     ( 8 ),
-       .IMM8_WIDTH     ( 8 ),
-       .REG_WIDTH      ( 4 ),
-       .CV_WIDTH       ( 11 ),
-       .OP_WIDTH       ( 4 )
+       .DATA_WIDTH     ( DATA_WIDTH ),
+       .ADDR_WIDTH     ( ADDR_WIDTH ),
+       .IMM8_WIDTH     ( IMM8_WIDTH ),
+       .REG_WIDTH      ( REG_WIDTH ),
+       .CV_WIDTH       ( CV_WIDTH ),
+       .OP_WIDTH       ( OP_WIDTH )
    )u_MEM(
        .clk            ( clk            ),
        .rst            ( rst            ),
 
-       .PCM_i          ( PCM_i          ),
-       .alu_outM_i     ( alu_outM_i     ),
-       .WriteDataM_i   ( WriteDataM_i   ),
-       .imm8M_i        ( imm8M_i        ),
-       .rsM_i          ( rsM_i          ),
-       .WriteRegM_i    ( WriteRegM_i    ),
-       .stall_MEM_WB_i ( stall_MEM_WB_i ),
-       .MemSrc_i       ( MemSrc_i       ),
-       .RegWriteM_i    ( RegWriteM_i    ),
-       .BranchM_i      ( BranchM_i      ),
-       .MemReadM_i     ( MemReadM_i     ),
-       .MemWriteM_i    ( MemWriteM_i    ),
-       .MemToRegM_i    ( MemToRegM_i    ),
-       .MovM_i         ( MovM_i         ),
-       .ResultW_i      ( ResultW_i      ),
+       .PCM_i          ( PCM          ),
+       .alu_outM_i     ( alu_outM     ),
+       .WriteDataM_i   ( WriteDataM   ),
+       .imm8M_i        ( imm8M        ),
+       .rsM_i          ( rsM          ),
 
-       .branchAddr_o   ( branchAddr_o   ),
-       .WBResultM_o    ( WBResultM_o    ),
-       .WriteRegM_o    ( WriteRegM_o    ),
-       .RegWriteM_o    ( RegWriteM_o    ),
-       .MemToRegM_o    ( MemToRegM_o    ),
-       .MemAddr_o      ( MemAddr_o      ),
-       .WriteDataM_o   ( WriteDataM_o   ),
-       .PC_src_o       ( PC_src_o       )
+       //Hazard controls
+       .stall_MEM_WB_i ( MEM_WBstall   ),
+       .MemSrc_i       ( mem_src       ),
+
+       .WriteRegM_i    ( WriteRegM    ),
+       .RegWriteM_i    ( RegWriteM    ),
+
+       //Forwarded data
+       .ResultW_i      ( ResultW      ),
+
+       //Control signals
+       .BranchM_i      ( BranchM      ),
+       .MemToRegM_i    ( MemToRegM    ),
+       .MovM_i         ( MovM         ),
+
+       //!Forward to ID
+       .branchAddr_o   ( branchAddr   ),
+       .PC_src_o       ( PC_src       ),
+
+       //!MEM/WB
+       .WBResultM_o    ( WBResultW    ),
+       .WriteRegM_o    ( WriteRegM    ),
+
+       //Control Signals
+       .RegWriteM_o    ( RegWriteM    ),
+       .MemToRegM_o    ( MemToRegM    ),
+
+       //DM
+       .MemWriteM_i    ( dm_wr        ),
+       .MemReadM_i     ( dm_rd        ),
+       .MemAddr_o      ( dm_addr      ),
+       .WriteDataM_o   ( dm_w_data    )
    );
 
 WB#(
-      .DATA_WIDTH   ( 16 ),
-      .ADDR_WIDTH   ( 8 ),
-      .IMM8_WIDTH   ( 8 ),
-      .REG_WIDTH    ( 4 ),
-      .CV_WIDTH     ( 11 ),
-      .OP_WIDTH     ( 4 )
+      .DATA_WIDTH   ( DATA_WIDTH ),
+      .ADDR_WIDTH   ( ADDR_WIDTH ),
+      .IMM8_WIDTH   ( IMM8_WIDTH ),
+      .REG_WIDTH    ( REG_WIDTH  ),
+      .CV_WIDTH     ( CV_WIDTH   ),
+      .OP_WIDTH     ( OP_WIDTH   )
   )u_WB(
       .clk          ( clk          ),
       .rst          ( rst          ),
-      .WBResultW_i  ( WBResultW_i  ),
-      .WriteRegW_i  ( WriteRegW_i  ),
-      .RegWriteW_i  ( RegWriteW_i  ),
-      .MemToRegW_i  ( MemToRegW_i  ),
-      .RegWriteW_o  ( RegWriteW_o  ),
-      .memData_r_i  ( memData_r_i  ),
-      .ResultW_o    ( ResultW_o    ),
-      .WriteRegW_o  ( WriteRegW_o  )
-  );
+
+      //MEM/WB
+      .WBResultW_i  ( WBResultW  ),
+
+      .WriteRegW_i  ( WriteRegW  ),
+      .RegWriteW_i  ( RegWriteW  ),
+
+      .MemToRegW_i  ( MemToRegW  ),
+      .RegWriteW_o  ( RegWriteW  ),
+
+      .memData_r_i  ( dm_r_data  ),
+      .ResultW_o    ( ResultW    ),
+      .WriteRegW_o  ( WriteRegW  )
+);
 
 
 endmodule
