@@ -140,6 +140,15 @@ Testing basic instructions without forwarding and stalling.
     sw  $3,12
     nop
     nop
+<<<<<<< HEAD
+=======
+    add $5,$2,$3
+    add $6,$2,$4
+    sub $11,$4,$2
+    sw $5,0
+    sw $6,1
+    sw $11,2
+>>>>>>> bd15e584d5246e21754706a9d4862c3d80903453
     stop
 ```
 Machine Code:
