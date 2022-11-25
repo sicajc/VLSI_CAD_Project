@@ -133,7 +133,7 @@ Testing basic instructions without forwarding and stalling.
     nop
     add $5,$2,$3
     add $6,$2,$4
-    sub $11,$2,$4
+    sub $11,$4,$2
     sw $5,0
     sw $6,1
     sw $11,2
