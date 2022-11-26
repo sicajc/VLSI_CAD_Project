@@ -25,10 +25,11 @@ module ID#(parameter DATA_WIDTH = 16,
         output[REG_WIDTH-1:0]  rdD ,
 
         //IF/ID
-        output[REG_WIDTH-1:0]  rtE,
-        output[REG_WIDTH-1:0]  rsE,
-        output[REG_WIDTH-1:0]  rdE,
+        output reg[REG_WIDTH-1:0]  rtE,
+        output reg[REG_WIDTH-1:0]  rsE,
+        output reg[REG_WIDTH-1:0]  rdE,
         output reg[ADDR_WIDTH-1:0] PCE,
+        output reg[IMM8_WIDTH-1:0] imm8D,
 
         output Jump,
         output Stop,
@@ -48,7 +49,7 @@ module ID#(parameter DATA_WIDTH = 16,
 assign  rsD    = instruction_mem_rD_i[11:8];
 assign  rtD    = instruction_mem_rD_i[7:4];
 assign  rdD    = instruction_mem_rD_i[3:0];
-wire[IMM8_WIDTH-1:0] imm8D = instruction_mem_rD_i[7:0];
+wire[IMM8_WIDTH-1:0] imm8D_w = instruction_mem_rD_i[7:0];
 wire[OP_WIDTH-1:0]   opcode = instruction_mem_rD_i[15:12];
 
 //Control vector
@@ -96,6 +97,12 @@ begin
         MemToRegE <= 'd0;
         MovE <= 'd0;
         FloatingE <= 'd0;
+
+        rtE <= 'd0;
+        rsE <= 'd0;
+        rdE <= 'd0;
+        imm8D<= 'd0;
+
     end
     else if(stall_ID_EX_i)
     begin
@@ -109,6 +116,11 @@ begin
         MemToRegE <= MemToRegE;
         MovE <= MovE;
         FloatingE <= FloatingE;
+
+        rtE <= rtE;
+        rsE <= rsE;
+        rdE <= rdE;
+        imm8D<= imm8D;
     end
     else if(flush_ID_EX_i)
     begin
@@ -122,6 +134,11 @@ begin
         MemToRegE <= 'd0;
         MovE <= 'd0;
         FloatingE <= 'd0;
+
+        rtE <= 'd0;
+        rsE <= 'd0;
+        rdE <= 'd0;
+        imm8D<='d0;
     end
     else
     begin
@@ -135,6 +152,11 @@ begin
         MemToRegE <= MemToReg;
         MovE <= Mov;
         FloatingE <= Floating;
+
+        rtE <= rtD;
+        rsE <= rsD;
+        rdE <= rdD;
+        imm8D<=imm8D_w;
     end
 end
 

@@ -1,4 +1,5 @@
-module CTR#(parameter OP_WIDTH = 4)
+module CTR#(parameter OP_WIDTH = 4,
+            parameter CV_WIDTH = 11)
        (input [OP_WIDTH-1:0] opcode_i,
         output RegWrite ,
         output ALUop ,
@@ -36,7 +37,7 @@ localparam ADDF_CV =      11'b10000000010;
 localparam MULTF_CV =     11'b10000000010;
 localparam NOP_CV =       11'b00000000000;
 
-reg control_vector;
+reg[CV_WIDTH-1:0] control_vector;
 //Main CTR decoder
 always @(*)
 begin

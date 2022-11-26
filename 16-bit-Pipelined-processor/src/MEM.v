@@ -40,6 +40,8 @@ module MEM #(parameter DATA_WIDTH = 16,
         output reg MemToRegM_o ,
 
         //DM
+        output dm_rd,
+        output dm_wr,
         output[ADDR_WIDTH-1:0] MemAddr_o,
         output[DATA_WIDTH-1:0] WriteDataM_o,
 
@@ -52,11 +54,14 @@ wire PC_src_o = ((WriteDataM_o == 'd0) && (BranchM_i) );
 assign branchAddr_o = PCM_i + imm8M_i;
 
 //DM
+assign  dm_wr = MemWriteM_i;
+assign  dm_rd = MemReadM_i;
 assign  MemAddr_o = imm8M_i;
 assign WriteDataM_o = MemSrc_i ?  ResultW_i : WriteDataM_i ;
 
+wire[DATA_WIDTH-1:0] sign_extended_val = {{8{imm8M_i[7]}},imm8M_i[7:0]};
 //MEM/WB
-wire[DATA_WIDTH-1:0] WBResult_w = MovM_i ? {{8{imm8M_i[8]}},imm8M_i[7:0]} : alu_outM_i;
+wire[DATA_WIDTH-1:0] WBResult_w = MovM_i ? sign_extended_val : alu_outM_i;
 
 always @(posedge clk )
 begin

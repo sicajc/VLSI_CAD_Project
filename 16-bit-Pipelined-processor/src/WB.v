@@ -11,8 +11,8 @@ module WB #(parameter DATA_WIDTH = 16,
              input[DATA_WIDTH-1:0] WBResultW_i,
              input[REG_WIDTH-1:0] WriteRegW_i,
              //Controls
-             input  RegWriteW_i ,
-             input  MemToRegW_i ,
+             input  RegWriteW_i,
+             input  MemToRegW_i,
              output RegWriteW_o,
              //DM
              input[DATA_WIDTH-1:0] memData_r_i,
@@ -25,5 +25,6 @@ module WB #(parameter DATA_WIDTH = 16,
 //Outputs to ID
 assign ResultW_o = MemToRegW_i ? memData_r_i : WBResultW_i;
 assign WriteRegW_o = WriteRegW_i;
+assign RegWriteW_o = RegWriteW_i;
 
 endmodule

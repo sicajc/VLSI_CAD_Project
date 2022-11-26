@@ -23,7 +23,7 @@ module pipelinedPS#(parameter OP_WIDTH  = 4,
            output stop,                   // to show that the processor is stopped
 
            //control signals for instruction memory (im)
-           input   [DATA_WIDTH-1:0] im_r_data,      // 16-bit read data of im
+           input   [DATA_WIDTH-1:0]  im_r_data,      // 16-bit read data of im
            output  [ADDR_WIDTH-1:0]  im_addr,        // 8-bit data address of im
            output  im_rd,                 // read enable of im
 
@@ -80,8 +80,10 @@ wire[ADDR_WIDTH-1:0] jumpAddr;
 
 //WB
 wire[DATA_WIDTH-1:0] ResultW;
-wire[REG_WIDTH-1:0] WriteRegW;
-wire[DATA_WIDTH-1:0] WBResultW;
+wire[REG_WIDTH-1:0]  WriteRegW;
+
+wire[REG_WIDTH-1:0] WriteRegW_rf;
+wire RegWriteW_rf; //Control
 
 //Stop Register
 reg  stop_flag;
@@ -115,7 +117,7 @@ hazardUnit#(
     .MemReadE    ( MemReadE    ),
 
     //Control hazard
-    .stop        ( stop_flag   ),
+    .stop        ( stop_flag_rd),
     .PCSrc       ( PCSrc       ),
     .jump        ( jump        ),
 
@@ -147,7 +149,7 @@ IF#(
 
       //PC
       .start(start),
-      .stop(stop_flag ),
+      .stop(stop_flag_rd ),
 
       .jump_i       ( jump       ),
       .PC_src_i     ( PC_src     ),
@@ -197,13 +199,14 @@ ID#(
       .rdD                  ( rdD                  ),
 
       .Jump                 ( Jump                  ),
-      .Stop                 ( stop_flag_rd          ),
+      .Stop                 ( stop                  ),
 
       //ID/EX
       .rtE                  ( rtE                  ),
       .rsE                  ( rsE                  ),
       .rdE                  ( rdE                  ),
       .PCE                  ( PCE                  ),
+      .imm8D                ( imm8E                ),
 
       //Control signals
       .RegWriteE            ( RegWriteE            ),
@@ -233,8 +236,8 @@ reg_file#(
             .r2_addr ( rf_r2_addr ),
 
             .w_data  ( ResultW    ),
-            .w_addr  ( WriteRegW  ),
-            .w_en    ( RegWriteW  ),
+            .w_addr  ( WriteRegW_rf  ),
+            .w_en    ( RegWriteW_rf  ),
 
             .r1_data ( rf_r1_data ),
             .r2_data ( rf_r2_data )
@@ -335,15 +338,18 @@ MEM#(
 
        //!MEM/WB
        .WBResultM_o    ( WBResultM    ),
-       .WriteRegM_o    ( WriteRegM    ),
+       .WriteRegM_o    ( WriteRegW    ),
 
        //Control Signals
        .RegWriteM_o    ( RegWriteW    ),
        .MemToRegM_o    ( MemToRegW    ),
 
        //DM
-       .MemWriteM_i    ( dm_wr        ),
-       .MemReadM_i     ( dm_rd        ),
+       .MemWriteM_i    ( MemWriteM    ),
+       .MemReadM_i     ( MemReadM     ),
+
+       .dm_rd(dm_rd),
+       .dm_wr(dm_wr),
        .MemAddr_o      ( dm_addr      ),
        .WriteDataM_o   ( dm_w_data    )
    );
@@ -362,16 +368,15 @@ WB#(
       //MEM/WB
       .WBResultW_i  ( WBResultM  ),
 
-      .WriteRegW_i  ( WriteRegM  ),
+      .WriteRegW_i  ( WriteRegW  ),
       .RegWriteW_i  ( RegWriteW  ),
       .MemToRegW_i  ( MemToRegW  ),
 
-
-      .RegWriteW_o  ( RegWriteW  ),
+      .RegWriteW_o  ( RegWriteW_rf  ),
 
       .memData_r_i  ( dm_r_data  ),
       .ResultW_o    ( ResultW    ),
-      .WriteRegW_o  ( WriteRegW  )
+      .WriteRegW_o  ( WriteRegW_rf  )
 );
 
 

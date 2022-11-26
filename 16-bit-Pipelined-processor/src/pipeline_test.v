@@ -137,8 +137,9 @@ always@(posedge clk)
 begin
     if(stop==1)
     begin
-        if(DM_MEM[10] !== 16'd7)
+        if(DM_MEM[12] !== 16'd7)
             err = err + 1;
+            $display("Memory value is : %d",DM_MEM[12]);
         // if(DM_MEM[10] !== DM_MEM[0]+DM_MEM[1])
         // err = err +1;
         // if(DM_MEM[11] !== 16'h002f)

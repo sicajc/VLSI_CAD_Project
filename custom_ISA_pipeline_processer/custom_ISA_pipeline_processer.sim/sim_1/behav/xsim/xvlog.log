@@ -6,7 +6,7 @@ INFO: [VRFC 10-311] analyzing module CTR
 INFO: [VRFC 10-311] analyzing module ID
 INFO: [VRFC 10-311] analyzing module IF
 INFO: [VRFC 10-311] analyzing module MEM
-WARNING: [VRFC 10-9336] redeclaration of ANSI port 'PC_src_o' is not allowed [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/MEM.v:51]
+WARNING: [VRFC 10-9336] redeclaration of ANSI port 'PC_src_o' is not allowed [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/MEM.v:53]
 INFO: [VRFC 10-311] analyzing module WB
 INFO: [VRFC 10-311] analyzing module pipelinedPS
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/reg_file.v" into library xil_defaultlib

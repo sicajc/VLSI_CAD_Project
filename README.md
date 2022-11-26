@@ -130,6 +130,13 @@ MemSrc:
 1. stop register is added , the reason is that stop signal can only be decoded in ID stage, however the stop signal needs to be read during IF stage for PC, otherwise it cannot know which state it is in.
 
 2. Processor Status Register(SR) is added s.t. we can know whether processor is running or not, if it is not running, PC would be locked.
+
+3. Any kind of control signal had better be kept using a status register to prevent some error, otherwise unexpected erros might occur due to unknown value given.
+
+4. You forget to redesign the RF file s.t. it can write at negedge and
+   read at positive edge.
+
+5. When executing Instructions, you should give enough nop before stop for previous instructions to actually complete.
 # Testbench
 ## Test1
 ```C
@@ -147,13 +154,14 @@ Testing basic instructions without forwarding and stalling.
     mov $2,4
     mov $3,0
     mov $4,12
+    nop
+    nop
     add $3,$2,$1
+    nop
+    nop
     sw  $3,12
-    nop
-    nop
     stop
-    nop
-    nop
+    nop infinity.
 ```
 Machine Code:
 ```h
@@ -161,11 +169,18 @@ Machine Code:
 1:  0011_0010_0000_0100 //mov $2,4
 2:  0011_0011_0000_0000 //mov $3,0
 3:  0011_0100_0000_1100 //mov $4,12
-4:  0010_0010_0001_0011 //add $3,$2,$1
-5:  0001_0011_0000_1100 //sw $3,12
 6:  1111_0000_0000_0000 // nop
 7:  1111_0000_0000_0000 // nop
-8:  0111_0000_0000_0000 // stop
+4:  0010_0010_0001_0011 //add $3,$2,$1
+5:  1111_0000_0000_0000 // nop
+6:  1111_0000_0000_0000 // nop
+7:  0001_0011_0000_1100 //sw $3,12
+8:  1111_0000_0000_0000 // nop
+9:  1111_0000_0000_0000 // nop
+10: 1111_0000_0000_0000 // nop
+11: 1111_0000_0000_0000 // nop
+12: 1111_0000_0000_0000 // nop
+13: 0111_0000_0000_0000 // stop
                         //dm[12] = 7
 ```
 ## Test2

@@ -78,8 +78,7 @@ assign PC  = pc_rd;
 
 //IM
 assign im_addr_o = pc_rd;
-assign im_addr_o = 1'b1;
-
+assign im_rd_o   = 1'b1;
 
 //IF/ID
 always @(posedge clk)
