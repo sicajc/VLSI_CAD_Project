@@ -1,3 +1,5 @@
+`include "reg_file.v"
+`include "CTR.v"
 module ID#(parameter DATA_WIDTH = 16,
            parameter ADDR_WIDTH = 8,
            parameter IMM8_WIDTH = 8,
@@ -10,11 +12,10 @@ module ID#(parameter DATA_WIDTH = 16,
         input[DATA_WIDTH-1:0] instruction_mem_rD_i,
         input flush_ID_EX_i,
         input stall_ID_EX_i,
-        input RegWriteW_i,
 
         //REGFILE
-        output[DATA_WIDTH-1:0] reg_file_r1,
-        output[DATA_WIDTH-1:0] reg_file_r2,
+        output[REG_WIDTH-1:0] reg_file_r1,
+        output[REG_WIDTH-1:0] reg_file_r2,
 
         //Forward to IF
         output[IMM8_WIDTH-1:0] jumpAddr,
@@ -62,6 +63,9 @@ wire MemToReg;
 wire Mov;
 wire Floating;
 
+//RF access
+assign reg_file_r1 = rsD;
+assign reg_file_r2 = rtD;
 
 CTR ctr(.opcode_i(opcode),
 
@@ -77,10 +81,6 @@ CTR ctr(.opcode_i(opcode),
         .Mov(Mov),
         .Floating(Floating),
         .Stop(Stop));
-
-reg_file RF(.rst(rst),.clk(clk),
-            .w_en(RegWriteW),.w_addr(WriteRegW),.w_data(ResultW),
-            .r1_en(1'b1),.r2_en(1'b1),.r1_addr(rsD),.r2_addr(rtD),.r1_data(reg_file_r1),.r2_data(reg_file_r2));
 
 // ID/EX
 always @(posedge clk)

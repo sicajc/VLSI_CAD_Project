@@ -14,7 +14,7 @@ module EX#(parameter DATA_WIDTH = 16,
         input[DATA_WIDTH-1:0] r2_data_r_i,
 
         //ID/EX
-        input[REG_WIDTH-1:0] imm8E_i,
+        input[IMM8_WIDTH-1:0] imm8E_i,
         input[REG_WIDTH-1:0] rtE_i,
         input[REG_WIDTH-1:0] rsE_i,
         input[REG_WIDTH-1:0] rdE_i,
@@ -37,9 +37,9 @@ module EX#(parameter DATA_WIDTH = 16,
         //Data
         output reg[ADDR_WIDTH-1:0] PCM_o,
         output reg[DATA_WIDTH-1:0] WriteDataM_o,
-        output reg[DATA_WIDTH-1:0] imm8M_o,
-        output reg[DATA_WIDTH-1:0] rsM_o,
-        output reg[DATA_WIDTH-1:0] WriteRegM_o,
+        output reg[IMM8_WIDTH-1:0] imm8M_o,
+        output reg[REG_WIDTH-1:0] rsM_o,
+        output reg[REG_WIDTH-1:0] WriteRegM_o,
         output reg[DATA_WIDTH-1:0] alu_outM_o,
 
         //Control signals

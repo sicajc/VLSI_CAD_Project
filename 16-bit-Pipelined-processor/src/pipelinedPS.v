@@ -1,3 +1,12 @@
+// `include "CTR.v"
+// `include "reg_file.v"
+`include "EX.v"
+`include "hazardUnit.v"
+`include "ID.v"
+`include "IF.v"
+`include "MEM.v"
+`include "WB.v"
+
 module pipelinedPS#(parameter OP_WIDTH  = 4,
                     parameter CV_WIDTH  = 10,
                     parameter HZ_CV_WIDTH  = 10,
@@ -32,19 +41,21 @@ module pipelinedPS#(parameter OP_WIDTH  = 4,
 wire[OP_WIDTH-1:0] opcode;
 
 //Main CTRs
-wire RegWrite,ALUop,Branch,MemRead,RegDst,MemWrite,Jump,MemToReg ,Mov,Floating,Stop;//ID
+wire RegWrite,ALUop,Branch,MemRead,RegDst,MemWrite,Jump,MemToReg ,Mov,Floating;//ID
 wire RegWriteE,ALUopE,BranchE,MemReadE,RegDstE,MemWriteE,MemToRegE ,MovE,FloatingE;//EX
 wire RegWriteM,BranchM,MemReadM,MemWriteM,MemToRegM ,MovM;//MEM
 wire RegWriteW,MemToRegW;//WB
 
 //Hazard units
-wire alu_src1,alu_src2,mem_src,flushEX_MEM,flushIF_ID,pcstall,flushID_EX ,IF_IDstall ,ID_EXstall ,EX_MEMstall,MEM_WBstall ;
+wire[1:0] alu_src1,alu_src2;
+wire mem_src,flushEX_MEM,flushIF_ID,pcstall,flushID_EX ,IF_IDstall ,ID_EXstall ,EX_MEMstall,MEM_WBstall ;
+wire[REG_WIDTH-1:0] rsI,rtI;
 
 //IF
 wire[ADDR_WIDTH-1:0] PCD;
 wire[REG_WIDTH-1:0] rsD,rtD,rdD;
 
-wire[ADDR_WIDTH-1:0] rf_r1_addr,rf_r2_addr;
+wire[REG_WIDTH-1:0] rf_r1_addr,rf_r2_addr;
 wire[DATA_WIDTH-1:0] rf_r1_data,rf_r2_data;
 
 //EX
@@ -52,15 +63,14 @@ wire[ADDR_WIDTH-1:0]PCE;
 wire[REG_WIDTH-1:0] rtE,rsE,rdE;
 wire[IMM8_WIDTH-1:0] imm8E;
 
-
 //MEM
 wire[ADDR_WIDTH-1:0] PCM;
 wire[DATA_WIDTH-1:0] WriteDataM;
-wire[DATA_WIDTH-1:0] imm8M;
-wire[DATA_WIDTH-1:0] rsM;
+wire[IMM8_WIDTH-1:0] imm8M;
+wire[REG_WIDTH-1:0] rsM;
 wire[REG_WIDTH-1:0] WriteRegM;
 wire[DATA_WIDTH-1:0] alu_outM;
-
+wire[DATA_WIDTH-1:0] WBResultM;
 
 
 wire PC_src;
@@ -70,7 +80,7 @@ wire[ADDR_WIDTH-1:0] jumpAddr;
 
 //WB
 wire[DATA_WIDTH-1:0] ResultW;
-wire[ADDR_WIDTH-1:0] WriteRegW;
+wire[REG_WIDTH-1:0] WriteRegW;
 wire[DATA_WIDTH-1:0] WBResultW;
 
 
@@ -88,7 +98,7 @@ CTR#(
        .MemToReg  ( MemToReg  ),
        .Mov       ( Mov       ),
        .Floating  ( Floating  ),
-       .Stop      ( Stop      )
+       .Stop      ( stop      )
    );
 
 hazardUnit#(
@@ -142,6 +152,10 @@ IF#(
       .rst          ( rst          ),
       .clk          ( clk          ),
 
+      //PC
+      .start(start),
+      .stop(stop),
+
       .jump_i       ( jump       ),
       .PC_src_i     ( PC_src     ),
       .branchAddr_i ( branchAddr ),
@@ -176,11 +190,11 @@ ID#(
       .instruction_mem_rD_i ( im_r_data ),
       .flush_ID_EX_i        ( flushID_EX        ),
       .stall_ID_EX_i        ( ID_EXstall        ),
-      .RegWriteW_i          ( RegWriteW          ),
 
       //RF read Addr
       .reg_file_r1          ( rf_r1_addr          ),
       .reg_file_r2          ( rf_r2_addr          ),
+
       //Forwarding
       .jumpAddr             ( jumpAddr             ),
 
@@ -188,8 +202,8 @@ ID#(
       .rtD                  ( rtD                  ),
       .rdD                  ( rdD                  ),
 
-      .Jump                ( Jump                ),
-      .Stop                ( Stop                ),
+      .Jump                ( Jump                  ),
+      .Stop                ( stop                  ),
 
       //ID/EX
       .rtE                  ( rtE                  ),
@@ -211,7 +225,7 @@ ID#(
 
 reg_file#(
             .DEPTH   ( REG_NUM ),
-            .ADDR    ( ADDR_WIDTH ),
+            .ADDR    ( REG_WIDTH ),
             .WIDTH   ( DATA_WIDTH )
         )u_reg_file(
             .rst     ( rst     ),
@@ -221,8 +235,8 @@ reg_file#(
             .r1_en   ( 1'b1   ),
             .r2_en   ( 1'b1   ),
 
-            .r1_addr ( r1_addr),
-            .r2_addr ( r2_addr ),
+            .r1_addr ( rf_r1_addr ),
+            .r2_addr ( rf_r2_addr ),
 
             .w_data  ( ResultW    ),
             .w_addr  ( WriteRegW  ),
@@ -283,7 +297,7 @@ EX#(
       .MemToRegM_o    ( MemToRegM    ),
       .MovM_o         ( MovM         ),
 
-      .WBResultM      ( WBResultM    ),
+      .WBResultM_i    ( WBResultM    ),
       .ResultW_i      ( ResultW      ),
       .alu_src1_i     ( alu_src1     ),
       .alu_src2_i     ( alu_src2     )
@@ -326,12 +340,12 @@ MEM#(
        .PC_src_o       ( PC_src       ),
 
        //!MEM/WB
-       .WBResultM_o    ( WBResultW    ),
+       .WBResultM_o    ( WBResultM    ),
        .WriteRegM_o    ( WriteRegM    ),
 
        //Control Signals
-       .RegWriteM_o    ( RegWriteM    ),
-       .MemToRegM_o    ( MemToRegM    ),
+       .RegWriteM_o    ( RegWriteW    ),
+       .MemToRegM_o    ( MemToRegW    ),
 
        //DM
        .MemWriteM_i    ( dm_wr        ),
@@ -352,12 +366,13 @@ WB#(
       .rst          ( rst          ),
 
       //MEM/WB
-      .WBResultW_i  ( WBResultW  ),
+      .WBResultW_i  ( WBResultM  ),
 
-      .WriteRegW_i  ( WriteRegW  ),
+      .WriteRegW_i  ( WriteRegM  ),
       .RegWriteW_i  ( RegWriteW  ),
-
       .MemToRegW_i  ( MemToRegW  ),
+
+
       .RegWriteW_o  ( RegWriteW  ),
 
       .memData_r_i  ( dm_r_data  ),

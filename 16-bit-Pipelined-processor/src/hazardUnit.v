@@ -5,8 +5,8 @@ module hazardUnit#(parameter REG_WIDTH = 4)
            input  rst,
 
            //Forwarding
-           input rsE        ,
-           input rtE        ,
+           input[REG_WIDTH-1:0] rsE        ,
+           input[REG_WIDTH-1:0] rtE        ,
 
            input RegWriteM  ,
            input RegWriteW  ,
@@ -14,9 +14,10 @@ module hazardUnit#(parameter REG_WIDTH = 4)
            input[REG_WIDTH-1:0] WriteRegM  ,
            input[REG_WIDTH-1:0] WriteRegW  ,
 
-           input rsM        ,
-           input rsI        ,
-           input rtI        ,
+           input[REG_WIDTH-1:0] rsM        ,
+           input[REG_WIDTH-1:0] rsI        ,
+           input[REG_WIDTH-1:0] rtI        ,
+
            input MemReadE   ,
            input stop       ,
            input PCSrc      ,

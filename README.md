@@ -12,6 +12,10 @@
 
 2.  The coprocessor is implemented using simplfied 16-bit IEEE format as an additional module.
 
+3. To start the processor, raise the input start signal to 1, the flag would get stored inside the state Register(SR) to ensure the processor keeps on running.
+
+4. The stop signal is a part of instruction, it would get decoded at ID stage. After stopping the processor, everything would get stalled.
+
 ![Block Diagram](image/16-bit%20RISC%20Pipelined%20Processor%20with%20FP%20unit.png)
 
 ## 5-stage RISC pipelined Processor
@@ -33,7 +37,7 @@
     PS --> PS_DP[Datapath]
 
     PS_DP --> REG[Register file]
-    PS_DP --> ALU
+    PS_DP --> ALU[IF]
     PS_DP --> IM(Instruction Memory)
     PS_DP --> DM(Data Memory)
     PS_DP --> PC(Program Counter)
@@ -47,6 +51,9 @@
     PS_CTR --> OP[OPcode]
 
 ```
+
+
+
 ### Processor block diagram
 <br />![Processor](image/Processor.png)
 
@@ -131,7 +138,7 @@ MemSrc:
     dm[addr] = c;
 ```
 Testing basic instructions without forwarding and stalling.
-```
+```python
     mov $1,3
     mov $2,4
     mov $3,0
@@ -140,28 +147,20 @@ Testing basic instructions without forwarding and stalling.
     sw  $3,12
     nop
     nop
-<<<<<<< HEAD
-=======
-    add $5,$2,$3
-    add $6,$2,$4
-    sub $11,$4,$2
-    sw $5,0
-    sw $6,1
-    sw $11,2
->>>>>>> bd15e584d5246e21754706a9d4862c3d80903453
     stop
 ```
 Machine Code:
-```
+```h
 0:  0011_0001_0000_0011 //mov $1,3
 1:  0011_0010_0000_0100 //mov $2,4
 2:  0011_0011_0000_0000 //mov $3,0
-3:  0011_0100_0000_1100
-4:  0010_0010_0001_0011
-5:  0001_0011_0000_1100
-6:  0000_0000_0000_0000
-7:  0000_0000_0000_0000
-8:  0111_0000_0000_0000
+3:  0011_0100_0000_1100 //mov $4,12
+4:  0010_0010_0001_0011 //add $3,$2,$1
+5:  0001_0011_0000_1100 //sw $3,12
+6:  1111_0000_0000_0000 // nop
+7:  1111_0000_0000_0000 // nop
+8:  0111_0000_0000_0000 // stop
+                        //dm[12] = 7
 ```
 ## Test2
 Testing R-R forwarding.

@@ -6,10 +6,14 @@ module IF#(parameter DATA_WIDTH = 16,
         //Control inputs
         input jump_i,
         input PC_src_i,
+        input start,
+
+        //From ID stage
+        input stop,
 
         //Forwarded addr
-        input branchAddr_i,
-        input jumpAddr_i,
+        input[ADDR_WIDTH-1:0] branchAddr_i,
+        input[ADDR_WIDTH-1:0] jumpAddr_i,
 
         //IF/ID control inputs
         input flushIF_ID_i,
@@ -21,11 +25,22 @@ module IF#(parameter DATA_WIDTH = 16,
         output                  im_rd_o,
 
         //IF/ID output
-        output reg[ADDR_WIDTH-1:0] PCD_IF_ID_rd_o);
+        output reg[ADDR_WIDTH-1:0] PCD_IF_ID_rd_o,
+
+        //Status
+        output reg processor_status_r_o);
 
 reg[ADDR_WIDTH-1:0] pc_rd;
 reg[ADDR_WIDTH-1:0] pc_wr;
 wire[ADDR_WIDTH-1:0] PCF;
+
+//Processor status
+always @(posedge clk)
+begin
+    processor_status_r_o <= (rst || stop) ? 1'b0 : (start ? 1'b1 :processor_status_r_o);
+end
+
+
 
 
 //PC & adder
@@ -48,9 +63,13 @@ begin
     begin
         pc_wr = jumpAddr_i;
     end
-    else
+    else if(processor_status_r_o)
     begin
         pc_wr = PCF;
+    end
+    else
+    begin
+        pc_wr = pc_rd;
     end
 end
 

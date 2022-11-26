@@ -11,7 +11,7 @@ module MEM #(parameter DATA_WIDTH = 16,
         input[ADDR_WIDTH-1:0] PCM_i,
         input[DATA_WIDTH-1:0] alu_outM_i,
         input[DATA_WIDTH-1:0] WriteDataM_i,
-        input[REG_WIDTH-1:0] imm8M_i,
+        input[IMM8_WIDTH-1:0] imm8M_i,
         input[REG_WIDTH-1:0] rsM_i,
         input[REG_WIDTH-1:0] WriteRegM_i,
 
@@ -28,14 +28,14 @@ module MEM #(parameter DATA_WIDTH = 16,
         input MovM_i,
 
         //Forwarded signal
-        input[1:0] ResultW_i,
+        input[DATA_WIDTH-1:0] ResultW_i,
 
         //Forward signal to IF
         output[ADDR_WIDTH-1:0] branchAddr_o,
 
         //MEM/WB
         output reg[DATA_WIDTH-1:0] WBResultM_o,
-        output reg[DATA_WIDTH-1:0] WriteRegM_o,
+        output reg[REG_WIDTH-1:0] WriteRegM_o,
         output reg RegWriteM_o ,
         output reg MemToRegM_o ,
 
