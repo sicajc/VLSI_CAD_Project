@@ -1,5 +1,4 @@
-// `include "CTR.v"
-// `include "reg_file.v"
+`include "reg_file.v"
 `include "EX.v"
 `include "hazardUnit.v"
 `include "ID.v"
@@ -41,7 +40,7 @@ module pipelinedPS#(parameter OP_WIDTH  = 4,
 wire[OP_WIDTH-1:0] opcode;
 
 //Main CTRs
-wire RegWrite,ALUop,Branch,MemRead,RegDst,MemWrite,Jump,MemToReg ,Mov,Floating;//ID
+// wire RegWrite,ALUop,Branch,MemRead,RegDst,MemWrite,Jump,MemToReg ,Mov,Floating;//ID
 wire RegWriteE,ALUopE,BranchE,MemReadE,RegDstE,MemWriteE,MemToRegE ,MovE,FloatingE;//EX
 wire RegWriteM,BranchM,MemReadM,MemWriteM,MemToRegM ,MovM;//MEM
 wire RegWriteW,MemToRegW;//WB
@@ -53,6 +52,7 @@ wire[REG_WIDTH-1:0] rsI,rtI;
 
 //IF
 wire[ADDR_WIDTH-1:0] PCD;
+wire[ADDR_WIDTH-1:0] PC;
 wire[REG_WIDTH-1:0] rsD,rtD,rdD;
 
 wire[REG_WIDTH-1:0] rf_r1_addr,rf_r2_addr;
@@ -83,23 +83,16 @@ wire[DATA_WIDTH-1:0] ResultW;
 wire[REG_WIDTH-1:0] WriteRegW;
 wire[DATA_WIDTH-1:0] WBResultW;
 
+//Stop Register
+reg  stop_flag;
+wire stop_flag_rd = stop_flag;
 
-CTR#(
-       .OP_WIDTH  ( OP_WIDTH )
-   )u_CTR(
-       .opcode_i  ( opcode    ),
-       .RegWrite  ( RegWrite  ),
-       .ALUop     ( ALUop     ),
-       .Branch    ( Branch    ),
-       .MemRead   ( MemRead   ),
-       .RegDst    ( RegDst    ),
-       .MemWrite  ( MemWrite  ),
-       .Jump      ( Jump      ),
-       .MemToReg  ( MemToReg  ),
-       .Mov       ( Mov       ),
-       .Floating  ( Floating  ),
-       .Stop      ( stop      )
-   );
+always @(posedge clk)
+begin
+    stop_flag <= rst ? 'd0 : ((PC >= 3)? stop : stop_flag);
+end
+
+
 
 hazardUnit#(
     .REG_WIDTH   ( REG_WIDTH )
@@ -122,7 +115,7 @@ hazardUnit#(
     .MemReadE    ( MemReadE    ),
 
     //Control hazard
-    .stop        ( stop        ),
+    .stop        ( stop_flag   ),
     .PCSrc       ( PCSrc       ),
     .jump        ( jump        ),
 
@@ -154,7 +147,7 @@ IF#(
 
       //PC
       .start(start),
-      .stop(stop),
+      .stop(stop_flag ),
 
       .jump_i       ( jump       ),
       .PC_src_i     ( PC_src     ),
@@ -171,6 +164,7 @@ IF#(
       .stallIF_ID_i ( IF_IDstall ),
 
       //PC
+      .PC(PC),
       .stallPC_i    ( pcstall    )
   );
 
@@ -202,8 +196,8 @@ ID#(
       .rtD                  ( rtD                  ),
       .rdD                  ( rdD                  ),
 
-      .Jump                ( Jump                  ),
-      .Stop                ( stop                  ),
+      .Jump                 ( Jump                  ),
+      .Stop                 ( stop_flag_rd          ),
 
       //ID/EX
       .rtE                  ( rtE                  ),

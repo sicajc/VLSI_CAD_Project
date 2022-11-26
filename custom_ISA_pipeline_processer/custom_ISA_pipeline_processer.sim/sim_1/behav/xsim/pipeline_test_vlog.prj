@@ -1,0 +1,11 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../16-bit-Pipelined-processor/src/pipelinedPS.v" \
+"../../../../../16-bit-Pipelined-processor/src/reg_file.v" \
+"../../../../../16-bit-Pipelined-processor/src/pipeline_test.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

@@ -1,0 +1,33 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/pipelinedPS.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module reg_file
+INFO: [VRFC 10-311] analyzing module EX
+INFO: [VRFC 10-311] analyzing module hazardUnit
+INFO: [VRFC 10-311] analyzing module CTR
+INFO: [VRFC 10-311] analyzing module ID
+INFO: [VRFC 10-311] analyzing module IF
+INFO: [VRFC 10-311] analyzing module MEM
+WARNING: [VRFC 10-9336] redeclaration of ANSI port 'PC_src_o' is not allowed [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/MEM.v:51]
+INFO: [VRFC 10-311] analyzing module WB
+INFO: [VRFC 10-311] analyzing module pipelinedPS
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/reg_file.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module reg_file
+WARNING: [VRFC 10-3609] overwriting previous definition of module 'reg_file' [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/reg_file.v:1]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/pipeline_test.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module reg_file
+INFO: [VRFC 10-311] analyzing module EX
+WARNING: [VRFC 10-3609] overwriting previous definition of module 'EX' [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/../src/EX.v:1]
+INFO: [VRFC 10-311] analyzing module hazardUnit
+WARNING: [VRFC 10-3609] overwriting previous definition of module 'hazardUnit' [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/../src/hazardUnit.v:1]
+INFO: [VRFC 10-311] analyzing module CTR
+WARNING: [VRFC 10-3609] overwriting previous definition of module 'CTR' [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/../src/CTR.v:1]
+INFO: [VRFC 10-311] analyzing module ID
+WARNING: [VRFC 10-3609] overwriting previous definition of module 'ID' [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/../src/ID.v:2]
+INFO: [VRFC 10-311] analyzing module IF
+WARNING: [VRFC 10-3609] overwriting previous definition of module 'IF' [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/../src/IF.v:1]
+INFO: [VRFC 10-311] analyzing module MEM
+WARNING: [VRFC 10-3609] overwriting previous definition of module 'MEM' [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/../src/MEM.v:1]
+INFO: [VRFC 10-311] analyzing module WB
+WARNING: [VRFC 10-3609] overwriting previous definition of module 'WB' [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/../src/WB.v:1]
+INFO: [VRFC 10-311] analyzing module pipelinedPS
+WARNING: [VRFC 10-3609] overwriting previous definition of module 'pipelinedPS' [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/../src/pipelinedPS.v:9]
+INFO: [VRFC 10-311] analyzing module pipeline_test

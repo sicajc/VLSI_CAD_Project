@@ -126,6 +126,10 @@ MemSrc:
         do nothing
 ```
 
+### Debug notes
+1. stop register is added , the reason is that stop signal can only be decoded in ID stage, however the stop signal needs to be read during IF stage for PC, otherwise it cannot know which state it is in.
+
+2. Processor Status Register(SR) is added s.t. we can know whether processor is running or not, if it is not running, PC would be locked.
 # Testbench
 ## Test1
 ```C
@@ -148,6 +152,8 @@ Testing basic instructions without forwarding and stalling.
     nop
     nop
     stop
+    nop
+    nop
 ```
 Machine Code:
 ```h

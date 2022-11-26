@@ -1,0 +1,23 @@
+Vivado Simulator v2022.1
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2022.1/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot pipeline_test_behav xil_defaultlib.pipeline_test xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3705] select index 8 into 'imm8M_i' is out of bounds [C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/../src/MEM.v:59]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.hazardUnit
+Compiling module xil_defaultlib.IF
+Compiling module xil_defaultlib.CTR
+Compiling module xil_defaultlib.ID(CV_WIDTH=10)
+Compiling module xil_defaultlib.reg_file(DEPTH=16,ADDR=4,WIDTH=1...
+Compiling module xil_defaultlib.EX(CV_WIDTH=10)
+Compiling module xil_defaultlib.MEM(CV_WIDTH=10)
+Compiling module xil_defaultlib.WB(CV_WIDTH=10)
+Compiling module xil_defaultlib.pipelinedPS
+Compiling module xil_defaultlib.pipeline_test
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot pipeline_test_behav

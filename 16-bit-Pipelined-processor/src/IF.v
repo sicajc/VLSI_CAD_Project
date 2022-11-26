@@ -8,7 +8,7 @@ module IF#(parameter DATA_WIDTH = 16,
         input PC_src_i,
         input start,
 
-        //From ID stage
+        //From stop_flag
         input stop,
 
         //Forwarded addr
@@ -28,7 +28,10 @@ module IF#(parameter DATA_WIDTH = 16,
         output reg[ADDR_WIDTH-1:0] PCD_IF_ID_rd_o,
 
         //Status
-        output reg processor_status_r_o);
+        output reg processor_status_r_o,
+
+        //Current PC
+        output[ADDR_WIDTH-1:0] PC);
 
 reg[ADDR_WIDTH-1:0] pc_rd;
 reg[ADDR_WIDTH-1:0] pc_wr;
@@ -39,9 +42,6 @@ always @(posedge clk)
 begin
     processor_status_r_o <= (rst || stop) ? 1'b0 : (start ? 1'b1 :processor_status_r_o);
 end
-
-
-
 
 //PC & adder
 always @(posedge clk )
@@ -74,6 +74,7 @@ begin
 end
 
 assign PCF = pc_rd + 8'b1;
+assign PC  = pc_rd;
 
 //IM
 assign im_addr_o = pc_rd;
