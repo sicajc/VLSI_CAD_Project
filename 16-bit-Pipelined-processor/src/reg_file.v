@@ -17,16 +17,18 @@ input     [ADDR-1:0]    r2_addr,  // #2-port read address
 
 input     [WIDTH-1:0]   w_data,   // write data
 
-output    [WIDTH-1:0]   r1_data,  // #1-port read data
-output    [WIDTH-1:0]   r2_data   // #2-port read data
+output reg   [WIDTH-1:0]   r1_data,  // #1-port read data
+output reg   [WIDTH-1:0]   r2_data   // #2-port read data
 );
 
 reg [WIDTH-1:0]    rf[0:DEPTH-1];
+always @(posedge clk )
+begin
+  r1_data <= (r1_en) ? rf[r1_addr] : {(WIDTH){1'b0}};
+  r2_data <= (r2_en) ? rf[r2_addr] : {(WIDTH){1'b0}};
+end
 
-assign  r1_data = (r1_en) ? rf[r1_addr] : {(WIDTH){1'b0}};
-assign  r2_data = (r2_en) ? rf[r2_addr] : {(WIDTH){1'b0}};
-
-always@(posedge clk or posedge rst)
+always@(negedge clk or posedge rst)
 begin: rf_block
   integer i;
   if(rst)

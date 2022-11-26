@@ -137,6 +137,8 @@ MemSrc:
    read at positive edge.
 
 5. When executing Instructions, you should give enough nop before stop for previous instructions to actually complete.
+
+6. When specifying components, you MUST first UNIT Test every Components before putting them into actions. Just give them some simple testbench s.t. you are sure that they are working as expected. THIS WOULD SAVE YOU TONS OF TIME!!!!!!!! I didnt notice that RF is not blocked.
 # Testbench
 ## Test1
 ```C
