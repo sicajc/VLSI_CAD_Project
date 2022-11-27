@@ -50,7 +50,7 @@ module MEM #(parameter DATA_WIDTH = 16,
        );
 
 //Branch
-wire PC_src_o = ((WriteDataM_o == 'd0) && (BranchM_i) );
+assign PC_src_o = ((WriteDataM_o == 'd0) && (BranchM_i) );
 assign branchAddr_o = PCM_i + imm8M_i;
 
 //DM

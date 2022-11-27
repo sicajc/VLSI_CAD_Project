@@ -95,7 +95,7 @@ ALU_src2:
 MemSrc:
 > To solve sw-lw data hazard
 ```verilog
-    if((rsM!=0) and (rsM == WriteRegW) and (MemRead == 1))
+    if((rsM!=0) and (rsM == WriteRegW) and (MemReadW == 1))
         MemSrc = 1
     else
         MemSrc = 0
@@ -108,7 +108,7 @@ MemSrc:
 ```verilog
     if(stop)
         stall Every Pipeline and PC
-    else if( ((rsI == rsE) and (rsI!=0)) or ((rsI == rsE) and (rtI != 0 )) and (MemRead == 1))
+    else if( ((rsD==rsE) or (rtD == rsE)) and (MemReadE == 1))
         stall PC and flush ID/EX
     else
         do nothing
@@ -138,6 +138,8 @@ MemSrc:
 5. When executing Instructions, you should give enough nop before stop for previous instructions to actually complete.
 
 6. When specifying components, you MUST first UNIT Test every Components before putting them into actions. Just give them some simple testbench s.t. you are sure that they are working as expected. THIS WOULD SAVE YOU TONS OF TIME!!!!!!!! I didnt notice that RF is not blocked.
+
+7. Remember to check whether you have used the right testbenches or whether you have correct the testbenches into the right one.
 # Testbench
 ## Test1
 ```C
@@ -224,6 +226,7 @@ Assembly:
 ```
 Machine Code:
 ```verilog
+//a = $1, b = $2 , c = $3 , d = $4
 0:      0000_0001_0000_0000 //lw $1,0
 1:      0000_0010_0000_0001 //lw $2,1
 2:      0000_0011_0000_0010 //lw $3,2

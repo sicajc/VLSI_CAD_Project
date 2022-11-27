@@ -112,13 +112,13 @@ hazardUnit#(
     .rsM         ( rsM         ),
 
     //Stall
-    .rsI         ( rsI         ),
-    .rtI         ( rtI         ),
+    .rsD         ( rsD         ),
+    .rtD         ( rtD         ),
     .MemReadE    ( MemReadE    ),
 
     //Control hazard
     .stop        ( stop_flag_rd),
-    .PCSrc       ( PCSrc       ),
+    .PCSrc       ( PC_src       ),
     .jump        ( jump        ),
 
     //Forwarding
@@ -196,9 +196,8 @@ ID#(
 
       .rsD                  ( rsD                  ),
       .rtD                  ( rtD                  ),
-      .rdD                  ( rdD                  ),
 
-      .Jump                 ( Jump                  ),
+      .Jump                 ( jump                  ),
       .Stop                 ( stop                  ),
 
       //ID/EX

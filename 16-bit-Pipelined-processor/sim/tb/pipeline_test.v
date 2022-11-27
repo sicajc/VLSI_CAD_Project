@@ -3,20 +3,20 @@
 `define End_CYCLE  10000000  // Modify cycle times once your design need more cycle times!
 `include "../../src/pipelinedPS.v"
 
-`ifdef tb1
-  `define PAT_DM "../data/Test1/dm_data.txt"
-  `define PAT_IM "../data/Test1/im_data.txt"
-`endif
+// `ifdef tb1
+//   `define PAT_DM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test1/dm_data.txt"
+//   `define PAT_IM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test1/im_data.txt"
+// `endif
 
-`ifdef tb2
-  `define PAT_DM "../data/Test2/dm_data.txt"
-  `define EXP_IM "../data/Test2/im_data.txt"
-`endif
+// `ifdef tb2
+   `define PAT_DM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test2/dm_data.txt"
+   `define PAT_IM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test2/im_data.txt"
+// `endif
 
-`ifdef tb3
-  `define PAT_DM "../data/Test3/dm_data.txt"
-  `define EXP_IM "../data/Test3/im_data.txt"
-`endif
+// `ifdef tb3
+//   `define PAT_DM "../data/Test3/dm_data.txt"
+//   `define EXP_IM "../data/Test3/im_data.txt"
+// `endif
 
 module pipeline_test;
 

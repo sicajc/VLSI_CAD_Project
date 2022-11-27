@@ -2,14 +2,14 @@
 2020.2
 Apr 18 2022
 16:05:34
+C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/tb/pipeline_test.v,1669523062,verilog,,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/pipelinedPS.v,pipeline_test,,,,,,,,
 C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/CTR.v,1669453961,verilog,,,,CTR,,,,,,,,
 C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/EX.v,1669444862,verilog,,,,EX,,,,,,,,
-C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/ID.v,1669454779,verilog,,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/CTR.v,ID,,,,,,,,
+C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/ID.v,1669522743,verilog,,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/CTR.v,ID,,,,,,,,
 C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/IF.v,1669453846,verilog,,,,IF,,,,,,,,
-C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/MEM.v,1669464891,verilog,,,,MEM,,,,,,,,
-C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/WB.v,1669467776,verilog,,,,WB,,,,,,,,
-C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/hazardUnit.v,1669439814,verilog,,,,hazardUnit,,,,,,,,
-C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/pipeline_test.v,1669464698,verilog,,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/pipelinedPS.v,pipeline_test,,,,,,,,
-C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/pipelinedPS.v,1669467595,verilog,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/reg_file.v,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/reg_file.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/EX.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/hazardUnit.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/ID.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/IF.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/MEM.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/WB.v,pipelinedPS,,,,,,,,
-C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/reg_file.v,1669468604,verilog,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/pipeline_test.v,,reg_file,,,,,,,,
+C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/MEM.v,1669522543,verilog,,,,MEM,,,,,,,,
+C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/WB.v,1669467983,verilog,,,,WB,,,,,,,,
+C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/hazardUnit.v,1669522470,verilog,,,,hazardUnit,,,,,,,,
+C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/pipelinedPS.v,1669522977,verilog,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/reg_file.v,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/reg_file.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/EX.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/hazardUnit.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/ID.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/IF.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/MEM.v;C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/WB.v,pipelinedPS,,,,,,,,
+C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/reg_file.v,1669468604,verilog,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/tb/pipeline_test.v,,reg_file,,,,,,,,
 C:/Users/User/Desktop/cad_project/custom_ISA_pipeline_processer/custom_ISA_pipeline_processer.sim/sim_1/behav/xsim/glbl.v,1649976174,verilog,,,,glbl,,,,,,,,

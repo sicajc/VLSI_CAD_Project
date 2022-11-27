@@ -15,8 +15,8 @@ module hazardUnit#(parameter REG_WIDTH = 4)
            input[REG_WIDTH-1:0] WriteRegW  ,
 
            input[REG_WIDTH-1:0] rsM        ,
-           input[REG_WIDTH-1:0] rsI        ,
-           input[REG_WIDTH-1:0] rtI        ,
+           input[REG_WIDTH-1:0] rsD        ,
+           input[REG_WIDTH-1:0] rtD        ,
 
            input MemReadE   ,
            input stop       ,
@@ -101,7 +101,7 @@ begin
 
         flushID_EX  = 1'b0;
     end
-    else if((rsI == rsE) && (rsI!=0) || ((rsI==rsE) && (rtI!=0) && (MemReadE == 1)))
+    else if((rsD==rsE) && (rtD!=0) && (MemReadE == 1))
     begin
         IF_IDstall  = 1'b0;
         ID_EXstall  = 1'b0;

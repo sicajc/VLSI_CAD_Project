@@ -46,9 +46,10 @@ module ID#(parameter DATA_WIDTH = 16,
        );
 
 //Instruction bit slices from IM
-assign  rsD    = instruction_mem_rD_i[11:8];
-assign  rtD    = instruction_mem_rD_i[7:4];
-assign  rdD    = instruction_mem_rD_i[3:0];
+assign  rsD     = instruction_mem_rD_i[11:8];
+assign  rtD     = instruction_mem_rD_i[7:4];
+assign  rdD     = instruction_mem_rD_i[3:0];
+assign  jumpAddr = instruction_mem_rD_i[7:0];
 wire[IMM8_WIDTH-1:0] imm8D_w = instruction_mem_rD_i[7:0];
 wire[OP_WIDTH-1:0]   opcode = instruction_mem_rD_i[15:12];
 

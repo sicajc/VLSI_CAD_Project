@@ -25,6 +25,19 @@ localparam ADDF =   4'b1000 ;
 localparam MULTF =  4'b1001 ;
 localparam NOP =    4'b1111 ;
 
+
+wire _ADD_       = opcode_i == ADD;
+wire _SW_        = opcode_i == SW;
+wire _LW_        = opcode_i == LW;
+wire _SUB_       = opcode_i == SUB;
+wire _MOV_       = opcode_i == MOV;
+wire _JMPZ_      = opcode_i == JMPZ;
+wire _STOP_      = opcode_i == STOP;
+wire _ADDF_      = opcode_i == ADDF;
+wire _MULTF_     = opcode_i == MULTF;
+wire _NOP_       = opcode_i == NOP;
+
+
 //Basic instruction ControlVector
 localparam ADD_CV =       11'b10000000000;
 localparam SW_CV =        11'b00000100000;
