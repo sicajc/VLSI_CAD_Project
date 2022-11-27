@@ -22,7 +22,7 @@ output reg   [WIDTH-1:0]   r2_data   // #2-port read data
 );
 
 reg [WIDTH-1:0]    rf[0:DEPTH-1];
-always @(posedge clk )
+always @(posedge clk)
 begin
   r1_data <= (r1_en) ? rf[r1_addr] : {(WIDTH){1'b0}};
   r2_data <= (r2_en) ? rf[r2_addr] : {(WIDTH){1'b0}};

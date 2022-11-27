@@ -105,14 +105,14 @@ begin
 
         flushID_EX  = 1'b0;
     end
-    else if((((rsD==rsE) || (rtD == rsE)) && (MemReadE == 1)) && (R_type == 1))
+    else if((((rsD == rsE) || (rtD == rsE)) && (MemReadE == 1)) && (R_type == 1))
     begin
         IF_IDstall  = 1'b0;
         ID_EXstall  = 1'b0;
         EX_MEMstall = 1'b0;
         MEM_WBstall = 1'b0;
-        pcstall     = 1'b1;
 
+        pcstall     = 1'b1;
         flushID_EX   = 1'b1;
     end
     else

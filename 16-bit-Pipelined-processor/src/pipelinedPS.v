@@ -270,7 +270,6 @@ EX#(
       .r2_data_r_i    ( rf_r2_data    ),
 
       .imm8E_i        ( imm8E        ),
-      .rtE_i          ( rtE          ),
       .rsE_i          ( rsE          ),
       .rdE_i          ( rdE          ),
 

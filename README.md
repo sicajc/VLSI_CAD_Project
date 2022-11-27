@@ -254,19 +254,68 @@ Machine Code:
                             //D[4] = -10
 ```
 ## Test3
+1. Debug notes
+   Problem occurs at PC, it reads out the wrong instruction after stalling.(Solved if seting IM to negative edge triggered) WHY?
+   Q: What should be negative triggered? What should be positive edge triggered?
 Testing R-lw hazard
+```C
+//D[0] = 10, D[1] = 20 , D[2] = 30
+int a = D[0];
+int b = D[1];
+int c = D[2];
+d = b + c;
+d = d + d;
+a = b + c;
+D[0] = a;
+D[1] = d;
+//Result D[0] = 50
+//Result D[1] = 80
 ```
-    lw $2,0
-    lw $3,1
-    lw $4,2
-    nop
-    nop
-    add $5,$2,$3
-    lw  $1,$3
-    add $6,$1,$2
-    add $7,$1,$2
-    stop
-    nop
+Assembly
+```python
+# a = $0 , b = $1 , c = $2
+lw $0,0
+lw $1,1
+lw $2,2
+add $3,$1,$2 #(lw-r hazard) at $2
+add $3,$3,$3
+add $0,$1,$2
+sw $0,0
+sw $3,1
+nop
+nop
+nop
+stop
+nop
+nop
+nop
+
+```
+
+Machine Code
+```python
+0 :0000_0000_0000_0000
+1 :0000_0001_0000_0001
+2 :0000_0010_0000_0010
+3 :0010_0001_0010_0011
+4 :0010_0011_0011_0011
+5 :0010_0001_0010_0000
+6 :0001_0000_0000_0000
+7 :0001_0011_0000_0001
+8 :1111_0000_0000_0000
+9 :1111_0000_0000_0000
+10:1111_0000_0000_0000
+11:0111_0000_0000_0000
+12:1111_0000_0000_0000
+13:1111_0000_0000_0000
+14:1111_0000_0000_0000
+15:1111_0000_0000_0000
+16:     .
+        .
+        .
+        .
+//Result D[0] = 50
+//Result D[1] = 80
 ```
 ## Test4
 Testing sw-lw forwarding

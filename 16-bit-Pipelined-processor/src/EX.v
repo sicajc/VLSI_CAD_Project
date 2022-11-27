@@ -15,7 +15,6 @@ module EX#(parameter DATA_WIDTH = 16,
 
         //ID/EX
         input[IMM8_WIDTH-1:0] imm8E_i,
-        input[REG_WIDTH-1:0] rtE_i,
         input[REG_WIDTH-1:0] rsE_i,
         input[REG_WIDTH-1:0] rdE_i,
         input flush_EX_MEM_i,

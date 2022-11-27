@@ -107,10 +107,10 @@ begin
         MovE <= 'd0;
         FloatingE <= 'd0;
 
-        rtE <= 'd0;
-        rsE <= 'd0;
-        rdE <= 'd0;
-        imm8D<= 'd0;
+        rtE <= 'd15;
+        rsE <= 'd15;
+        rdE <= 'd15;
+        imm8D<= 'd250;
 
     end
     else if(stall_ID_EX_i)

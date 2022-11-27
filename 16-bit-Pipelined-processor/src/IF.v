@@ -44,14 +44,14 @@ begin
 end
 
 //PC & adder
-always @(posedge clk )
+always @(posedge clk)
 begin
     pc_rd <= rst ? 'd0 : pc_wr;
 end
 
 always @(*)
 begin
-    if(stallIF_ID_i)
+    if(stallPC_i)
     begin
         pc_wr = pc_rd;
     end
