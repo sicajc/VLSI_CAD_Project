@@ -40,7 +40,7 @@ module pipelinedPS#(parameter OP_WIDTH  = 4,
 wire[OP_WIDTH-1:0] opcode;
 
 //Main CTRs
-// wire RegWrite,ALUop,Branch,MemRead,RegDst,MemWrite,Jump,MemToReg ,Mov,Floating;//ID
+wire RegWriteD;//ID
 wire RegWriteE,ALUopE,BranchE,MemReadE,RegDstE,MemWriteE,MemToRegE ,MovE,FloatingE;//EX
 wire RegWriteM,BranchM,MemReadM,MemWriteM,MemToRegM ,MovM;//MEM
 wire RegWriteW,MemToRegW;//WB
@@ -49,6 +49,7 @@ wire RegWriteW,MemToRegW;//WB
 wire[1:0] alu_src1,alu_src2;
 wire mem_src,flushEX_MEM,flushIF_ID,pcstall,flushID_EX ,IF_IDstall ,ID_EXstall ,EX_MEMstall,MEM_WBstall ;
 wire[REG_WIDTH-1:0] rsI,rtI;
+wire R_type;
 
 //IF
 wire[ADDR_WIDTH-1:0] PCD;
@@ -115,6 +116,8 @@ hazardUnit#(
     .rsD         ( rsD         ),
     .rtD         ( rtD         ),
     .MemReadE    ( MemReadE    ),
+    .RegWriteD   ( RegWriteD   ),
+    .R_type      ( R_type      ),
 
     //Control hazard
     .stop        ( stop_flag_rd),
@@ -168,6 +171,7 @@ IF#(
       //PC
       .PC(PC),
       .stallPC_i    ( pcstall    )
+
   );
 
 ID#(
@@ -216,7 +220,11 @@ ID#(
       .MemWriteE            ( MemWriteE            ),
       .MemToRegE            ( MemToRegE            ),
       .MovE                 ( MovE                 ),
-      .FloatingE            ( FloatingE            )
+      .FloatingE            ( FloatingE            ),
+
+      //Hazard
+      .RegWrite_o(RegWriteD),
+      .R_type(R_type)
   );
 
 reg_file#(

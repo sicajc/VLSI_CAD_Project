@@ -11,7 +11,8 @@ module CTR#(parameter OP_WIDTH = 4,
         output MemToReg ,
         output Mov ,
         output Floating ,
-        output Stop);
+        output Stop,
+        output R_type);
 
 //Basic instructions OP
 localparam ADD =    4'b0010 ;
@@ -36,6 +37,7 @@ wire _STOP_      = opcode_i == STOP;
 wire _ADDF_      = opcode_i == ADDF;
 wire _MULTF_     = opcode_i == MULTF;
 wire _NOP_       = opcode_i == NOP;
+assign R_type    = _ADD_ || _SUB_ || _MULTF_ || _NOP_ || _STOP_ || _JMPZ_ ;
 
 
 //Basic instruction ControlVector

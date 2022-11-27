@@ -95,7 +95,7 @@ ALU_src2:
 MemSrc:
 > To solve sw-lw data hazard
 ```verilog
-    if((rsM!=0) and (rsM == WriteRegW) and (MemReadW == 1))
+    if((rsM!=0) and (rsM == WriteRegW) and (MemReadW == 1) and (MemWriteM == 1))
         MemSrc = 1
     else
         MemSrc = 0
@@ -108,7 +108,7 @@ MemSrc:
 ```verilog
     if(stop)
         stall Every Pipeline and PC
-    else if( ((rsD==rsE) or (rtD == rsE)) and (MemReadE == 1))
+    else if( ((rsD==rsE) or (rtD == rsE)) and (MemReadE == 1) and (ID Stage is NOT I type))
         stall PC and flush ID/EX
     else
         do nothing

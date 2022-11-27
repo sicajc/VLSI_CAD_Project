@@ -24,6 +24,10 @@ module ID#(parameter DATA_WIDTH = 16,
         output[REG_WIDTH-1:0]  rtD ,
         output[REG_WIDTH-1:0]  rdD ,
 
+        //LW-R hazard needed
+        output RegWrite_o,
+        output R_type    ,
+
         //IF/ID
         output reg[REG_WIDTH-1:0]  rtE,
         output reg[REG_WIDTH-1:0]  rsE,
@@ -81,7 +85,11 @@ CTR ctr(.opcode_i(opcode),
         .MemToReg(MemToReg),
         .Mov(Mov),
         .Floating(Floating),
-        .Stop(Stop));
+        .Stop(Stop),
+        .R_type(R_type));
+
+//LW-R hazard, ID stage R, EX stage LW
+assign RegWrite_o = RegWrite;
 
 // ID/EX
 always @(posedge clk)
