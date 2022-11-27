@@ -2,7 +2,7 @@
 2020.2
 Apr 18 2022
 16:05:34
-C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/tb/pipeline_test.v,1669552060,verilog,,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/pipelinedPS.v,pipeline_test,,,,,,,,
+C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/tb/pipeline_test.v,1669556221,verilog,,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/pipelinedPS.v,pipeline_test,,,,,,,,
 C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/CTR.v,1669529636,verilog,,,,CTR,,,,,,,,
 C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/EX.v,1669547612,verilog,,,,EX,,,,,,,,
 C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/ID.v,1669548870,verilog,,,C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/src/CTR.v,ID,,,,,,,,

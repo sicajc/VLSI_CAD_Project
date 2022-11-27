@@ -22,7 +22,7 @@ module EX#(parameter DATA_WIDTH = 16,
 
         //Control Vector
         input RegWriteE_i ,
-        input ALUopE_i ,
+        input[1:0] ALUopE_i ,
         input BranchE_i ,
         input MemReadE_i ,
         input RegDstE_i ,
@@ -37,8 +37,8 @@ module EX#(parameter DATA_WIDTH = 16,
         output reg[ADDR_WIDTH-1:0] PCM_o,
         output reg[DATA_WIDTH-1:0] WriteDataM_o,
         output reg[IMM8_WIDTH-1:0] imm8M_o,
-        output reg[REG_WIDTH-1:0] rsM_o,
-        output reg[REG_WIDTH-1:0] WriteRegM_o,
+        output reg[REG_WIDTH-1:0]  rsM_o,
+        output reg[REG_WIDTH-1:0]  WriteRegM_o,
         output reg[DATA_WIDTH-1:0] alu_outM_o,
 
         //Control signals
@@ -62,7 +62,7 @@ reg[DATA_WIDTH-1:0] alu_in2;
 
 wire[DATA_WIDTH-1:0] WriteDataE_w;
 wire[DATA_WIDTH-1:0] WriteRegE_w;
-wire[DATA_WIDTH-1:0] alu_w;
+reg[DATA_WIDTH-1:0] alu_w;
 
 //ALU_SRC1
 always @(*)
@@ -111,7 +111,14 @@ begin
 end
 
 //ALU
-assign alu_w = ALUopE_i ? alu_in1 - alu_in2 : alu_in1 + alu_in2;
+always @(*)
+begin
+    case(ALUopE_i)
+    2'b00: alu_w = alu_in1 - alu_in2;
+    2'b01: alu_w = alu_in1 + alu_in2;
+    2'b10: alu_w = alu_in1 < alu_in2;
+    endcase
+end
 
 // EX/MEM
 always @(posedge clk)

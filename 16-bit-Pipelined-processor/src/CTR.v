@@ -1,8 +1,8 @@
 module CTR#(parameter OP_WIDTH = 4,
-            parameter CV_WIDTH = 11)
+            parameter CV_WIDTH = 12)
        (input [OP_WIDTH-1:0] opcode_i,
         output RegWrite ,
-        output ALUop ,
+        output[1:0] ALUop ,
         output Branch ,
         output MemRead ,
         output RegDst ,
@@ -25,6 +25,7 @@ localparam STOP =   4'b0111 ;
 localparam ADDF =   4'b1000 ;
 localparam MULTF =  4'b1001 ;
 localparam NOP =    4'b1111 ;
+localparam SLT =    4'b1010 ;
 
 
 wire _ADD_       = opcode_i == ADD;
@@ -37,20 +38,22 @@ wire _STOP_      = opcode_i == STOP;
 wire _ADDF_      = opcode_i == ADDF;
 wire _MULTF_     = opcode_i == MULTF;
 wire _NOP_       = opcode_i == NOP;
-assign R_type    = _ADD_ || _SUB_ || _MULTF_ || _NOP_ || _STOP_ || _JMPZ_ ;
+wire _SLT_       = opcode_i == SLT;
+assign R_type    = _ADD_ || _SUB_ || _MULTF_ || _NOP_ || _STOP_ || _JMPZ_ || _SLT_;
 
 
 //Basic instruction ControlVector
-localparam ADD_CV =       11'b10000000000;
-localparam SW_CV =        11'b00000100000;
-localparam LW_CV =        11'b10011001000;
-localparam SUB_CV =       11'b11000000000;
-localparam MOV_CV =       11'b10001000100;
-localparam JMPZ_CV =      11'b00100000000;
-localparam STOP_CV =      11'b00000000001;
-localparam ADDF_CV =      11'b10000000010;
-localparam MULTF_CV =     11'b10000000010;
-localparam NOP_CV =       11'b00000000000;
+localparam ADD_CV   =       12'b100000000000;
+localparam SW_CV    =       12'b000000100000;
+localparam LW_CV    =       12'b100011001000;
+localparam SUB_CV   =       12'b101000000000;
+localparam MOV_CV   =       12'b100001000100;
+localparam JMPZ_CV  =       12'b000100000000;
+localparam STOP_CV  =       12'b000000000001;
+localparam ADDF_CV  =       12'b100000000010;
+localparam MULTF_CV =       12'b100000000010;
+localparam NOP_CV   =       12'b000000000000;
+localparam SLT_CV   =       12'b110000000000;
 
 reg[CV_WIDTH-1:0] control_vector;
 //Main CTR decoder

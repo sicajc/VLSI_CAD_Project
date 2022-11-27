@@ -39,7 +39,7 @@ module ID#(parameter DATA_WIDTH = 16,
         output Stop,
 
         output reg RegWriteE,
-        output reg ALUopE,
+        output reg[1:0] ALUopE,
         output reg BranchE,
         output reg MemReadE,
         output reg RegDstE,
@@ -58,8 +58,8 @@ wire[IMM8_WIDTH-1:0] imm8D_w = instruction_mem_rD_i[7:0];
 wire[OP_WIDTH-1:0]   opcode = instruction_mem_rD_i[15:12];
 
 //Control vector
+wire[1:0] ALUop;
 wire RegWrite;
-wire ALUop;
 wire Branch;
 wire MemRead;
 wire RegDst;

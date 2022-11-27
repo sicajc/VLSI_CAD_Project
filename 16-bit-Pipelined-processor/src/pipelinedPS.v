@@ -41,7 +41,8 @@ wire[OP_WIDTH-1:0] opcode;
 
 //Main CTRs
 wire RegWriteD;//ID
-wire RegWriteE,ALUopE,BranchE,MemReadE,RegDstE,MemWriteE,MemToRegE ,MovE,FloatingE;//EX
+wire RegWriteE,BranchE,MemReadE,RegDstE,MemWriteE,MemToRegE ,MovE,FloatingE;//EX
+wire[1:0] ALUopE;
 wire RegWriteM,BranchM,MemReadM,MemWriteM,MemToRegM ,MovM;//MEM
 wire RegWriteW,MemToRegW;//WB
 
