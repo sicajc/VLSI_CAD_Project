@@ -1,7 +1,22 @@
 `timescale 1ns/10ps
 `define CYCLE      20.0
 `define End_CYCLE  10000000  // Modify cycle times once your design need more cycle times!
-`include "../src/pipelinedPS.v"
+`include "../../src/pipelinedPS.v"
+
+`ifdef tb1
+  `define PAT_DM "../data/Test1/dm_data.txt"
+  `define PAT_IM "../data/Test1/im_data.txt"
+`endif
+
+`ifdef tb2
+  `define PAT_DM "../data/Test2/dm_data.txt"
+  `define EXP_IM "../data/Test2/im_data.txt"
+`endif
+
+`ifdef tb3
+  `define PAT_DM "../data/Test3/dm_data.txt"
+  `define EXP_IM "../data/Test3/im_data.txt"
+`endif
 
 module pipeline_test;
 
@@ -91,8 +106,8 @@ end
 initial
 begin // initial pattern
     wait(rst==1);
-    $readmemb("C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test1/im_data.txt", IM_MEM);
-    $readmemh("C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test1/dm_data.txt", DM_MEM);
+    $readmemb(`PAT_IM, IM_MEM);
+    $readmemh(`PAT_DM, DM_MEM);
 end
 
 // initial
@@ -133,38 +148,47 @@ begin
     $finish;
 end
 
+//Test1
+// always@(posedge clk)
+// begin
+    // if(stop==1)
+    // begin
+        // if(DM_MEM[12] !== 16'd7)
+            // err = err + 1;
+            // $display("Memory value is : %d",DM_MEM[12]);
+//
+        // $display(" ");
+        // $display("-----------------------------------------------------\n");
+        // $display("--------------------- S U M M A R Y -----------------\n");
+//
+        // if(err==0)
+            // $display("Congratulations! The result is PASS!!\n");
+        // else
+            // $display("FAIL!!!  There are %d errors! \n", err);
+//
+        // $display("-----------------------------------------------------\n");
+//
+        // #(`CYCLE/2);
+        // $finish;
+    // end
+// end
+
+
+//Test2
 always@(posedge clk)
 begin
     if(stop==1)
     begin
-        if(DM_MEM[12] !== 16'd7)
+        if(DM_MEM[3] !== 16'd160)
             err = err + 1;
             $display("Memory value is : %d",DM_MEM[12]);
-        // if(DM_MEM[10] !== DM_MEM[0]+DM_MEM[1])
-        // err = err +1;
-        // if(DM_MEM[11] !== 16'h002f)
-        // err = err +1;
-        // if(DM_MEM[12] !== DM_MEM[8]-DM_MEM[9])
-        // err = err +1;
-        // if(DM_MEM[13] !== 16'h00ff)
-        // err = err +1;
-        // if(DM_MEM[14] !== 16'h0000)
-        // err = err +1;
-        // if(DM_MEM[15] !== 16'h000a)
-        // err = err +1;
-        // if(DM_MEM[16] !== 16'h0001)
-        // err = err +1;
-        // if(DM_MEM[17] !== 16'h0002)
-        // err = err +1;
 
-        // $display("DM_MEM[10] = %h\n", DM_MEM[10]);
-        // $display("DM_MEM[11] = %h\n", DM_MEM[11]);
-        // $display("DM_MEM[12] = %h\n", DM_MEM[12]);
-        // $display("DM_MEM[13] = %h\n", DM_MEM[13]);
-        // $display("DM_MEM[14] = %h\n", DM_MEM[14]);
-        // $display("DM_MEM[15] = %h\n", DM_MEM[15]);
-        // $display("DM_MEM[16] = %h\n", DM_MEM[16]);
-        // $display("DM_MEM[17] = %h\n", DM_MEM[17]);
+        if(DM_MEM[4] !== (-10))
+            err = err +1 ;
+
+        $display("DM_MEM[3] = %h\n", DM_MEM[3]);
+        $display("DM_MEM[4] = %h\n", DM_MEM[4]);
+
         $display(" ");
         $display("-----------------------------------------------------\n");
         $display("--------------------- S U M M A R Y -----------------\n");
