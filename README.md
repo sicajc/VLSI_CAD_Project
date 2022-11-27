@@ -133,8 +133,7 @@ MemSrc:
 
 3. Any kind of control signal had better be kept using a status register to prevent some error, otherwise unexpected erros might occur due to unknown value given.
 
-4. You forget to redesign the RF file s.t. it can write at negedge and
-   read at positive edge.
+4. You forget to redesign the RF file s.t. it can write at negedge and read at positive edge.
 
 5. When executing Instructions, you should give enough nop before stop for previous instructions to actually complete.
 
@@ -166,7 +165,7 @@ Testing basic instructions without forwarding and stalling.
     nop infinity.
 ```
 Machine Code:
-```h
+```verilog
 0:  0011_0001_0000_0011 //mov $1,3
 1:  0011_0010_0000_0100 //mov $2,4
 2:  0011_0011_0000_0000 //mov $3,0
@@ -186,20 +185,63 @@ Machine Code:
                         //dm[12] = 7
 ```
 ## Test2
-Testing R-R forwarding.
+Testing R-R forwarding and the functionality of lw.
+```C
+    //D[0] = 10;
+    //D[1] = 20;
+    //D[2] = 30;
+    int a = D[0];
+    int b = D[1];
+    int c = D[2];
+    d = a - b; //d = -10
+    c = a + b; //c = 30
+    a = c + a; //a = 40
+    a = a + a; //a = 80
+    D[3] = c; //D[3] = 30
+    D[4] = d; //D[4] = -10
 ```
-    lw $2,0
-    lw $3,1
-    lw $4,2
-    nop
-    nop
-    add $5,$2,$3
-    add $5,$5,$5
-    add $3,$5,$2
-    stop
-    nop
+Assembly:
+```python
+   lw $1 , 0 //int a = D[0];
+   lw $2 , 1 //int b = D[1];
+   lw $3 , 2 //int c = D[2];
+   sub $4,$1,$2 // d = a - b
+   add $3,$1,$2 // c = a + b
+   add $1,$3,$1 // a = c + a
+   add $1,$1,$1 // a = a + a
+   sw  $3 , 3   // D[3]
+   sw  $4 , 4   // D[4]
+   nop
+   nop
+   nop
+   nop
+   stop
+   //Check D[3] = 30 and D[4] = -10
 ```
-
+Machine Code:
+```verilog
+0:      0000_0001_0000_0000 //lw $1,0
+1:      0000_0010_0000_0001 //lw $2,1
+2:      0000_0011_0000_0010 //lw $3,2
+3:      0100_0001_0010_0100 //sub $4,$1,$2
+4:      0010_0001_0010_0011 //add $3,$1,$2
+5:      0010_0011_0001_0001 //add $1,$3,$1
+6:      0010_0001_0001_0001 //add $1,$1,$1
+7:      0001_0011_0000_0011 // sw $3,3
+8:      0001_0100_0000_0100 // sw $4,4
+9:      1111_0000_0000_0000 // nop
+10:     1111_0000_0000_0000 // nop
+11:     1111_0000_0000_0000 // nop
+12:     1111_0000_0000_0000 // nop
+13:     0111_0000_0000_0000 // stop
+14:     1111_0000_0000_0000 // nop
+15:     1111_0000_0000_0000 // nop
+.               .           // nop
+.               .           // nop
+.               .           // nop
+                            //D[3] = 30
+                            //D[4] = -10
+```
 ## Test3
 Testing R-lw hazard
 ```
