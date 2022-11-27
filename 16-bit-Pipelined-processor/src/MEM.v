@@ -38,6 +38,7 @@ module MEM #(parameter DATA_WIDTH = 16,
         output reg[REG_WIDTH-1:0] WriteRegM_o,
         output reg RegWriteM_o ,
         output reg MemToRegM_o ,
+        output reg MemReadM_o,
 
         //DM
         output dm_rd,
@@ -45,13 +46,14 @@ module MEM #(parameter DATA_WIDTH = 16,
         output[ADDR_WIDTH-1:0] MemAddr_o,
         output[DATA_WIDTH-1:0] WriteDataM_o,
 
-        //Branch hazard control
+        //Hazard control
         output PC_src_o
        );
 
 //Branch
 assign PC_src_o = ((WriteDataM_o == 'd0) && (BranchM_i) );
 assign branchAddr_o = PCM_i + imm8M_i;
+
 
 //DM
 assign  dm_wr = MemWriteM_i;
@@ -72,6 +74,7 @@ begin
 
         WBResultM_o <= 'd0;
         WriteRegM_o <= 'd0;
+        MemReadM_o  <= 'd0;
     end
     else if(stall_MEM_WB_i)
     begin
@@ -79,6 +82,7 @@ begin
         MemToRegM_o <= MemToRegM_o;
         WBResultM_o <= WBResultM_o;
         WriteRegM_o <= WriteRegM_o;
+        MemReadM_o  <= MemReadM_o;
     end
     else
     begin
@@ -87,6 +91,7 @@ begin
 
         WBResultM_o <= WBResult_w;
         WriteRegM_o <= WriteRegM_i;
+        MemReadM_o  <= MemReadM_i;
     end
 end
 

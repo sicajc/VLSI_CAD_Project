@@ -133,6 +133,8 @@ hazardUnit#(
     .flushEX_MEM ( flushEX_MEM ),
     .flushIF_ID  ( flushIF_ID  ),
     .pcstall     ( pcstall     ),
+    .MemReadW    ( MemReadW    ),
+    .MemWriteM   ( MemWriteM   ),
 
     //Control hazard
     .flushID_EX  ( flushID_EX  ),
@@ -330,6 +332,7 @@ MEM#(
 
        .WriteRegM_i    ( WriteRegM    ),
        .RegWriteM_i    ( RegWriteM    ),
+       .MemReadM_o     ( MemReadW     ),
 
        //Forwarded data
        .ResultW_i      ( ResultW      ),

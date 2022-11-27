@@ -20,7 +20,8 @@ module WB #(parameter DATA_WIDTH = 16,
              //RF_WB
              output[DATA_WIDTH-1:0] ResultW_o,
              //RF_WB_Addr
-             output[REG_WIDTH-1:0] WriteRegW_o);
+             output[REG_WIDTH-1:0] WriteRegW_o
+             );
 
 //Outputs to ID
 assign ResultW_o = MemToRegW_i ? memData_r_i : WBResultW_i;

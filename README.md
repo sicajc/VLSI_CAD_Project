@@ -70,13 +70,14 @@
 ![HazardUnit](image/HazardUnits.png)
 
 # Forwarding Condition
->To solve Data hazard including R-R sw-lw
+>To solve Data hazard including R-R,sw-lw
 
 ALU_src1:
 ```verilog
-    if((rsE!=0)and(rsE == WriteRegM) and (RegWriteM))
+    // In this ISA, lw does not need forwarding. also $0 can store value other than 0. Different from MIPS.
+    if((rsE == WriteRegM) and (RegWriteM == 1) and (MemReadE != 1))
         ALU_src1 = 01
-    else if ((rsE!=0) and (rsE == WriteRegW) and (RegWriteW ==1 ))
+    else if ((rsE == WriteRegW) and (RegWriteW ==1 ) and (MemReadE != 1))
         ALU_src1 = 10
     else
         ALU_src1 = 00
@@ -84,9 +85,9 @@ ALU_src1:
 
 ALU_src2:
 ```verilog
-    if((rtE!=0)and(rtE == WriteRegM) and (RegWriteM == 1))
+    if((rtE == WriteRegM) and (RegWriteM == 1) and (MemReadE != 1))
         ALU_src2 = 01
-    else if ((rtE!=0) and (rtE == WriteRegW) and (RegWriteW == 1))
+    else if ((rtE == WriteRegW) and (RegWriteW == 1) and (MemReadE != 1))
         ALU_src2 = 10
     else
         ALU_src2 = 00
@@ -95,7 +96,7 @@ ALU_src2:
 MemSrc:
 > To solve sw-lw data hazard
 ```verilog
-    if((rsM!=0) and (rsM == WriteRegW) and (MemReadW == 1) and (MemWriteM == 1))
+    if((rsM == WriteRegW) and (MemReadW == 1) and (MemWriteM == 1))
         MemSrc = 1
     else
         MemSrc = 0
@@ -108,7 +109,7 @@ MemSrc:
 ```verilog
     if(stop)
         stall Every Pipeline and PC
-    else if( ((rsD==rsE) or (rtD == rsE)) and (MemReadE == 1) and (ID Stage is NOT I type))
+    else if( ((rsD==rsE) or (rtD == rsE)) and (MemReadE == 1) and (ID stage is R-type))
         stall PC and flush ID/EX
     else
         do nothing
