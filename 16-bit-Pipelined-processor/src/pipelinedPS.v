@@ -72,6 +72,7 @@ wire[REG_WIDTH-1:0] rsM;
 wire[REG_WIDTH-1:0] WriteRegM;
 wire[DATA_WIDTH-1:0] alu_outM;
 wire[DATA_WIDTH-1:0] WBResultM;
+wire[DATA_WIDTH-1:0] WBResultM_w;
 
 
 wire PC_src;
@@ -303,7 +304,7 @@ EX#(
       .MemToRegM_o    ( MemToRegM    ),
       .MovM_o         ( MovM         ),
 
-      .WBResultM_i    ( WBResultM    ),
+      .WBResultM_i    ( WBResultM_w  ),
       .ResultW_i      ( ResultW      ),
       .alu_src1_i     ( alu_src1     ),
       .alu_src2_i     ( alu_src2     )
@@ -345,6 +346,9 @@ MEM#(
        //!Forward to ID
        .branchAddr_o   ( branchAddr   ),
        .PC_src_o       ( PC_src       ),
+
+       //Forward to EX
+       .WBResultM_w    ( WBResultM_w  ),
 
        //!MEM/WB
        .WBResultM_o    ( WBResultM    ),

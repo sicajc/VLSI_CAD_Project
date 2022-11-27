@@ -183,7 +183,7 @@ begin
             err = err + 1;
             $display("Memory value is : %d",DM_MEM[12]);
 
-        if(DM_MEM[4] !== (-10))
+        if(DM_MEM[4] !== -16'd10)
             err = err +1 ;
 
         $display("DM_MEM[3] = %h\n", DM_MEM[3]);

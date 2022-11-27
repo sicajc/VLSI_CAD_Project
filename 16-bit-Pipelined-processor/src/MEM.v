@@ -33,6 +33,9 @@ module MEM #(parameter DATA_WIDTH = 16,
         //Forward signal to IF
         output[ADDR_WIDTH-1:0] branchAddr_o,
 
+        //Forwarding to EX
+        output[DATA_WIDTH-1:0] WBResultM_w,
+
         //MEM/WB
         output reg[DATA_WIDTH-1:0] WBResultM_o,
         output reg[REG_WIDTH-1:0] WriteRegM_o,
@@ -63,7 +66,7 @@ assign WriteDataM_o = MemSrc_i ?  ResultW_i : WriteDataM_i ;
 
 wire[DATA_WIDTH-1:0] sign_extended_val = {{8{imm8M_i[7]}},imm8M_i[7:0]};
 //MEM/WB
-wire[DATA_WIDTH-1:0] WBResult_w = MovM_i ? sign_extended_val : alu_outM_i;
+assign WBResultM_w = MovM_i ? sign_extended_val : alu_outM_i;
 
 always @(posedge clk )
 begin
@@ -89,7 +92,7 @@ begin
         RegWriteM_o <= RegWriteM_i;
         MemToRegM_o <= MemToRegM_i;
 
-        WBResultM_o <= WBResult_w;
+        WBResultM_o <= WBResultM_w;
         WriteRegM_o <= WriteRegM_i;
         MemReadM_o  <= MemReadM_i;
     end
