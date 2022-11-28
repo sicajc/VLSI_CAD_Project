@@ -16,6 +16,8 @@
 
 4. The stop signal is a part of instruction, it would get decoded at ID stage. After stopping the processor, everything would get stalled.
 
+5. Specially note we jump at MEM stage for jmpz and jump no matter what, so the jump signal needs to be propogate throughout the pipeline.
+
 ![Block Diagram](image/16-bit%20RISC%20Pipelined%20Processor%20with%20FP%20unit.png)
 
 ## 5-stage RISC pipelined Processor
@@ -119,10 +121,8 @@ MemSrc:
 > To solve j and branch hazard
 
 ```verilog
-    if(jump == 1)
-        flush IF/ID
-    else if (PCSrc == 1)
-        flush EX/MEM for 3 cycles
+    if (PCSrc == 1 || jump == 1)
+        flush EX/MEM and flush IF/ID and stallPC for 3 cycles
     else
         do nothing
 ```
@@ -141,6 +141,8 @@ MemSrc:
 6. When specifying components, you MUST first UNIT Test every Components before putting them into actions. Just give them some simple testbench s.t. you are sure that they are working as expected. THIS WOULD SAVE YOU TONS OF TIME!!!!!!!! I didnt notice that RF is not blocked.
 
 7. Remember to check whether you have used the right testbenches or whether you have correct the testbenches into the right one.
+
+8. Original design has problem with jump. You had better put branches at the same location to prevent errors!
 
 # Synthesis Result
 

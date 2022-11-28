@@ -26,6 +26,7 @@ localparam ADDF =   4'b1000 ;
 localparam MULTF =  4'b1001 ;
 localparam NOP =    4'b1111 ;
 localparam SLT =    4'b1010 ;
+localparam JUMP =   4'b0110 ;
 
 
 wire _ADD_       = opcode_i == ADD;
@@ -39,7 +40,8 @@ wire _ADDF_      = opcode_i == ADDF;
 wire _MULTF_     = opcode_i == MULTF;
 wire _NOP_       = opcode_i == NOP;
 wire _SLT_       = opcode_i == SLT;
-assign R_type    = _ADD_ || _SUB_ || _MULTF_ || _NOP_ || _STOP_ || _JMPZ_ || _SLT_;
+wire _JUMP_      = opcode_i == JUMP;
+assign R_type    = _ADD_ || _SUB_ || _MULTF_ || _NOP_ || _STOP_ || _JMPZ_ || _SLT_; //Note JMPZ is not R_type but is needs forwarding.
 
 
 //Basic instruction ControlVector
@@ -54,6 +56,7 @@ localparam ADDF_CV  =       12'b100000000010;
 localparam MULTF_CV =       12'b100000000010;
 localparam NOP_CV   =       12'b000000000000;
 localparam SLT_CV   =       12'b110000000000;
+localparam JUMP_CV  =       12'b000000010000;
 
 reg[CV_WIDTH-1:0] control_vector;
 //Main CTR decoder
@@ -100,6 +103,10 @@ begin
         begin
             control_vector = NOP_CV;
         end
+        JUMP:
+        begin
+            control_vector = JUMP_CV;
+        end
         default:
         begin
             control_vector = NOP;
@@ -107,6 +114,6 @@ begin
     endcase
 end
 
-assign {RegWrite,ALUop,Branch,MemRead,RegDst,MemWrite,Jump,MemToReg,Mov,Floating,Stop} = control_vector;
+assign {RegWrite,ALUop[1:0],Branch,MemRead,RegDst,MemWrite,Jump,MemToReg,Mov,Floating,Stop} = control_vector;
 
 endmodule

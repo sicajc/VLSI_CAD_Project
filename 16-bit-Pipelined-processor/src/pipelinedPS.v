@@ -41,9 +41,9 @@ wire[OP_WIDTH-1:0] opcode;
 
 //Main CTRs
 wire RegWriteD;//ID
-wire RegWriteE,BranchE,MemReadE,RegDstE,MemWriteE,MemToRegE ,MovE,FloatingE;//EX
+wire RegWriteE,BranchE,MemReadE,RegDstE,MemWriteE,MemToRegE ,MovE,FloatingE,jumpE;//EX
 wire[1:0] ALUopE;
-wire RegWriteM,BranchM,MemReadM,MemWriteM,MemToRegM ,MovM;//MEM
+wire RegWriteM,BranchM,MemReadM,MemWriteM,MemToRegM ,MovM,jumpM;//MEM
 wire RegWriteW,MemToRegW;//WB
 
 //Hazard units
@@ -77,9 +77,9 @@ wire[DATA_WIDTH-1:0] WBResultM_w;
 
 
 wire PC_src;
-
 wire[ADDR_WIDTH-1:0] branchAddr;
 wire[ADDR_WIDTH-1:0] jumpAddr;
+wire jumpM_f;
 
 //WB
 wire[DATA_WIDTH-1:0] ResultW;
@@ -122,9 +122,9 @@ hazardUnit#(
     .R_type      ( R_type      ),
 
     //Control hazard
-    .stop        ( stop_flag_rd),
+    .stop        ( stop_flag_rd ),
     .PCSrc       ( PC_src       ),
-    .jump        ( jump        ),
+    .jump        ( jumpM_f      ),
 
     //Forwarding
     .alu_src1    ( alu_src1    ),
@@ -158,7 +158,7 @@ IF#(
       .start(start),
       .stop(stop_flag_rd ),
 
-      .jump_i       ( jump       ),
+      .jump_i       ( jumpM_f    ),
       .PC_src_i     ( PC_src     ),
       .branchAddr_i ( branchAddr ),
       .jumpAddr_i   ( jumpAddr   ),
@@ -200,12 +200,9 @@ ID#(
       .reg_file_r2          ( rf_r2_addr          ),
 
       //Forwarding
-      .jumpAddr             ( jumpAddr             ),
-
       .rsD                  ( rsD                  ),
       .rtD                  ( rtD                  ),
 
-      .Jump                 ( jump                  ),
       .Stop                 ( stop                  ),
 
       //ID/EX
@@ -225,6 +222,7 @@ ID#(
       .MemToRegE            ( MemToRegE            ),
       .MovE                 ( MovE                 ),
       .FloatingE            ( FloatingE            ),
+      .jumpE                ( jumpE                ),
 
       //Hazard
       .RegWrite_o(RegWriteD),
@@ -287,6 +285,7 @@ EX#(
       .MemToRegE_i    ( MemToRegE    ),
       .MovE_i         ( MovE         ),
       .FloatingE_i    ( FloatingE    ),
+      .jumpE_i        ( jumpE        ),
 
       .PCM_o          ( PCM          ),
       .WriteDataM_o   ( WriteDataM   ),
@@ -303,6 +302,7 @@ EX#(
       .MemWriteM_o    ( MemWriteM    ),
       .MemToRegM_o    ( MemToRegM    ),
       .MovM_o         ( MovM         ),
+      .jumpM_o        ( jumpM        ),
 
       .WBResultM_i    ( WBResultM_w  ),
       .ResultW_i      ( ResultW      ),
@@ -342,10 +342,12 @@ MEM#(
        .BranchM_i      ( BranchM      ),
        .MemToRegM_i    ( MemToRegM    ),
        .MovM_i         ( MovM         ),
+       .jumpM_i        ( jumpM        ),
 
        //!Forward to ID
        .branchAddr_o   ( branchAddr   ),
        .PC_src_o       ( PC_src       ),
+       .jumpAddr_o     ( jumpAddr     ),
 
        //Forward to EX
        .WBResultM_w    ( WBResultM_w  ),
@@ -357,6 +359,7 @@ MEM#(
        //Control Signals
        .RegWriteM_o    ( RegWriteW    ),
        .MemToRegM_o    ( MemToRegW    ),
+       .jumpM_o        ( jumpM_f      ),
 
        //DM
        .MemWriteM_i    ( MemWriteM    ),

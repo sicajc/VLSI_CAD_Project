@@ -16,9 +16,6 @@ module ID#(parameter DATA_WIDTH = 16,
         output[REG_WIDTH-1:0] reg_file_r1,
         output[REG_WIDTH-1:0] reg_file_r2,
 
-        //Forward to IF
-        output[IMM8_WIDTH-1:0] jumpAddr,
-
         //Hazard unit inputs
         output[REG_WIDTH-1:0]  rsD ,
         output[REG_WIDTH-1:0]  rtD ,
@@ -35,7 +32,6 @@ module ID#(parameter DATA_WIDTH = 16,
         output reg[ADDR_WIDTH-1:0] PCE,
         output reg[IMM8_WIDTH-1:0] imm8D,
 
-        output Jump,
         output Stop,
 
         output reg RegWriteE,
@@ -46,14 +42,14 @@ module ID#(parameter DATA_WIDTH = 16,
         output reg MemWriteE,
         output reg MemToRegE,
         output reg MovE,
-        output reg FloatingE
+        output reg FloatingE,
+        output reg jumpE
        );
 
 //Instruction bit slices from IM
 assign  rsD     = instruction_mem_rD_i[11:8];
 assign  rtD     = instruction_mem_rD_i[7:4];
 assign  rdD     = instruction_mem_rD_i[3:0];
-assign  jumpAddr = instruction_mem_rD_i[7:0];
 wire[IMM8_WIDTH-1:0] imm8D_w = instruction_mem_rD_i[7:0];
 wire[OP_WIDTH-1:0]   opcode = instruction_mem_rD_i[15:12];
 
@@ -67,6 +63,7 @@ wire MemWrite;
 wire MemToReg;
 wire Mov;
 wire Floating;
+wire Jump;
 
 //RF access
 assign reg_file_r1 = rsD;
@@ -111,6 +108,7 @@ begin
         rsE <= 'd15;
         rdE <= 'd15;
         imm8D<= 'd250;
+        jumpE <= 'd0;
 
     end
     else if(stall_ID_EX_i)
@@ -130,6 +128,7 @@ begin
         rsE <= rsE;
         rdE <= rdE;
         imm8D<= imm8D;
+        jumpE <= jumpE;
     end
     else if(flush_ID_EX_i)
     begin
@@ -148,6 +147,7 @@ begin
         rsE <= 'd0;
         rdE <= 'd0;
         imm8D<='d0;
+        jumpE <= 'd0;
     end
     else
     begin
@@ -166,6 +166,7 @@ begin
         rsE <= rsD;
         rdE <= rdD;
         imm8D<=imm8D_w;
+        jumpE <= Jump;
     end
 end
 

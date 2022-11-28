@@ -26,12 +26,15 @@ module MEM #(parameter DATA_WIDTH = 16,
         input MemWriteM_i,
         input MemToRegM_i,
         input MovM_i,
+        input jumpM_i,
 
         //Forwarded signal
         input[DATA_WIDTH-1:0] ResultW_i,
 
         //Forward signal to IF
         output[ADDR_WIDTH-1:0] branchAddr_o,
+        output[ADDR_WIDTH-1:0] jumpAddr_o,
+        output jumpM_o,
 
         //Forwarding to EX
         output[DATA_WIDTH-1:0] WBResultM_w,
@@ -55,7 +58,9 @@ module MEM #(parameter DATA_WIDTH = 16,
 
 //Branch
 assign PC_src_o = ((WriteDataM_o == 'd0) && (BranchM_i) );
-assign branchAddr_o = PCM_i + imm8M_i;
+assign jumpM_o = jumpM_i;
+assign branchAddr_o = imm8M_i;
+assign jumpAddr_o   = imm8M_i;
 
 
 //DM

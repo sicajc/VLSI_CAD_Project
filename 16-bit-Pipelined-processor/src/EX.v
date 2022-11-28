@@ -30,6 +30,7 @@ module EX#(parameter DATA_WIDTH = 16,
         input MemToRegE_i ,
         input MovE_i ,
         input FloatingE_i ,
+        input jumpE_i,
 
 
         //EX/ME
@@ -48,6 +49,7 @@ module EX#(parameter DATA_WIDTH = 16,
         output reg MemWriteM_o ,
         output reg MemToRegM_o ,
         output reg MovM_o,
+        output reg jumpM_o,
 
         //Hazard signals
         //Forwarded data
@@ -114,8 +116,8 @@ end
 always @(*)
 begin
     case(ALUopE_i)
-    2'b00: alu_w = alu_in1 - alu_in2;
-    2'b01: alu_w = alu_in1 + alu_in2;
+    2'b00: alu_w = alu_in1 + alu_in2;
+    2'b01: alu_w = alu_in1 - alu_in2;
     2'b10: alu_w = alu_in1 < alu_in2;
     endcase
 end
@@ -139,16 +141,17 @@ begin
         MemWriteM_o<='d0;
         MemToRegM_o<='d0;
         MovM_o<='d0;
+        jumpM_o <= 'd0;
     end
     else if(flush_EX_MEM_i)
     begin
         PCM_o <= 'd0;
 
         WriteDataM_o<='d0;
-        imm8M_o<='d0;
-        rsM_o<='d0;
-        WriteRegM_o<='d0;
-        alu_outM_o<='d0;
+        imm8M_o<= 'd15;
+        rsM_o<= 'd15;
+        WriteRegM_o<= 'd15;
+        alu_outM_o<= 'd15;
 
         RegWriteM_o<='d0;
         BranchM_o<='d0;
@@ -156,6 +159,7 @@ begin
         MemWriteM_o<='d0;
         MemToRegM_o<='d0;
         MovM_o<='d0;
+        jumpM_o <= 'd0;
     end
     else if(stall_EX_MEM_i)
     begin
@@ -173,6 +177,7 @@ begin
         MemWriteM_o         <=  MemWriteM_o;
         MemToRegM_o         <=  MemToRegM_o;
         MovM_o              <=  MovM_o;
+        jumpM_o <= jumpM_o;
     end
     else
     begin
@@ -190,6 +195,7 @@ begin
         MemWriteM_o         <=  MemWriteE_i;
         MemToRegM_o         <=  MemToRegE_i;
         MovM_o              <=  MovE_i;
+        jumpM_o <= jumpE_i;
     end
 end
 
