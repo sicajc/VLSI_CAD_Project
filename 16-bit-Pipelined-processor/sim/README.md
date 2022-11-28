@@ -273,7 +273,7 @@ Assembly
 6:            mov  $2,10
 7:            j    endif
 8:if:         add $2,$0,$1 # c = a + b
-9:endif:      sw  $2,0     # D[0]  = c;
+9:endif:      sw  $2,0     # D[0]  = c = 7;
 nop
 nop
 nop
