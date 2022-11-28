@@ -45,6 +45,14 @@ module hazardUnit#(parameter REG_WIDTH = 4)
            output reg      EX_MEMstall,
            output reg      MEM_WBstall);
 
+reg branch_hazard_flag_w;
+reg branch_hazard_flag_r;
+
+wire branch_flush_flag = branch_hazard_flag_w ;
+
+reg[2:0] flush_cnt;
+wire flush_done_flag  = (flush_cnt == 'd3);
+
 //Hazard unit control
 //Fowarding
 always @(*)
@@ -127,10 +135,9 @@ begin
     end
 end
 
-reg branch_hazard_flag_w;
-reg branch_hazard_flag_r;
 
-wire branch_flush_flag = branch_hazard_flag_w ;
+
+
 //Control Hazard
 always @(*)
 begin
@@ -152,9 +159,6 @@ begin
         flushEX_MEM = 1'b0;
     end
 end
-
-reg[2:0] flush_cnt;
-wire flush_done_flag  = (flush_cnt == 'd3);
 
 always @(posedge clk)
 begin

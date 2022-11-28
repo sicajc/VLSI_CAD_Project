@@ -1,11 +1,3 @@
-`include "reg_file.v"
-`include "EX.v"
-`include "hazardUnit.v"
-`include "ID.v"
-`include "IF.v"
-`include "MEM.v"
-`include "WB.v"
-
 module pipelinedPS#(parameter OP_WIDTH  = 4,
                     parameter CV_WIDTH  = 10,
                     parameter HZ_CV_WIDTH  = 10,

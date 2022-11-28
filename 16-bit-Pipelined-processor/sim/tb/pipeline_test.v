@@ -1,7 +1,6 @@
 `timescale 1ns/10ps
 `define CYCLE      20.0
 `define End_CYCLE  10000000  // Modify cycle times once your design need more cycle times!
-`include "../../src/pipelinedPS.v"
 
 // `ifdef tb1
 //   `define PAT_DM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test1/dm_data.txt"
