@@ -1,0 +1,10 @@
+
+  Linking design 'pipelinedPS'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  * (9 designs)               /home/rain/VLSI_CAD_Project/16_bit_Pipelined_processor/pipelinedPS.db, etc
+  slow (library)              /usr/cad/Design_Kit/CBDK_IC_Contest_v2.5/SynopsysDC/db/slow.db
+  fast (library)              /usr/cad/Design_Kit/CBDK_IC_Contest_v2.5/SynopsysDC/db/fast.db
+  dw_foundation.sldb (library) /usr/cad/synopsys/synthesis/cur/libraries/syn/dw_foundation.sldb
+
+1

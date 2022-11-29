@@ -23,7 +23,6 @@ module hazardUnit#(parameter REG_WIDTH = 4)
            input MemReadE   ,
            input MemWriteM  ,
            input MemReadW   ,
-           input stop       ,
            input PCSrc      ,
            input jump       ,
 
@@ -103,17 +102,7 @@ end
 //Stall
 always @(*)
 begin
-    if(stop)
-    begin
-        IF_IDstall  = 1'b1;
-        ID_EXstall  = 1'b1;
-        EX_MEMstall = 1'b1;
-        MEM_WBstall = 1'b1;
-        pcstall     = 1'b1;
-
-        flushID_EX  = 1'b0;
-    end
-    else if(((((rsD == rsE) || (rtD == rsE)) && (MemReadE == 1)) && (R_type == 1)) || (branch_flush_flag))
+    if(((((rsD == rsE) || (rtD == rsE)) && (MemReadE == 1)) && (R_type == 1)) || (branch_flush_flag))
     begin
         IF_IDstall  = 1'b0;
         ID_EXstall  = 1'b0;

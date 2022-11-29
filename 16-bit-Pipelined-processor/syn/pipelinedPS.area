@@ -1,0 +1,30 @@
+
+****************************************
+Report : area
+Design : pipelinedPS
+Version: N-2017.09-SP2
+Date   : Tue Nov 29 22:25:03 2022
+****************************************
+
+Library(s) Used:
+
+    slow (File: /usr/cad/Design_Kit/CBDK_IC_Contest_v2.5/SynopsysDC/db/slow.db)
+
+Number of ports:                           71
+Number of nets:                          1964
+Number of cells:                         1895
+Number of combinational cells:           1459
+Number of sequential cells:               436
+Number of macros/black boxes:               0
+Number of buf/inv:                         92
+Number of references:                      48
+
+Combinational area:              10354.139833
+Buf/Inv area:                      329.295595
+Noncombinational area:           13163.336819
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:                 23517.476651
+Total area:                 undefined
+1

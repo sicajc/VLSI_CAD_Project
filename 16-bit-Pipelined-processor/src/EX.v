@@ -119,6 +119,7 @@ begin
     2'b00: alu_w = alu_in1 + alu_in2;
     2'b01: alu_w = alu_in1 - alu_in2;
     2'b10: alu_w = alu_in1 < alu_in2;
+    default: alu_w = 2'd0;
     endcase
 end
 

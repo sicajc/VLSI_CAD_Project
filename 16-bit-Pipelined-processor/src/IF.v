@@ -8,9 +8,6 @@ module IF#(parameter DATA_WIDTH = 16,
         input PC_src_i,
         input start,
 
-        //From stop_flag
-        input stop,
-
         //Forwarded addr
         input[ADDR_WIDTH-1:0] branchAddr_i,
         input[ADDR_WIDTH-1:0] jumpAddr_i,
@@ -40,7 +37,7 @@ wire[ADDR_WIDTH-1:0] PCF;
 //Processor status
 always @(posedge clk)
 begin
-    processor_status_r_o <= (rst || stop) ? 1'b0 : (start ? 1'b1 :processor_status_r_o);
+    processor_status_r_o <= (rst) ? 1'b0 : (start ? 1'b1 :processor_status_r_o);
 end
 
 //PC & adder

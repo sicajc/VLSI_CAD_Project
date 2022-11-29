@@ -1,3 +1,13 @@
+`timescale 1ns/10ps
+`include "./EX.v"
+`include "./hazardUnit.v"
+`include "./ID.v"
+`include "./IF.v"
+`include "./MEM.v"
+`include "./reg_file.v"
+`include "./WB.v"
+//`include "/home/rain/VLSI_CAD_Project/16_bit_Pipelined_processor/src/CTR.v"
+
 module pipelinedPS#(parameter OP_WIDTH  = 4,
                     parameter CV_WIDTH  = 10,
                     parameter HZ_CV_WIDTH  = 10,
@@ -12,7 +22,7 @@ module pipelinedPS#(parameter OP_WIDTH  = 4,
            input  rst,
 
            input  start,                  // to start the processor
-           output stop,                   // to show that the processor is stopped
+           output reg stop_o,             // to show that the processor is stopped
 
            //control signals for instruction memory (im)
            input   [DATA_WIDTH-1:0]  im_r_data,      // 16-bit read data of im
@@ -66,7 +76,7 @@ wire[REG_WIDTH-1:0] WriteRegM;
 wire[DATA_WIDTH-1:0] alu_outM;
 wire[DATA_WIDTH-1:0] WBResultM;
 wire[DATA_WIDTH-1:0] WBResultM_w;
-
+wire MemReadW;
 
 wire PC_src;
 wire[ADDR_WIDTH-1:0] branchAddr;
@@ -81,14 +91,21 @@ wire[REG_WIDTH-1:0] WriteRegW_rf;
 wire RegWriteW_rf; //Control
 
 //Stop Register
-reg  stop_flag;
-wire stop_flag_rd = stop_flag;
-
-always @(posedge clk)
+wire stop_wr;
+always @(posedge clk )
 begin
-    stop_flag <= rst ? 'd0 : ((PC >= 3)? stop : stop_flag);
+    stop_o <= rst ? 0 : stop_wr;
 end
 
+//! Adding 1 more pipeline register to IF/ID to keep timing
+//! also another pipeline register to catch the instruction from
+//! Assume reading from IM does not cost time.
+
+reg[DATA_WIDTH-1:0] instruction_pipe;
+
+//! Adding 1 pipeline register to catch value from DM.
+//! This time change the model of DM s.t. it can read instantly.(This is not practical at all)
+reg[DATA_WIDTH-1:0] dm_data_pipe;
 
 
 hazardUnit#(
@@ -114,7 +131,6 @@ hazardUnit#(
     .R_type      ( R_type      ),
 
     //Control hazard
-    .stop        ( stop_flag_rd ),
     .PCSrc       ( PC_src       ),
     .jump        ( jumpM_f      ),
 
@@ -138,7 +154,6 @@ hazardUnit#(
     .MEM_WBstall ( MEM_WBstall )
 );
 
-
 IF#(
       .DATA_WIDTH   ( DATA_WIDTH ),
       .ADDR_WIDTH   ( ADDR_WIDTH )
@@ -148,7 +163,6 @@ IF#(
 
       //PC
       .start(start),
-      .stop(stop_flag_rd ),
 
       .jump_i       ( jumpM_f    ),
       .PC_src_i     ( PC_src     ),
@@ -170,6 +184,12 @@ IF#(
 
   );
 
+//Additional pipeline for IF/ID.
+always @(negedge clk)
+begin
+    instruction_pipe <= (rst || flushIF_ID) ? 16'b1111_0000_0000_0000 : im_r_data;
+end
+
 ID#(
       .DATA_WIDTH           ( DATA_WIDTH ),
       .ADDR_WIDTH           ( ADDR_WIDTH ),
@@ -182,10 +202,10 @@ ID#(
       .clk                  ( clk                  ),
 
       //IF/ID
-      .PCD_i                ( PCD                ),
-      .instruction_mem_rD_i ( im_r_data ),
-      .flush_ID_EX_i        ( flushID_EX        ),
-      .stall_ID_EX_i        ( ID_EXstall        ),
+      .PCD_i                ( PCD             ),
+      .instruction_mem_rD_i ( instruction_pipe     ),
+      .flush_ID_EX_i        ( flushID_EX           ),
+      .stall_ID_EX_i        ( ID_EXstall           ),
 
       //RF read Addr
       .reg_file_r1          ( rf_r1_addr          ),
@@ -195,7 +215,7 @@ ID#(
       .rsD                  ( rsD                  ),
       .rtD                  ( rtD                  ),
 
-      .Stop                 ( stop                  ),
+      .Stop                 ( stop_wr              ),
 
       //ID/EX
       .rtE                  ( rtE                  ),
@@ -357,11 +377,18 @@ MEM#(
        .MemWriteM_i    ( MemWriteM    ),
        .MemReadM_i     ( MemReadM     ),
 
-       .dm_rd(dm_rd),
-       .dm_wr(dm_wr),
+       .dm_rd          ( dm_rd        ),
+       .dm_wr          ( dm_wr        ),
        .MemAddr_o      ( dm_addr      ),
        .WriteDataM_o   ( dm_w_data    )
    );
+
+//! Adding Pipeline register to catch the output from DM
+always @(posedge clk )
+begin
+    dm_data_pipe <= rst ? 'd0 : dm_r_data; //0 value.
+end
+
 
 WB#(
       .DATA_WIDTH   ( DATA_WIDTH ),
@@ -383,8 +410,8 @@ WB#(
 
       .RegWriteW_o  ( RegWriteW_rf  ),
 
-      .memData_r_i  ( dm_r_data  ),
-      .ResultW_o    ( ResultW    ),
+      .memData_r_i  ( dm_data_pipe  ),
+      .ResultW_o    ( ResultW       ),
       .WriteRegW_o  ( WriteRegW_rf  )
 );
 

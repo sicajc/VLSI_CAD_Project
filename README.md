@@ -5,6 +5,7 @@
 2. [Datapath](#datapath)
 3. [Controlpath](#controlpath)
 4. [TestBench](#testbench)
+5. [Synthesis](#synthesis-result)
 
 
 ## Introduction
@@ -144,8 +145,18 @@ MemSrc:
 
 8. Original design has problem with jump. You had better put branches at the same location to prevent errors!
 
-# Synthesis Result
+# Testbench
+Look at 16-bit-pipelined-processer/sim
 
+# Synthesis Result
+## Area
+![AREA](image/syn/area.png)
+## Power
+![Power](image/syn/power.png)
+## Timing
+![Timing](image/syn/timing1.png)
+### Slack
+![Timing2](image/syn/timing2.png)
 
 # APR
 
