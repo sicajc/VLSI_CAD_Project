@@ -6,6 +6,7 @@
 3. [Controlpath](#controlpath)
 4. [TestBench](#testbench)
 5. [Synthesis](#synthesis-result)
+6. [APR](#apr)
 
 
 ## Introduction
@@ -159,6 +160,14 @@ Look at 16-bit-pipelined-processer/sim
 ![Timing2](image/syn/timing2.png)
 
 # APR
+![](16-bit-Pipelined-processor/APR/image/pipelinedPS_apr_result.jpg)
 
 
 # References
+```
+[1] Yamin Li and Wanming Chu, "Aizup-a pipelined processor design and implementation on XILINX FPGA chip," 1996 Proceedings IEEE Symposium on FPGAs for Custom Computing Machines, 1996, pp. 98-106, doi: 10.1109/FPGA.1996.564755.
+
+[2] N. Manjikian and J. Roth, "Performance enhancement and high-level specification of a pipelined processor in programmable logic," 2007 IEEE Northeast Workshop on Circuits and Systems, 2007, pp. 1340-1343, doi: 10.1109/NEWCAS.2007.4488017.
+
+[3] K. D. Rao, P. V. Muralikrishna and C. Gangadhar, "FPGA Implementation of 32 Bit Complex Floating Point Multiplier Using Vedic Real Multipliers with Minimum Path Delay," 2018 5th IEEE Uttar Pradesh Section International Conference on Electrical, Electronics and Computer Engineering (UPCON), 2018, pp. 1-6, doi: 10.1109/UPCON.2018.8597031.
+```
