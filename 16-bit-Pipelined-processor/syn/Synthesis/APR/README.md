@@ -9,6 +9,10 @@
    5. Input delays and output delays. (The constraint you want to give other people to use)
 
 ## APR flow
+0. Start the IC compiler using command at the where you have sdc and syn file.
+![](image/start_apr.jpg)
+
+
 1. After preparing your design and its generated sdc and syn files, try to run the scripts prepared.
 ```
     1. design setup
