@@ -160,7 +160,7 @@ Look at 16-bit-pipelined-processer/sim
 ![Timing2](image/syn/timing2.png)
 
 # APR
-![APR](#image/APR/pipelinedPS_apr_result.jpg)
+![APR](image/APR/pipelinedPS_apr_result.jpg)
 
 
 # References
