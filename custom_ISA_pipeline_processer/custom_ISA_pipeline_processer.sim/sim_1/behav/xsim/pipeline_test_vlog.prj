@@ -1,5 +1,12 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
+"../../../../../16-bit-Pipelined-processor/src/CTR.v" \
+"../../../../../16-bit-Pipelined-processor/src/EX.v" \
+"../../../../../16-bit-Pipelined-processor/src/ID.v" \
+"../../../../../16-bit-Pipelined-processor/src/IF.v" \
+"../../../../../16-bit-Pipelined-processor/src/MEM.v" \
+"../../../../../16-bit-Pipelined-processor/src/WB.v" \
+"../../../../../16-bit-Pipelined-processor/src/hazardUnit.v" \
 "../../../../../16-bit-Pipelined-processor/src/pipelinedPS.v" \
 "../../../../../16-bit-Pipelined-processor/src/reg_file.v" \
 "../../../../../16-bit-Pipelined-processor/sim/tb/pipeline_test.v" \

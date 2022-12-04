@@ -23,7 +23,6 @@ module hazardUnit#(parameter REG_WIDTH = 4)
            input MemReadE   ,
            input MemWriteM  ,
            input MemReadW   ,
-           input stop       ,
            input PCSrc      ,
            input jump       ,
 
@@ -44,6 +43,14 @@ module hazardUnit#(parameter REG_WIDTH = 4)
            output reg      ID_EXstall,
            output reg      EX_MEMstall,
            output reg      MEM_WBstall);
+
+reg branch_hazard_flag_w;
+reg branch_hazard_flag_r;
+
+wire branch_flush_flag = branch_hazard_flag_w ;
+
+reg[2:0] flush_cnt;
+wire flush_done_flag  = (flush_cnt == 'd3);
 
 //Hazard unit control
 //Fowarding
@@ -95,17 +102,7 @@ end
 //Stall
 always @(*)
 begin
-    if(stop)
-    begin
-        IF_IDstall  = 1'b1;
-        ID_EXstall  = 1'b1;
-        EX_MEMstall = 1'b1;
-        MEM_WBstall = 1'b1;
-        pcstall     = 1'b1;
-
-        flushID_EX  = 1'b0;
-    end
-    else if((((rsD == rsE) || (rtD == rsE)) && (MemReadE == 1)) && (R_type == 1))
+    if(((((rsD == rsE) || (rtD == rsE)) && (MemReadE == 1)) && (R_type == 1)) || (branch_flush_flag))
     begin
         IF_IDstall  = 1'b0;
         ID_EXstall  = 1'b0;
@@ -127,10 +124,9 @@ begin
     end
 end
 
-reg branch_hazard_flag_w;
-reg branch_hazard_flag_r;
 
-wire branch_flush_flag = branch_hazard_flag_w && branch_hazard_flag_r;
+
+
 //Control Hazard
 always @(*)
 begin
@@ -143,7 +139,7 @@ begin
     else if(branch_flush_flag)
     begin
         // need to flush for 3 cycles.
-        flushIF_ID  = 1'b0;
+        flushIF_ID  = 1'b1;
         flushEX_MEM = 1'b1;
     end
     else
@@ -152,9 +148,6 @@ begin
         flushEX_MEM = 1'b0;
     end
 end
-
-reg[2:0] flush_cnt;
-wire flush_done_flag  = (flush_cnt == 'd2);
 
 always @(posedge clk)
 begin

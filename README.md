@@ -5,6 +5,8 @@
 2. [Datapath](#datapath)
 3. [Controlpath](#controlpath)
 4. [TestBench](#testbench)
+5. [Synthesis](#synthesis-result)
+6. [APR](#apr)
 
 
 ## Introduction
@@ -15,6 +17,8 @@
 3. To start the processor, raise the input start signal to 1, the flag would get stored inside the state Register(SR) to ensure the processor keeps on running.
 
 4. The stop signal is a part of instruction, it would get decoded at ID stage. After stopping the processor, everything would get stalled.
+
+5. Specially note we jump at MEM stage for jmpz and jump no matter what, so the jump signal needs to be propogate throughout the pipeline.
 
 ![Block Diagram](image/16-bit%20RISC%20Pipelined%20Processor%20with%20FP%20unit.png)
 
@@ -119,10 +123,8 @@ MemSrc:
 > To solve j and branch hazard
 
 ```verilog
-    if(jump == 1)
-        flush IF/ID
-    else if (PCSrc == 1)
-        flush EX/MEM for 3 cycles
+    if (PCSrc == 1 || jump == 1)
+        flush EX/MEM and flush IF/ID and stallPC for 3 cycles
     else
         do nothing
 ```
@@ -142,10 +144,30 @@ MemSrc:
 
 7. Remember to check whether you have used the right testbenches or whether you have correct the testbenches into the right one.
 
-# Synthesis Result
+8. Original design has problem with jump. You had better put branches at the same location to prevent errors!
 
+# Testbench
+Look at 16-bit-pipelined-processer/sim
+
+# Synthesis Result
+## Area
+![AREA](image/syn/area.png)
+## Power
+![Power](image/syn/power.png)
+## Timing
+![Timing](image/syn/timing1.png)
+### Slack
+![Timing2](image/syn/timing2.png)
 
 # APR
+![](16-bit-Pipelined-processor/APR/image/pipelinedPS_apr_result.jpg)
 
 
 # References
+```
+[1] Yamin Li and Wanming Chu, "Aizup-a pipelined processor design and implementation on XILINX FPGA chip," 1996 Proceedings IEEE Symposium on FPGAs for Custom Computing Machines, 1996, pp. 98-106, doi: 10.1109/FPGA.1996.564755.
+
+[2] N. Manjikian and J. Roth, "Performance enhancement and high-level specification of a pipelined processor in programmable logic," 2007 IEEE Northeast Workshop on Circuits and Systems, 2007, pp. 1340-1343, doi: 10.1109/NEWCAS.2007.4488017.
+
+[3] K. D. Rao, P. V. Muralikrishna and C. Gangadhar, "FPGA Implementation of 32 Bit Complex Floating Point Multiplier Using Vedic Real Multipliers with Minimum Path Delay," 2018 5th IEEE Uttar Pradesh Section International Conference on Electrical, Electronics and Computer Engineering (UPCON), 2018, pp. 1-6, doi: 10.1109/UPCON.2018.8597031.
+```

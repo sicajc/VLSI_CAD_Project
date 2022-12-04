@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# Vivado v2022.1 (64-bit)
+# SW Build 3526262 on Mon Apr 18 15:48:16 MDT 2022
+# IP Build 3524634 on Mon Apr 18 20:55:01 MDT 2022
+# Start of session at: Mon Nov 28 22:48:07 2022
+# Process ID: 7904
+# Current directory: C:/Users/User/Desktop/cad_project/custom_ISA_pipeline_processer/custom_ISA_pipeline_processer.runs/synth_1
+# Command line: vivado.exe -log pipelinedPS.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source pipelinedPS.tcl
+# Log file: C:/Users/User/Desktop/cad_project/custom_ISA_pipeline_processer/custom_ISA_pipeline_processer.runs/synth_1/pipelinedPS.vds
+# Journal file: C:/Users/User/Desktop/cad_project/custom_ISA_pipeline_processer/custom_ISA_pipeline_processer.runs/synth_1\vivado.jou
+# Running On: DESKTOP-N6LOO8D, OS: Windows, CPU Frequency: 2904 MHz, CPU Physical cores: 8, Host memory: 8370 MB
+#-----------------------------------------------------------
+source pipelinedPS.tcl -notrace

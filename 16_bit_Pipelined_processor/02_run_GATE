@@ -1,1 +1,0 @@
-ncverilog pipeline_test.v -define GATE -debug -v tsmc13_neg.v +access+rw | tee ncverilog.log +nospecify
