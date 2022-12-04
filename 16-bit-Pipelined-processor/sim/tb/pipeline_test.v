@@ -14,18 +14,18 @@
 // `endif
 
 // `ifdef tb3
-// `define PAT_DM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test3/dm_data.txt"
-// `define PAT_IM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test3/im_data.txt"
+`define PAT_DM "C:/Users/HIBIKI/Desktop/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test3/dm_data.txt"
+`define PAT_IM "C:/Users/HIBIKI/Desktop/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test3/im_data.txt"
 // `endif
 
 // `ifdef tb4
-// `define PAT_DM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test4/dm_data.txt"
-// `define PAT_IM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test4/im_data.txt"
+//`define PAT_DM "C:/Users/HIBIKI/Desktop/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test4/dm_data.txt"
+//`define PAT_IM "C:/Users/HIBIKI/Desktop/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test4/im_data.txt"
 // `endif
 
 // `ifdef tb5
-`define PAT_DM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test5/dm_data.txt"
-`define PAT_IM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test5/im_data.txt"
+// `define PAT_DM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test5/dm_data.txt"
+// `define PAT_IM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test5/im_data.txt"
 // `endif
 
 
@@ -129,24 +129,24 @@ end
 // end
 
 // instruction memory model
-always@(negedge clk)
+always@(posedge clk)
 begin
     if (im_rd == 1)
-        im_r_data <= IM_MEM[im_addr];
+        im_r_data <= #1 IM_MEM[im_addr];
 end
 
 // data memory model	for read
 always@(posedge clk)
 begin
     if (dm_rd == 1)
-        dm_r_data <= DM_MEM[dm_addr];
+        dm_r_data <= #1  DM_MEM[dm_addr];
 end
 
 // data memory model	for write
 always@(posedge clk)
 begin
     if (dm_wr == 1)
-        DM_MEM[dm_addr] <= dm_w_data;
+        DM_MEM[dm_addr] <= #1 dm_w_data;
 end
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -218,86 +218,86 @@ end
 // end
 
 //Test3
-// always@(posedge clk)
-// begin
-    // if(stop==1)
-    // begin
-        // if(DM_MEM[0] !== 16'd50)
-            // err = err + 1;
-//
-        // if(DM_MEM[1] !== 16'd100)
-            // err = err +1 ;
-//
-        // $display("DM_MEM[0] = %d\n", DM_MEM[0]);
-        // $display("DM_MEM[1] = %d\n", DM_MEM[1]);
-//
-        // $display(" ");
-        // $display("-----------------------------------------------------\n");
-        // $display("--------------------- S U M M A R Y -----------------\n");
-//
-        // if(err==0)
-            // $display("Congratulations! The result is PASS!!\n");
-        // else
-            // $display("FAIL!!!  There are %d errors! \n", err);
-//
-        // $display("-----------------------------------------------------\n");
-//
-        // #(`CYCLE/2);
-        // $finish;
-    // end
-// end
+ always@(posedge clk)
+ begin
+     if(stop==1)
+     begin
+         if(DM_MEM[0] !== 16'd50)
+             err = err + 1;
+
+         if(DM_MEM[1] !== 16'd100)
+             err = err +1 ;
+
+         $display("DM_MEM[0] = %d\n", DM_MEM[0]);
+         $display("DM_MEM[1] = %d\n", DM_MEM[1]);
+
+         $display(" ");
+         $display("-----------------------------------------------------\n");
+         $display("--------------------- S U M M A R Y -----------------\n");
+
+         if(err==0)
+             $display("Congratulations! The result is PASS!!\n");
+         else
+             $display("FAIL!!!  There are %d errors! \n", err);
+
+         $display("-----------------------------------------------------\n");
+
+         #(`CYCLE/2);
+         $finish;
+     end
+ end
 
 //Test4
 // always@(posedge clk)
 // begin
-    // if(stop==1)
-    // begin
-        // if(DM_MEM[1] !== 16'd10)
-            // err = err + 1;
-//
-        // $display("DM_MEM[1] = %d\n", DM_MEM[1]);
-//
-        // $display(" ");
-        // $display("-----------------------------------------------------\n");
-        // $display("--------------------- S U M M A R Y -----------------\n");
-//
-        // if(err==0)
-            // $display("Congratulations! The result is PASS!!\n");
-        // else
-            // $display("FAIL!!!  There are %d errors! \n", err);
-//
-        // $display("-----------------------------------------------------\n");
-//
-        // #(`CYCLE/2);
-        // $finish;
-    // end
+//     if(stop==1)
+//     begin
+//         if(DM_MEM[1] !== 16'd10)
+//             err = err + 1;
+
+//         $display("DM_MEM[1] = %d\n", DM_MEM[1]);
+
+//         $display(" ");
+//         $display("-----------------------------------------------------\n");
+//         $display("--------------------- S U M M A R Y -----------------\n");
+
+//         if(err==0)
+//             $display("Congratulations! The result is PASS!!\n");
+//         else
+//             $display("FAIL!!!  There are %d errors! \n", err);
+
+//         $display("-----------------------------------------------------\n");
+
+//         #(`CYCLE/2);
+//         $finish;
+//     end
 // end
 
 //Test5
-always@(posedge clk)
-begin
-    if(stop==1)
-    begin
-        if(DM_MEM[0] !== 16'd7)
-            err = err + 1;
+//always@(posedge clk)
+//begin
+//    if(stop==1)
+//    begin
+//        if(DM_MEM[0] !== 16'd7)
+//            err = err + 1;
 
-        $display("DM_MEM[1] = %d\n", DM_MEM[0]);
+//        $display("DM_MEM[1] = %d\n", DM_MEM[0]);
 
-        $display(" ");
-        $display("-----------------------------------------------------\n");
-        $display("--------------------- S U M M A R Y -----------------\n");
+//        $display(" ");
+//        $display("-----------------------------------------------------\n");
+//        $display("--------------------- S U M M A R Y -----------------\n");
 
-        if(err==0)
-            $display("Congratulations! The result is PASS!!\n");
-        else
-            $display("FAIL!!!  There are %d errors! \n", err);
+//        if(err==0)
+//            $display("Congratulations! The result is PASS!!\n");
+//        else
+//            $display("FAIL!!!  There are %d errors! \n", err);
 
-        $display("-----------------------------------------------------\n");
+//        $display("-----------------------------------------------------\n");
 
-        #(`CYCLE/2);
-        $finish;
-    end
-end
+//        #(`CYCLE/2);
+//        $finish;
+//    end
+//end
 
 
 endmodule

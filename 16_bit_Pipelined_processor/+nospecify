@@ -1,0 +1,300 @@
+ncverilog: 15.20-s039: (c) Copyright 1995-2017 Cadence Design Systems, Inc.
+Recompiling... reason: file './pipeline_test.v' is newer than expected.
+	expected: Mon Nov 28 20:13:01 2022
+	actual:   Mon Nov 28 20:40:45 2022
+file: pipeline_test.v
+	module worklib.pipeline_test:v
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+		Caching library 'tsmc13_neg' ....... Done
+	Elaborating the design hierarchy:
+	Reading SDF file from location "/home/rain/VLSI_CAD_Project/16_bit_Pipelined_processor/Netlist/pipelinedPS_SYN.sdf"
+	Writing compiled SDF file to "pipelinedPS_SYN.sdf.X".
+	Annotating SDF timing data:
+		Compiled SDF file:     pipelinedPS_SYN.sdf.X
+		Log file:              
+		Backannotation scope:  pipeline_test.u_pipelinedPS
+		Configuration file:    
+		MTM control:           
+		Scale factors:         
+		Scale type:            
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2502 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8356>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2502 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8357>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2502 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8360>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2502 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8361>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2501 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8372>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2501 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8373>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2501 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8376>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2501 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8377>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2497 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8420>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2497 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8421>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2497 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8424>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2497 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 8425>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2072 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12886>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2072 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12887>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2072 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12890>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2072 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12891>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2069 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12925>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2069 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12926>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2069 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12929>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2069 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12930>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2067 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12952>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2067 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12953>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2067 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12956>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2067 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 12957>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2063 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13000>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2063 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13001>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2063 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13004>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2063 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13005>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2060 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13039>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2060 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13040>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2060 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13043>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2060 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13044>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2057 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13078>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2057 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13079>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2057 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13082>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2057 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13083>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2052 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13140>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2052 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13141>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2052 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13144>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2052 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13145>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2049 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13179>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2049 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13180>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2049 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13183>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2049 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13184>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2046 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13218>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2046 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13219>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2046 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13222>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2046 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13223>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2041 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13280>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2041 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13281>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2041 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13284>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2041 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13285>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2038 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13319>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2038 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13320>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2038 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13323>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2038 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13324>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2035 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13358>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2035 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13359>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2035 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13362>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2035 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13363>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U2032 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13397>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U2032 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13398>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U2032 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13401>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U2032 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 13402>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U1888 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 14929>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U1888 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 14930>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U1888 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 14933>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U1888 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 14934>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1360 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20905>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1360 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20906>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1359 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20919>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1359 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20920>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1358 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20933>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1358 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20934>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1357 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20947>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1357 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20948>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1355 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20973>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1355 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20974>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1354 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20987>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1354 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 20988>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1353 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21001>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1353 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21002>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1352 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21015>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1352 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21016>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1349 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21051>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1349 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21052>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1348 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21065>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1348 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21066>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1347 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21079>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1347 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21080>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1346 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21093>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1346 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21094>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1344 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21119>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1344 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21120>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1343 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21133>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1343 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21134>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1342 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21147>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1342 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21148>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1341 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21161>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge S0) Y) of instance pipeline_test.u_pipelinedPS.U1341 of module MXI2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21162>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U1309 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21503>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U1309 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21504>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U1309 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21507>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U1309 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21508>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U1308 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21519>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U1308 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21520>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U1308 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21523>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U1308 of module XOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21524>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U1283 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21802>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U1283 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21803>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U1283 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21806>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U1283 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21807>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) Y) of instance pipeline_test.u_pipelinedPS.U1279 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21849>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) Y) of instance pipeline_test.u_pipelinedPS.U1279 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21850>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) Y) of instance pipeline_test.u_pipelinedPS.U1279 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21853>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) Y) of instance pipeline_test.u_pipelinedPS.U1279 of module XNOR2X1 <./Netlist/pipelinedPS_SYN.sdf, line 21854>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U4 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22689>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U4 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22690>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U4 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22695>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U4 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22696>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U4 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22699>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U4 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22700>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U5 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22720>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U5 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22721>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U5 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22726>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U5 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22727>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U5 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22730>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U5 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22731>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U6 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22751>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U6 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22752>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U6 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22757>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U6 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22758>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U6 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22761>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U6 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22762>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U7 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22782>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U7 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22783>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U7 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22788>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U7 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22789>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U7 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22792>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U7 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22793>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U8 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22813>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U8 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22814>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U8 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22819>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U8 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22820>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U8 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22823>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U8 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22824>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U9 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22844>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U9 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22845>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U9 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22850>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U9 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22851>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U9 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22854>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U9 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22855>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U10 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22875>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U10 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22876>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U10 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22881>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U10 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22882>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U10 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22885>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U10 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22886>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U11 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22906>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U11 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22907>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U11 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22912>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U11 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22913>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U11 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22916>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U11 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22917>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U12 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22937>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U12 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22938>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U12 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22943>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U12 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22944>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U12 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22947>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U12 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22948>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U13 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22968>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U13 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22969>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U13 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22974>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U13 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22975>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U13 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22978>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U13 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 22979>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U3 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23407>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U3 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23408>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U3 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23413>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U3 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23414>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U3 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23417>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U3 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23418>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U14 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23438>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U14 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23439>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U14 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23444>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U14 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23445>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U14 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23448>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U14 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23449>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U15 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23469>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U15 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23470>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U15 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23475>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U15 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23476>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U15 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23479>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U15 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23480>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U16 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23500>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U16 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23501>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U16 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23506>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U16 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23507>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U16 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23510>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U16 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23511>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U17 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23531>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge A) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U17 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23532>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U17 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23537>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge B) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U17 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23538>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (posedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U17 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23541>.
+ncelab: *W,SDFNEP: Unable to annotate to non-existent path (IOPATH (negedge CI) S) of instance pipeline_test.u_pipelinedPS.DP_OP_106J1_122_570_U17 of module ADDFXL <./Netlist/pipelinedPS_SYN.sdf, line 23542>.
+	Annotation completed with 0 Errors and 206 Warnings
+	SDF statistics: No. of Pathdelays = 5868  Annotated = 100.00% -- No. of Tchecks = 2148  Annotated = 100.00% 
+				        Total 	   Annotated	  Percentage
+		 Path Delays	        5868	        5868	      100.00
+		      $width	        1074	        1074	      100.00
+		  $setuphold	        1074	        1074	      100.00
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		tsmc13_neg.ADDFXL:v <0x079c181e>
+			streams:   0, words:     0
+		tsmc13_neg.DFFQX1:v <0x2db5c1a0>
+			streams:   0, words:     0
+		tsmc13_neg.DFFQX1:v <0x48c87c1e>
+			streams:   0, words:     0
+		tsmc13_neg.DFFRX1:v <0x1992d34f>
+			streams:   0, words:     0
+		tsmc13_neg.MX2X1:v <0x6df4340e>
+			streams:   0, words:     0
+		tsmc13_neg.MXI2X1:v <0x0b1cdff5>
+			streams:   0, words:     0
+		tsmc13_neg.XNOR2X1:v <0x72fdf287>
+			streams:   0, words:     0
+		tsmc13_neg.XOR2X1:v <0x0ccaffe5>
+			streams:   0, words:     0
+		worklib.pipeline_test:v <0x490f4ebe>
+			streams:  20, words: 13911
+		worklib.pipelinedPS:v <0x37efe2b0>
+			streams:   1, words:   113
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                    Instances  Unique
+		Modules:                 1994      49
+		UDPs:                     427       2
+		Primitives:              4839       8
+		Timing outputs:          2263      19
+		Registers:                417      11
+		Scalar wires:            4468       -
+		Expanded wires:            32       2
+		Always blocks:              5       5
+		Initial blocks:             8       8
+		Pseudo assignments:         6       6
+		Timing checks:           3222     823
+		Interconnect:            5524       -
+		Delayed tcheck signals:  1074     414
+		Simulation timescale:     1ps
+	Writing initial simulation snapshot: worklib.pipeline_test:v
+Loading snapshot worklib.pipeline_test:v .................... Done
+*Verdi* Loading libsscore_ius152.so
+ncsim> source /usr/cad/cadence/INCISIV/cur/tools/inca/files/ncsimrc
+ncsim> run
+-----------------------------------------------------
+
+START!!! Simulation Start .....
+
+-----------------------------------------------------
+
+ncsim: *W,RMEMAR: $readmem warning: address incremented out of range. Too many data words read
+	at line 26 of file "/home/rain/VLSI_CAD_Project/16_bit_Pipelined_processor/sim/data/Test5/im_data.txt". Current address: 25, address range: [0:24].
+            File: ./pipeline_test.v, line = 158, pos = 28
+           Scope: pipeline_test
+            Time: 61 NS + 0
+
+-----------------------------------------------------
+
+Error!!! The simulation can't be terminated under normal operation!
+
+-------------------------FAIL------------------------
+
+-----------------------------------------------------
+
+Simulation complete via $finish(1) at time 10 MS + 0
+./pipeline_test.v:197     $finish;
+ncsim> exit

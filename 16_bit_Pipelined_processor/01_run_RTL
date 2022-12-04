@@ -1,0 +1,1 @@
+ncverilog pipeline_test.v -define RTL -debug

@@ -1,0 +1,43 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : pipelinedPS
+Version: N-2017.09-SP2
+Date   : Mon Nov 28 20:45:39 2022
+****************************************
+
+Operating Conditions: slow   Library: slow
+Wire Load Model Mode: top
+
+  Startpoint: im_r_data[15]
+              (input port clocked by clk)
+  Endpoint: stop (output port clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  input external delay                    30.00      30.00 r
+  im_r_data[15] (in)                       0.00      30.00 r
+  U1234/Y (NAND2X8)                        0.04      30.04 f
+  U1233/Y (NAND2X6)                        0.05      30.09 r
+  U1272/Y (NAND2X6)                        0.06      30.15 f
+  U1270/Y (NOR2X8)                         0.11      30.26 r
+  stop (out)                               0.00      30.26 r
+  data arrival time                                  30.26
+
+  max_delay                               60.00      60.00
+  output external delay                  -30.00      30.00
+  data required time                                 30.00
+  -----------------------------------------------------------
+  data required time                                 30.00
+  data arrival time                                 -30.26
+  -----------------------------------------------------------
+  slack (VIOLATED)                                   -0.26
+
+
+1

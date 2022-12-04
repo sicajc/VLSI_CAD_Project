@@ -1,0 +1,28 @@
+s1(28Nov2022:18:32:46):  ncverilog pipeline_test.v -define RTL -debug 
+s2(28Nov2022:18:34:59):  ncverilog pipeline_test.v -define RTL -debug -define TB5 
+s3(28Nov2022:18:36:49):  ncverilog pipeline_test.v -define RTL -debug -define TB5 
+s4(28Nov2022:18:38:05):  ncverilog pipeline_test.v -define RTL -debug -define TB5 
+s5(28Nov2022:18:38:52):  ncverilog pipeline_test.v -define RTL -debug -define TB5 
+s6(28Nov2022:18:42:24):  ncverilog pipeline_test.v -define RTL -debug -define TB5 
+s7(28Nov2022:18:43:59):  ncverilog pipeline_test.v -define RTL -debug -define TB5 
+s8(28Nov2022:18:44:29):  ncverilog pipeline_test.v -define RTL -debug -define TB5 
+s9(28Nov2022:18:46:56):  ncverilog pipeline_test.v -define RTL -define TB5 -debug 
+s10(28Nov2022:18:57:32):  ncverilog pipeline_test.v -define RTL+TB5 -debug 
+s11(28Nov2022:18:57:39):  ncverilog pipeline_test.v -define RTL+TB5 
+s12(28Nov2022:19:19:29):  ncverilog pipeline_test.v -define RTL+TB5 -debug 
+s13(28Nov2022:19:22:04):  ncverilog pipeline_test.v -define RTL+TB5 -debug 
+s14(28Nov2022:19:22:40):  ncverilog pipeline_test.v -define RTL+TB5 -debug 
+s15(28Nov2022:19:24:45):  ncverilog pipeline_test.v -define RTL -debug 
+s16(28Nov2022:19:25:01):  ncverilog pipeline_test.v -define RTL -debug 
+s17(28Nov2022:19:27:16):  ncverilog pipeline_test.v -define RTL -debug 
+s18(28Nov2022:19:27:38):  ncverilog pipeline_test.v -define RTL -debug 
+s19(28Nov2022:19:28:28):  ncverilog pipeline_test.v -define RTL -debug 
+s20(28Nov2022:19:29:51):  ncverilog pipeline_test.v -define RTL -debug 
+s21(28Nov2022:19:31:31):  ncverilog pipeline_test.v -define RTL -debug 
+s22(28Nov2022:20:03:13):  ncverilog pipeline_test.v -define GATE -debug -v tsmc13_neg.v +access+rw 
+s23(28Nov2022:20:09:45):  ncverilog pipeline_test.v -define GATE -debug -v tsmc13_neg.v +access+rw 
+s24(28Nov2022:20:11:46):  ncverilog pipeline_test.v -define GATE -debug -v tsmc13_neg.v +access+rw 
+s25(28Nov2022:20:35:15):  ncverilog pipeline_test.v -define RTL -debug 
+s26(28Nov2022:20:36:41):  ncverilog pipeline_test.v -define GATE -debug -v tsmc13_neg.v +access+rw 
+s27(28Nov2022:20:39:51):  ncverilog pipeline_test.v -define GATE -debug -v tsmc13_neg.v +access+rw 
+s28(28Nov2022:20:40:49):  ncverilog pipeline_test.v -define GATE -debug -v tsmc13_neg.v +access+rw 
