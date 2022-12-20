@@ -10,7 +10,7 @@
 
 
 ## Introduction
-1. A 16-bit 5-stage pipelined RISC Processor with floating point coprocessor is implemented, using a small set of Custom RISC ISA. In order to enhance performace, forwarding unit and hazard detection unit are also implemented to resolve the data hazard and control hazard.
+1. A 16-bit 5-stage pipelined RISC Processor with 8-bit floating point coprocessor is implemented, using a small set of Custom RISC ISA. In order to enhance performace, forwarding unit and hazard detection unit are also implemented to resolve the data hazard and control hazard.
 
 2.  The coprocessor is implemented using simplfied 16-bit IEEE format as an additional module.
 
@@ -25,6 +25,10 @@
 ## 5-stage RISC pipelined Processor
 ### ISA
 ![ISA](image/ISA_Instruction_Description.png)
+
+
+## 16-bit-IEEE-Floating point format
+![Floating point format](image/16-floating_point.png)
 
 ### System tree diagram
 ```mermaid
@@ -56,8 +60,6 @@
 
 ```
 
-
-
 ### Processor block diagram
 <br />![Processor](image/Processor.png)
 
@@ -72,6 +74,11 @@
 ## Hazard Unit
 
 ![HazardUnit](image/HazardUnits.png)
+
+
+# Floating point Arithmetic
+- To perform floating point arithmetic you have to first store the Data Memory, you cannot assign from imm8. It is prohibited.
+
 
 # Forwarding Condition
 >To solve Data hazard including R-R,sw-lw

@@ -19,4 +19,3 @@ output [7 : 0] status_inst;
                .op(inst_op), .z(z_inst), .status(status_inst) );
 
 endmodule
-python c:/Users/User/.vscode/extensions/truecrab.verilog-testbench-instance-0.0.5/out/vTbgenerator.py c:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/src/DW_fp_addsub_inst.v
