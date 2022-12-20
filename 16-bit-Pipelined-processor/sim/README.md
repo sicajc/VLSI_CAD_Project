@@ -153,7 +153,7 @@ a = b + c;
 D[0] = a;
 D[1] = d;
 //Result D[0] = 50
-//Result D[1] = 80
+//Result D[1] = 100
 ```
 Assembly
 ```python
@@ -200,7 +200,7 @@ Machine Code
 
     .
 //Result D[0] = 50
-//Result D[1] = 80
+//Result D[1] = 100
 ```
 ## Test4
 Testing sw-lw forwarding
@@ -211,6 +211,7 @@ int b = 4;
 int c = 0;
 c = D[0];
 D[1] = c;
+//D[1] = 10
 ```
 Assembly
 ```python
@@ -228,6 +229,7 @@ stop
 nop
 nop
 nop
+
 ```
 Machine Code
 ```
@@ -310,7 +312,7 @@ Machine Code
 
 
 
-## Full testing
+## Test6 (For Floating Point)
 ```
 
 ```

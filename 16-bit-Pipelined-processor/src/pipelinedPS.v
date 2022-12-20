@@ -384,7 +384,7 @@ MEM#(
    );
 
 //! Adding Pipeline register to catch the output from DM
-always @(posedge clk )
+always @(posedge clk)
 begin
     dm_data_pipe <= rst ? 'd0 : dm_r_data; //0 value.
 end

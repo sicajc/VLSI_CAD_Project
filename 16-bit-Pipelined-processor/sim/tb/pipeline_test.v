@@ -1,60 +1,52 @@
 `timescale 1ns/10ps
 `define CYCLE      10.0
 `define End_CYCLE  10000000  // Modify cycle times once your design need more cycle times!
-`define tb1
+`define tb5
+`define FILE_DIR "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim"
 `define RTL
 `define SDFFILE  "/home/rain/VLSI_CAD_Project/16_bit_Pipelined_processor/Netlist/pipelinedPS_SYN.sdf"
 
+// synopsys translate_off
 `ifdef tb1
-   `define PAT_DM "../data/Test1/dm_data.txt"
-   `define PAT_IM "../data/Test1/im_data.txt"
+   `define PAT_DM "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test1/dm_data.txt"
+   `define PAT_IM "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test1/im_data.txt"
 `endif
+
 
 `ifdef tb2
-   `define PAT_DM "../data/Test2/dm_data.txt"
-   `define PAT_IM "../data/Test2/im_data.txt"
+   `define PAT_DM "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test2/dm_data.txt"
+   `define PAT_IM "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test2/im_data.txt"
 `endif
 
-<<<<<<< HEAD
-// `ifdef tb3
-`define PAT_DM "C:/Users/HIBIKI/Desktop/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test3/dm_data.txt"
-`define PAT_IM "C:/Users/HIBIKI/Desktop/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test3/im_data.txt"
-// `endif
 
-// `ifdef tb4
-//`define PAT_DM "C:/Users/HIBIKI/Desktop/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test4/dm_data.txt"
-//`define PAT_IM "C:/Users/HIBIKI/Desktop/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test4/im_data.txt"
-// `endif
-
-// `ifdef tb5
-// `define PAT_DM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test5/dm_data.txt"
-// `define PAT_IM "C:/Users/User/Desktop/cad_project/16-bit-Pipelined-processor/sim/data/Test5/im_data.txt"
-// `endif
-=======
 `ifdef tb3
-   `define PAT_DM "../data/Test3/dm_data.txt"
-   `define PAT_IM "../data/Test3/im_data.txt"
+   `define PAT_DM "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test3/dm_data.txt"
+   `define PAT_IM "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test3/im_data.txt"
 `endif
+
 
 `ifdef tb4
-   `define PAT_DM "../data/Test4/dm_data.txt"
-   `define PAT_IM "../data/Test4/im_data.txt"
+   `define PAT_DM "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test4/dm_data.txt"
+   `define PAT_IM "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test4/im_data.txt"
 `endif
+
 
 `ifdef tb5
-   `define PAT_DM "../data/Test5/dm_data.txt"
-   `define PAT_IM "../data/Test5/im_data.txt"
+   `define PAT_DM "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test5/dm_data.txt"
+   `define PAT_IM "C:/Users/User/Desktop/cad_final_project/VLSI_CAD_Project/16-bit-Pipelined-processor/sim/data/Test5/im_data.txt"
 `endif
->>>>>>> a8f8c72adfaef8ef8828be24c5ada176f426f043
+// synopsys_translate_on
 
-`ifdef RTL
-   `include "../../src/pipelinedPS.v"
-`endif
 
+// `ifdef RTL
+//    `include "../../src/pipelinedPS.v"
+// `endif
+
+// synopsys translate_off
 `ifdef GATE
    `include "/home/rain/VLSI_CAD_Project/16_bit_Pipelined_processor/Netlist/pipelinedPS_SYN.v"
 `endif
-
+// synopsys_translate_on
 
 module pipeline_test;
 
@@ -83,13 +75,17 @@ wire  [15:0] dm_w_data;        // 16-bit write data
 reg	[15:0] IM_MEM	[0:24];
 reg	[15:0] DM_MEM	[0:24];
 
+
+// synopsys translate_off
 initial
 begin
 `ifdef GATE
     $sdf_annotate(`SDFFILE, u_pipelinedPS);
 `endif
 end
+// synopsys_translate_on
 
+// synopsys translate_off
 `ifdef RTL
 pipelinedPS#(
                .OP_WIDTH     ( 4 ),
@@ -120,7 +116,9 @@ pipelinedPS#(
                .dm_w_data    ( dm_w_data    )
            );
 `endif
+// synopsys_translate_on
 
+// synopsys translate_off
 `ifdef GATE
 pipelinedPS u_pipelinedPS(
                 .clk          ( clk          ),
@@ -141,6 +139,7 @@ pipelinedPS u_pipelinedPS(
                 .dm_w_data    ( dm_w_data    )
             );
 `endif
+// synopsys_translate_on
 
 always
 begin
@@ -175,7 +174,7 @@ initial
 begin // initial pattern
     wait(rst==1);
     $readmemb(`PAT_IM, IM_MEM);
-    $readmemb(`PAT_DM, DM_MEM);
+    $readmemh(`PAT_DM, DM_MEM);
 end
 
 // initial
@@ -184,31 +183,22 @@ end
 //     $fsdbDumpvars;
 // end
 
-<<<<<<< HEAD
-// instruction memory model
-always@(posedge clk)
-begin
-    if (im_rd == 1)
-        im_r_data <= #1 IM_MEM[im_addr];
-=======
 // instruction memory model ,
-// negedge read
 always@(*)
 begin
     if (im_rd == 1)
+    begin
         im_r_data = IM_MEM[im_addr];
->>>>>>> a8f8c72adfaef8ef8828be24c5ada176f426f043
+    end
 end
 
 // data memory model for read
 always@(*)
 begin
     if (dm_rd == 1)
-<<<<<<< HEAD
-        dm_r_data <= #1  DM_MEM[dm_addr];
-=======
+    begin
         dm_r_data = DM_MEM[dm_addr];
->>>>>>> a8f8c72adfaef8ef8828be24c5ada176f426f043
+    end
 end
 
 // data memory model	for write
@@ -229,197 +219,101 @@ begin
     $finish;
 end
 
-//Test1
-<<<<<<< HEAD
-// always@(posedge clk)
-// begin
-    // if(stop==1)
-    // begin
-        // if(DM_MEM[12] !== 16'd7)
-            // err = err + 1;
-            // $display("Memory value is : %d",DM_MEM[12]);
-//
-        // $display(" ");
-        // $display("-----------------------------------------------------\n");
-        // $display("--------------------- S U M M A R Y -----------------\n");
-//
-        // if(err==0)
-            // $display("Congratulations! The result is PASS!!\n");
-        // else
-            // $display("FAIL!!!  There are %d errors! \n", err);
-//
-        // $display("-----------------------------------------------------\n");
-//
-        // #(`CYCLE/2);
-        // $finish;
-    // end
-// end
 
-
-//Test2
-// always@(posedge clk)
-// begin
-    // if(stop==1)
-    // begin
-        // if(DM_MEM[3] !== 16'd160)
-            // err = err + 1;
-            // $display("Memory value is : %d",DM_MEM[12]);
-//
-        // if(DM_MEM[4] !== -16'd10)
-            // err = err +1 ;
-//
-        // $display("DM_MEM[3] = %h\n", DM_MEM[3]);
-        // $display("DM_MEM[4] = %h\n", DM_MEM[4]);
-//
-        // $display(" ");
-        // $display("-----------------------------------------------------\n");
-        // $display("--------------------- S U M M A R Y -----------------\n");
-//
-        // if(err==0)
-            // $display("Congratulations! The result is PASS!!\n");
-        // else
-            // $display("FAIL!!!  There are %d errors! \n", err);
-//
-        // $display("-----------------------------------------------------\n");
-//
-        // #(`CYCLE/2);
-        // $finish;
-    // end
-// end
-
-//Test3
- always@(posedge clk)
- begin
-     if(stop==1)
-     begin
-         if(DM_MEM[0] !== 16'd50)
-             err = err + 1;
-
-         if(DM_MEM[1] !== 16'd100)
-             err = err +1 ;
-
-         $display("DM_MEM[0] = %d\n", DM_MEM[0]);
-         $display("DM_MEM[1] = %d\n", DM_MEM[1]);
-
-         $display(" ");
-         $display("-----------------------------------------------------\n");
-         $display("--------------------- S U M M A R Y -----------------\n");
-
-         if(err==0)
-             $display("Congratulations! The result is PASS!!\n");
-         else
-             $display("FAIL!!!  There are %d errors! \n", err);
-
-         $display("-----------------------------------------------------\n");
-
-         #(`CYCLE/2);
-         $finish;
-     end
- end
-
-//Test4
-// always@(posedge clk)
-// begin
-//     if(stop==1)
-//     begin
-//         if(DM_MEM[1] !== 16'd10)
-//             err = err + 1;
-
-//         $display("DM_MEM[1] = %d\n", DM_MEM[1]);
-
-//         $display(" ");
-//         $display("-----------------------------------------------------\n");
-//         $display("--------------------- S U M M A R Y -----------------\n");
-
-//         if(err==0)
-//             $display("Congratulations! The result is PASS!!\n");
-//         else
-//             $display("FAIL!!!  There are %d errors! \n", err);
-
-//         $display("-----------------------------------------------------\n");
-
-//         #(`CYCLE/2);
-//         $finish;
-//     end
-// end
-
-//Test5
-//always@(posedge clk)
-//begin
-//    if(stop==1)
-//    begin
-//        if(DM_MEM[0] !== 16'd7)
-//            err = err + 1;
-
-//        $display("DM_MEM[1] = %d\n", DM_MEM[0]);
-=======
 always@(posedge clk)
 begin
     if(stop==1)
     begin
-
+        // synopsys translate_off
 `ifdef tb1
         if(DM_MEM[12] !== 16'd7)
+        begin
             err = err + 1;
-        $display("DM_MEM[12] = %d\n", DM_MEM[12]);
+            $display("DM_MEM[12] = %d\n", DM_MEM[12]);
+            $display("Correct Value should be DM_MEM[12] = %d\n", 16'd7);
+        end
 `endif
+
 
 `ifdef tb2
 
         if(DM_MEM[3] !== 16'd160)
-
+        begin
             err = err + 1;
+            $display("DM_MEM[3] = %d\n", DM_MEM[3]);
+            $display("Correct Value should be DM_MEM[3] = %d\n", 16'd160);
+        end
+
 
         if(DM_MEM[4] !== -16'd10)
-
+        begin
             err = err +1 ;
-
-        $display("DM_MEM[3] = %d\n", DM_MEM[3]);
-
-        $display("DM_MEM[4] = %d\n", DM_MEM[4]);
-
-
+            $display("DM_MEM[4] = %d\n", DM_MEM[4]);
+            $display("Correct Value should be DM_MEM[4] = %d\n", -16'd10);
+        end
 `endif
+
 
 `ifdef tb3
 
         if(DM_MEM[0] !== 16'd50)
+        begin
             err = err + 1;
+            $display("DM_MEM[0] = %d\n", DM_MEM[0]);
+            $display("Correct Value should be DM_MEM[0] = %d\n", 16'd50);
+        end
         if(DM_MEM[1] !== 16'd100)
+        begin
             err = err +1 ;
-        $display("DM_MEM[0] = %d\n", DM_MEM[0]);
-        $display("DM_MEM[1] = %d\n", DM_MEM[1]);
+            $display("DM_MEM[1] = %d\n", DM_MEM[1]);
+            $display("Correct Value should be DM_MEM[1] = %d\n", 16'd100);
+        end
+
+
 `endif
 
-`ifdef tb4
+
+
+`ifdef t4
 
         if(DM_MEM[1] !== 16'd10)
+        begin
             err = err + 1;
-        $display("DM_MEM[1] = %d\n", DM_MEM[1]);
+            $display("DM_MEM[0] = %d\n", DM_MEM[1]);
+            $display("Correct Value should be DM_MEM[1] = %d\n", 16'd10);
+        end
 `endif
 
-`ifdef tb5
 
+
+`ifdef tb5
         if(DM_MEM[0] !== 16'd7)
             err = err + 1;
         $display("DM_MEM[1] = %d\n", DM_MEM[0]);
 `endif
->>>>>>> a8f8c72adfaef8ef8828be24c5ada176f426f043
 
-//        $display(" ");
-//        $display("-----------------------------------------------------\n");
-//        $display("--------------------- S U M M A R Y -----------------\n");
+`ifdef tb6
+        if(DM_MEM[0] !== 16'd7)
+            err = err + 1;
+        $display("DM_MEM[1] = %d\n", DM_MEM[0]);
+`endif
 
-//        if(err==0)
-//            $display("Congratulations! The result is PASS!!\n");
-//        else
-//            $display("FAIL!!!  There are %d errors! \n", err);
 
-//        $display("-----------------------------------------------------\n");
+        // synopsys_translate_on
 
-//        #(`CYCLE/2);
-//        $finish;
-//    end
-//end
+        $display(" ");
+        $display("-----------------------------------------------------\n");
+        $display("--------------------- S U M M A R Y -----------------\n");
 
+        if(err==0)
+            $display("Congratulations! The result is PASS!!\n");
+        else
+            $display("FAIL!!!  There are %d errors! \n", err);
+
+        $display("-----------------------------------------------------\n");
+
+        #(`CYCLE/2);
+        $finish;
+    end
+end
 endmodule

@@ -28,7 +28,7 @@ begin
   r2_data <= (r2_en) ? rf[r2_addr] : {(WIDTH){1'b0}};
 end
 
-always@(posedge clk or posedge rst) // negedge wb
+always@(negedge clk or posedge rst) // negedge wb
 begin: rf_block
   integer i;
   if(rst)
