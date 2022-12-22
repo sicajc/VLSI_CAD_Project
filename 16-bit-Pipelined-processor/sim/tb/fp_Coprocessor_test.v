@@ -33,8 +33,35 @@ initial
 begin
     #(PERIOD*2) rst  =  1;
     #(PERIOD*2) rst  =  0;
-                rdData_input1_i = 
-                rdData_input2_i =
+    rdData_input1_i = 16'h444C;
+    rdData_input2_i = 16'h4799;
+    rdData_inst_op_i = 1'b0;
+    repeat(PERIOD*5) @(negedge clk);
+
+    if(getResult_data_ff_o !== 16'h49F3)
+    begin
+        $display("Result is %h",getResult_status_output_ff_o);
+        $display("Error the Result should be %h", 16'h49F3);
+        $finish;
+    end
+
+
+    #(PERIOD*10)rdData_inst_op_i = 1'b1;
+    rdData_input1_i = 16'h444C;
+    rdData_input2_i = 16'h4799;
+    rdData_inst_op_i = 1'b0;
+
+    repeat(PERIOD*5) @(negedge clk);
+    if(getResult_data_ff_o !== 16'h49F3)
+    begin
+        $display("Result is %h",getResult_status_output_ff_o);
+        $display("Error the Result should be %h", 16'h49F3);
+        $finish;
+    end
+
+    $display("Congragulations: There are No error :3");
+    #(PERIOD*10)$finish;
+
 end
 
 floating_Coprocessor #(

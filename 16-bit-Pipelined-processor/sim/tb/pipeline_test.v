@@ -75,6 +75,9 @@ wire  [15:0] dm_w_data;        // 16-bit write data
 reg	[15:0] IM_MEM	[0:24];
 reg	[15:0] DM_MEM	[0:24];
 
+integer total_cycles = 0;
+integer cycles = 0;
+integer stop_flag = 0;
 
 // synopsys translate_off
 initial
@@ -146,36 +149,6 @@ begin
     #(`CYCLE/2) clk = ~clk;
 end
 
-initial
-begin  // global control
-
-    $display("-----------------------------------------------------\n");
-    $display("START!!! Simulation Start .....\n");
-    $display("-----------------------------------------------------\n");
-
-    @(negedge clk);
-    #1;
-    rst = 1'b1;
-
-    #(`CYCLE*3);
-    #1;
-    rst = 1'b0;
-
-    @(posedge clk);
-    #1;
-    start = 1'b1;
-
-    #(`CYCLE);
-    #5;
-    start = 1'b0;
-end
-
-initial
-begin // initial pattern
-    wait(rst==1);
-    $readmemb(`PAT_IM, IM_MEM);
-    $readmemh(`PAT_DM, DM_MEM);
-end
 
 // initial
 // begin
@@ -219,10 +192,51 @@ begin
     $finish;
 end
 
-
-always@(posedge clk)
+initial
 begin
-    if(stop==1)
+    $display("-----------------------------------------------------\n");
+    $display("START!!! Simulation Start .....\n");
+    $display("-----------------------------------------------------\n");
+
+    @(negedge clk);
+    #1;
+    rst = 1'b1;
+    #(`CYCLE*3);
+    #1;
+    rst = 1'b0;
+    @(posedge clk);
+    #1;
+    start = 1'b1;
+    #(`CYCLE);
+    #5;
+    start = 1'b0;
+    wait_stop;
+    checkans;
+    check;
+end
+
+initial
+begin
+    wait(rst==1);
+    $readmemb(`PAT_IM, IM_MEM);
+    $readmemh(`PAT_DM, DM_MEM);
+end
+
+
+task wait_stop ;
+    begin
+        cycles = 0;
+        while(stop === 0)
+        begin
+            cycles = cycles + 1;
+            @(negedge clk);
+        end
+        total_cycles = total_cycles + cycles;
+        stop_flag = 1;
+    end
+endtask
+
+task checkans;
     begin
         // synopsys translate_off
 `ifdef tb1
@@ -236,7 +250,6 @@ begin
 
 
 `ifdef tb2
-
         if(DM_MEM[3] !== 16'd160)
         begin
             err = err + 1;
@@ -255,7 +268,6 @@ begin
 
 
 `ifdef tb3
-
         if(DM_MEM[0] !== 16'd50)
         begin
             err = err + 1;
@@ -268,11 +280,7 @@ begin
             $display("DM_MEM[1] = %d\n", DM_MEM[1]);
             $display("Correct Value should be DM_MEM[1] = %d\n", 16'd100);
         end
-
-
 `endif
-
-
 
 `ifdef t4
 
@@ -288,32 +296,104 @@ begin
 
 `ifdef tb5
         if(DM_MEM[0] !== 16'd7)
+        begin
             err = err + 1;
-        $display("DM_MEM[1] = %d\n", DM_MEM[0]);
+            $display("DM_MEM[1] = %d\n", DM_MEM[0]);
+        end
 `endif
 
 `ifdef tb6
+
         if(DM_MEM[0] !== 16'd7)
+        begin
             err = err + 1;
-        $display("DM_MEM[1] = %d\n", DM_MEM[0]);
+            $display("DM_MEM[1] = %d\n", DM_MEM[0]);
+        end
 `endif
-
-
         // synopsys_translate_on
+    end
+endtask
 
-        $display(" ");
-        $display("-----------------------------------------------------\n");
-        $display("--------------------- S U M M A R Y -----------------\n");
+task check;
+    begin
+        if(stop_flag == 1)
+        begin
+            if(err>=1)
+            begin
+                $display("============================================================================");
+                $display("      ▄▄           ▄▄  ");
+                $display("       ██         ██ ");
+                $display("        ██       ██ ");
+                $display("          ██   ██ ");
+                $display("           ██ ██  ");
+                $display("        ▄▄██████████▄  		FAIL!!!  There are %d errors! \n", err);
+                $display("      █▀             ▀█ ");
+                $display("      █   █████████   █ 	MY GRANDMA writes a better program than you.");
+                $display("      █  ▄█▀    ▀█▄   █");
+                $display("██    █  █   ▄█▄   █  █     ██");
+                $display("███   █  █   ███   █  █   ▄███");
+                $display("█ ██  █  █   ▀█▀   █  █  ▄█ █");
+                $display("▀█ ██ █  ▀█▄     ▄█▀  █ ▄█ █▀ ");
+                $display(" ▀█ █▄█     ▀███▀     █▄█ █▀");
+                $display("   ▀██                █▀");
+                $display("      █  ▄████████▄   █▌");
+                $display("      █  █        █   █");
+                $display("      █  █        █   █");
+                $display("      █  ▀▀▀▀▀▀▀▀▀▀   █ ");
+                $display("      ██             ██");
+                $display("       ██           ██ ");
+                $display("        █ ▄██████▄ █ ");
+                $display("        █ █      █ █ ");
+                $display("        █ █      █ █  ");
+                $display("        ██▀      ▀██   ");
+                $display("============================================================================");
+                $finish;
+                $finish;
+            end
+            else
+            begin
+                YOU_PASS_task;
+            end
+        end
+    end
+endtask
 
-        if(err==0)
-            $display("Congratulations! The result is PASS!!\n");
-        else
-            $display("FAIL!!!  There are %d errors! \n", err);
-
-        $display("-----------------------------------------------------\n");
-
-        #(`CYCLE/2);
+task YOU_PASS_task;
+    begin
+        $display ("----------------------------------------------------------------------------------------------------------------------");
+        $display ("                                                  Congratulations!                                                   ");
+        $display ("                                           You have passed all patterns!                                             ");
+        $display ("                                           Your execution cycles = %5d cycles                                    ", total_cycles);
+        $display ("                                           Your clock period = %.1f ns                                           ", `CYCLE);
+        $display ("                                           Your total latency = %.1f ns                                          ", total_cycles*`CYCLE);
+        $display ("----------------------------------------------------------------------------------------------------------------------");
+        $display("============================================================================");
+        $display("\n");
+        $display("\n");
+        $display("/ /##########\                                  #########");
+        $display("// /############/                           #############");
+        $display("  /  (#############       /            ##################");
+        $display("       ################################################  ");
+        $display("        /###########################################     ");
+        $display("          //(#####################################(      ");
+        $display("           (##################################(/         ");
+        $display("    ...   /####################################(         ");
+        $display("    ..    #####(   /###############(    ########(        ");
+        $display("         (#####     ###############     (########  	   ");
+        $display(".        #######(  (################   (#########( 	   ");
+        $display(".       /###############/  (######################/	   ");
+        $display("       .    /############################/ ///(###( 	   ");
+        $display("//    . /////(##########################///////####  	   ");
+        $display("      .  ////#########(       /#########(//////####(     ");
+        $display("       (#((###########(        (#########(((((######/    ");
+        $display("       /###############(      /(####################(    ");
+        $display("/////// /#################(  (#######################    ");
+        $display("//////   (###########################################(   ");
+        $display("	^o^		WOOOOOW  YOU  PASSED!!!");
+        $display("\n");
+        $display("============================================================================");
         $finish;
     end
-end
+endtask
+
 endmodule
