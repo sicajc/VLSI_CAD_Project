@@ -4,7 +4,6 @@
 ### <font face = "Times New Roman"><p style="text-align: center;">Instructor: Prof. Hun-Chun Lin</p></font>
 ### <font face = "Times New Roman"><p style="text-align: center;">December 2022</p></font>
 
-### <font face = "Times New Roman"><p style="text-align: center;">Github: [Click for Github Link](https://github.com/sicajc/VLSI_CAD_Project)</p></font>
 
 
 

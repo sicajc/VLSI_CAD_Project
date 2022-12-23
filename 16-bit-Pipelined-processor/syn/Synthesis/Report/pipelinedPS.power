@@ -1,4 +1,4 @@
- 
+
 ****************************************
 Report : power
         -analysis_effort low
@@ -17,7 +17,7 @@ Operating Conditions: slow   Library: slow
 Wire Load Model Mode: top
 
 
-Global Operating Voltage = 1.08 
+Global Operating Voltage = 1.08
 Power-specific unit information :
     Voltage Units = 1V
     Capacitance Units = 1.000000pf
