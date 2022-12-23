@@ -10,7 +10,7 @@
 
 
 ## Introduction
-1. A 16-bit 5-stage pipelined RISC Processor with 8-bit floating point coprocessor is implemented, using a small set of Custom RISC ISA. In order to enhance performace, forwarding unit and hazard detection unit are also implemented to resolve the data hazard and control hazard.
+1. A 16-bit 5-stage pipelined RISC Processor with 16-bit floating point coprocessor is implemented, using a small set of Custom RISC ISA. In order to enhance performace, forwarding unit and hazard detection unit are also implemented to resolve the data hazard and control hazard.
 
 2.  The coprocessor is implemented using simplfied 16-bit IEEE format as an additional module.
 
