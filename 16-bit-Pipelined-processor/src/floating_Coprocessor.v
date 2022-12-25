@@ -12,7 +12,7 @@ module floating_Coprocessor#(
            input[2:0]       rdData_inst_rnd_i,
            output  reg [STATUS_BIT-1:0] getResult_status_output_ff_o,
            output  reg [DATA_WIDTH-1:0] getResult_data_ff_o
-       );
+         );
 // DW_fp_addsub_inst Inputs
 wire   [SIG_WIDTH+EXP_WIDTH : 0]  inst_a    = rdData_input1_i   ;
 wire   [SIG_WIDTH+EXP_WIDTH : 0]  inst_b    = rdData_input2_i   ;
@@ -43,18 +43,18 @@ DW_fp_addsub_inst #(
                   );
 
 DW_fp_mult_inst #(
-    .sig_width       ( SIG_WIDTH       ),
-    .exp_width       ( EXP_WIDTH       ),
-    .ieee_compliance ( IEEE_COMPILANCE ),
-    .en_ubr_flag     ( 1'b0               ))
- u_DW_fp_mult_inst (
-    .inst_a                  ( inst_a                                 ),
-    .inst_b                  ( inst_b                                 ),
-    .inst_rnd                ( inst_rnd                               ),
+                    .sig_width       ( SIG_WIDTH       ),
+                    .exp_width       ( EXP_WIDTH       ),
+                    .ieee_compliance ( IEEE_COMPILANCE ),
+                    .en_ubr_flag     ( 1'b0               ))
+                u_DW_fp_mult_inst (
+                    .inst_a                  ( inst_a                                 ),
+                    .inst_b                  ( inst_b                                 ),
+                    .inst_rnd                ( inst_rnd                               ),
 
-    .z_inst                  ( z_mult_inst                            ),
-    .status_inst             ( status_mult_inst                            )
-);
+                    .z_inst                  ( z_mult_inst                            ),
+                    .status_inst             ( status_mult_inst                            )
+                );
 
 assign selected_Result = rdData_inst_op_i ? z_mult_inst       : z_add_inst;
 assign status_floating = rdData_inst_op_i ? status_mult_inst  :status_add_inst;

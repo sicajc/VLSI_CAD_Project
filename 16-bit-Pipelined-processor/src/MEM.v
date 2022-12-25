@@ -27,6 +27,10 @@ module MEM #(parameter DATA_WIDTH = 16,
         input MemToRegM_i,
         input MovM_i,
         input jumpM_i,
+        input FloatingM_i,
+
+        //floating
+        input[DATA_WIDTH-1:0] floating_Result_i,
 
         //Forwarded signal
         input[DATA_WIDTH-1:0] ResultW_i,
@@ -71,9 +75,9 @@ assign WriteDataM_o = MemSrc_i ?  ResultW_i : WriteDataM_i ;
 
 wire[DATA_WIDTH-1:0] sign_extended_val = {{8{imm8M_i[7]}},imm8M_i[7:0]};
 //MEM/WB
-assign WBResultM_w = MovM_i ? sign_extended_val : alu_outM_i;
+assign WBResultM_w = MovM_i ? sign_extended_val : (FloatingM_i ? floating_Result_i:alu_outM_i);
 
-always @(posedge clk )
+always @(posedge clk)
 begin
     if(rst)
     begin

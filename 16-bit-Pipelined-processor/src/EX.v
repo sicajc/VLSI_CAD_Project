@@ -32,6 +32,10 @@ module EX#(parameter DATA_WIDTH = 16,
         input FloatingE_i ,
         input jumpE_i,
 
+        //floating out
+        output[DATA_WIDTH-1:0] floating_din_1_o,
+        output[DATA_WIDTH-1:0] floating_din_2_o,
+
 
         //EX/ME
         //Data
@@ -50,6 +54,7 @@ module EX#(parameter DATA_WIDTH = 16,
         output reg MemToRegM_o ,
         output reg MovM_o,
         output reg jumpM_o,
+        output reg FloatingE_o,
 
         //Hazard signals
         //Forwarded data
@@ -116,10 +121,14 @@ end
 always @(*)
 begin
     case(ALUopE_i)
-    2'b00: alu_w = alu_in1 + alu_in2;
-    2'b01: alu_w = alu_in1 - alu_in2;
-    2'b10: alu_w = alu_in1 < alu_in2;
-    default: alu_w = 2'd0;
+        2'b00:
+            alu_w = alu_in1 + alu_in2;
+        2'b01:
+            alu_w = alu_in1 - alu_in2;
+        2'b10:
+            alu_w = alu_in1 < alu_in2;
+        default:
+            alu_w = 2'd0;
     endcase
 end
 
@@ -143,6 +152,7 @@ begin
         MemToRegM_o<='d0;
         MovM_o<='d0;
         jumpM_o <= 'd0;
+        FloatingE_o <= 'd0;
     end
     else if(flush_EX_MEM_i)
     begin
@@ -161,6 +171,7 @@ begin
         MemToRegM_o<='d0;
         MovM_o<='d0;
         jumpM_o <= 'd0;
+        FloatingE_o <= 'd0;
     end
     else if(stall_EX_MEM_i)
     begin
@@ -179,6 +190,7 @@ begin
         MemToRegM_o         <=  MemToRegM_o;
         MovM_o              <=  MovM_o;
         jumpM_o <= jumpM_o;
+        FloatingE_o <= FloatingE_o;
     end
     else
     begin
@@ -197,6 +209,7 @@ begin
         MemToRegM_o         <=  MemToRegE_i;
         MovM_o              <=  MovE_i;
         jumpM_o <= jumpE_i;
+        FloatingE_o <= FloatingE_i;
     end
 end
 

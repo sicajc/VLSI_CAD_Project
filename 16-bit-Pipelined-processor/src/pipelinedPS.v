@@ -6,6 +6,7 @@
 `include "./MEM.v"
 `include "./reg_file.v"
 `include "./WB.v"
+`include "./floating_Coprocessor.v"
 //`include "/home/rain/VLSI_CAD_Project/16_bit_Pipelined_processor/src/CTR.v"
 
 module pipelinedPS#(parameter OP_WIDTH  = 4,
@@ -90,6 +91,14 @@ wire[REG_WIDTH-1:0]  WriteRegW;
 wire[REG_WIDTH-1:0] WriteRegW_rf;
 wire RegWriteW_rf; //Control
 
+//floating
+wire[DATA_WIDTH-1:0] floating_din_1;
+wire[DATA_WIDTH-1:0] floating_din_2;
+wire[DATA_WIDTH-1:0] floating_Result_r;
+wire floating_inst_op;
+wire floating_inst_rnd;
+
+
 //Stop Register
 wire stop_wr;
 always @(posedge clk )
@@ -109,50 +118,50 @@ reg[DATA_WIDTH-1:0] dm_data_pipe;
 
 
 hazardUnit#(
-    .REG_WIDTH   ( REG_WIDTH )
-)u_hazardUnit(
-    .clk         ( clk         ),
-    .rst         ( rst         ),
+              .REG_WIDTH   ( REG_WIDTH )
+          )u_hazardUnit(
+              .clk         ( clk         ),
+              .rst         ( rst         ),
 
-    //Fowarding and stall
-    .rsE         ( rsE         ),
-    .rtE         ( rtE         ),
-    .RegWriteM   ( RegWriteM   ),
-    .RegWriteW   ( RegWriteW   ),
-    .WriteRegM   ( WriteRegM   ),
-    .WriteRegW   ( WriteRegW   ),
-    .rsM         ( rsM         ),
+              //Fowarding and stall
+              .rsE         ( rsE         ),
+              .rtE         ( rtE         ),
+              .RegWriteM   ( RegWriteM   ),
+              .RegWriteW   ( RegWriteW   ),
+              .WriteRegM   ( WriteRegM   ),
+              .WriteRegW   ( WriteRegW   ),
+              .rsM         ( rsM         ),
 
-    //Stall
-    .rsD         ( rsD         ),
-    .rtD         ( rtD         ),
-    .MemReadE    ( MemReadE    ),
-    .RegWriteD   ( RegWriteD   ),
-    .R_type      ( R_type      ),
+              //Stall
+              .rsD         ( rsD         ),
+              .rtD         ( rtD         ),
+              .MemReadE    ( MemReadE    ),
+              .RegWriteD   ( RegWriteD   ),
+              .R_type      ( R_type      ),
 
-    //Control hazard
-    .PCSrc       ( PC_src       ),
-    .jump        ( jumpM_f      ),
+              //Control hazard
+              .PCSrc       ( PC_src       ),
+              .jump        ( jumpM_f      ),
 
-    //Forwarding
-    .alu_src1    ( alu_src1    ),
-    .alu_src2    ( alu_src2    ),
-    .mem_src     ( mem_src     ),
+              //Forwarding
+              .alu_src1    ( alu_src1    ),
+              .alu_src2    ( alu_src2    ),
+              .mem_src     ( mem_src     ),
 
-    //Stall
-    .flushEX_MEM ( flushEX_MEM ),
-    .flushIF_ID  ( flushIF_ID  ),
-    .pcstall     ( pcstall     ),
-    .MemReadW    ( MemReadW    ),
-    .MemWriteM   ( MemWriteM   ),
+              //Stall
+              .flushEX_MEM ( flushEX_MEM ),
+              .flushIF_ID  ( flushIF_ID  ),
+              .pcstall     ( pcstall     ),
+              .MemReadW    ( MemReadW    ),
+              .MemWriteM   ( MemWriteM   ),
 
-    //Control hazard
-    .flushID_EX  ( flushID_EX  ),
-    .IF_IDstall  ( IF_IDstall  ),
-    .ID_EXstall  ( ID_EXstall  ),
-    .EX_MEMstall ( EX_MEMstall ),
-    .MEM_WBstall ( MEM_WBstall )
-);
+              //Control hazard
+              .flushID_EX  ( flushID_EX  ),
+              .IF_IDstall  ( IF_IDstall  ),
+              .ID_EXstall  ( ID_EXstall  ),
+              .EX_MEMstall ( EX_MEMstall ),
+              .MEM_WBstall ( MEM_WBstall )
+          );
 
 IF#(
       .DATA_WIDTH   ( DATA_WIDTH ),
@@ -284,6 +293,10 @@ EX#(
       .rsE_i          ( rsE          ),
       .rdE_i          ( rdE          ),
 
+      //floating out
+      .floating_din_1_o(floating_din_1),
+      .floating_din_2_o(floating_din_2),
+
       //Control
       .flush_EX_MEM_i ( flushEX_MEM ),
       .stall_EX_MEM_i ( EX_MEMstall ),
@@ -413,7 +426,24 @@ WB#(
       .memData_r_i  ( dm_data_pipe  ),
       .ResultW_o    ( ResultW       ),
       .WriteRegW_o  ( WriteRegW_rf  )
-);
+  );
 
+floating_Coprocessor
+    #(
+        .DATA_WIDTH      (DATA_WIDTH      ),
+        .SIG_WIDTH       (SIG_WIDTH       ),
+        .EXP_WIDTH       (EXP_WIDTH       ),
+        .IEEE_COMPILANCE (IEEE_COMPILANCE ),
+        .STATUS_BIT      (STATUS_BIT      )
+    )
+    u_floating_Coprocessor(
+        .clk                          (clk                          ),
+        .rdData_input1_i              (floating_din_1              ),
+        .rdData_input2_i              (floating_din_2              ),
+        .rdData_inst_op_i             (floating_inst_op             ),
+        .rdData_inst_rnd_i            (floating_inst_rnd            ),
+        .getResult_status_output_ff_o (getResult_status_output_ff_o ),
+        .getResult_data_ff_o          (floating_Result_r          )
+    );
 
 endmodule
